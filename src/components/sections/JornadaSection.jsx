@@ -15,7 +15,7 @@ export default function JornadaSection() {
             Temas Abordados na Palestra
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mx-auto max-w-[700px] text-sm sm:text-base text-muted-foreground md:text-lg">
-            Uma palestra completa que conecta 12 temas essenciais para transformar postura, mentalidade e resultados.
+            Uma palestra completa que conecta 8 temas essenciais para transformar postura, mentalidade e resultados.
           </motion.p>
         </div>
 

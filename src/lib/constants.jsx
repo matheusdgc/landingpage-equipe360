@@ -129,16 +129,12 @@ export const NOT_FOR = [
 export const JOURNEY = [
   { num: "01", title: "Gratidão", icon: <Heart className="h-5 w-5" />, desc: "Reconhecer o valor do que se tem e construir a partir disso." },
   { num: "02", title: "Trabalho em Equipe", icon: <Users className="h-5 w-5" />, desc: "Fortalecer a colaboração e o senso de pertencimento." },
-  { num: "03", title: "Constância", icon: <Clock className="h-5 w-5" />, desc: "Desenvolver disciplina e regularidade nos resultados." },
-  { num: "04", title: "Postura Profissional", icon: <Award className="h-5 w-5" />, desc: "Atitude que gera respeito e credibilidade no ambiente corporativo." },
-  { num: "05", title: "Responsabilidade", icon: <Shield className="h-5 w-5" />, desc: "Assumir compromissos e entregar com excelência." },
-  { num: "06", title: "Comunicação", icon: <Megaphone className="h-5 w-5" />, desc: "Expressar ideias com clareza e escutar com empatia." },
-  { num: "07", title: "Atitude de Dono", icon: <Crown className="h-5 w-5" />, desc: "Cuidar do negócio como se fosse seu." },
-  { num: "08", title: "Tomada de Decisão", icon: <Compass className="h-5 w-5" />, desc: "Pensar antes de agir e escolher com sabedoria." },
-  { num: "09", title: "Gestão Emocional sob Pressão", icon: <Brain className="h-5 w-5" />, desc: "Manter o equilíbrio em cenários de alta exigência." },
-  { num: "10", title: "Execução com Qualidade e Segurança", icon: <ShieldCheck className="h-5 w-5" />, desc: "Entregar com padrão e atenção ao HSE-IT." },
-  { num: "11", title: "Crescimento Profissional", icon: <Rocket className="h-5 w-5" />, desc: "Planejar e trilhar uma carreira com propósito." },
-  { num: "12", title: "Propósito e Visão de Vida", icon: <Lightbulb className="h-5 w-5" />, desc: "Conectar trabalho, vida e evolução pessoal." },
+  { num: "03", title: "Postura Profissional", icon: <Award className="h-5 w-5" />, desc: "Atitude que gera respeito e credibilidade no ambiente corporativo." },
+  { num: "04", title: "Responsabilidade", icon: <Shield className="h-5 w-5" />, desc: "Assumir compromissos e entregar com excelência." },
+  { num: "05", title: "Comunicação", icon: <Megaphone className="h-5 w-5" />, desc: "Expressar ideias com clareza e escutar com empatia." },
+  { num: "06", title: "Atitude de Dono", icon: <Crown className="h-5 w-5" />, desc: "Cuidar do negócio como se fosse seu." },
+  { num: "07", title: "Gestão Emocional", icon: <Brain className="h-5 w-5" />, desc: "Manter o equilíbrio em cenários de alta exigência." },
+  { num: "08", title: "Propósito e Crescimento", icon: <Rocket className="h-5 w-5" />, desc: "Conectar trabalho, vida e evolução profissional." },
 ]
 
 export const RESULTS = [
