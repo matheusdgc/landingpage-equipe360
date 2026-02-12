@@ -2,13 +2,14 @@ import { motion } from "framer-motion"
 import { Instagram, Linkedin, Youtube, Mail } from "lucide-react"
 import { fadeIn, SPEAKER_BADGES } from "@/lib/constants.jsx"
 import { cn } from "@/lib/utils"
+import profile2 from "@/public/images/profile2.jpeg"
 
 const SPEAKER = {
   name: "João Paulino",
   title: "Palestrante & Facilitador de Desenvolvimento Comportamental",
   description:
     "João Paulino é palestrante e facilitador de desenvolvimento comportamental, com foco em maturidade emocional, postura profissional e intraempreendedorismo. Seu trabalho é ajudar colaboradores comuns a se tornarem profissionais conscientes, responsáveis e preparados para crescer — dentro da empresa e na vida.",
-  imageUrl: null, // substituir por foto real
+  imageUrl: profile2,
   socials: [
     { icon: Instagram, url: "#", label: "Instagram" },
     { icon: Linkedin, url: "#", label: "LinkedIn" },

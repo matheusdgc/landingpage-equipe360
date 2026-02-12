@@ -47,29 +47,33 @@ export default function ContatoSection() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 sm:gap-10 pt-2"
           >
-            <div className="flex items-center gap-3">
-              <div className="rounded-2xl bg-brand-petrol/10 p-3">
-                <Mail className="h-5 w-5 text-brand-petrol" />
+            <a href="mailto:joao@comautomacao.com.br" className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-brand-petrol/10 p-3 hover:bg-brand-orange transition-colors">
+                  <Mail className="h-5 w-5 text-brand-petrol" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-medium text-brand-petrol">E-mail</p>
+                  <a href="mailto:joao@comautomacao.com.br" className="text-sm text-muted-foreground hover:text-brand-orange transition-colors">
+                    joao@comautomacao.com.br
+                  </a>
+                </div>
               </div>
-              <div className="text-left">
-                <p className="text-sm font-medium text-brand-petrol">E-mail</p>
-                <a href="mailto:contato@equipe360.com.br" className="text-sm text-muted-foreground hover:text-brand-orange transition-colors">
-                  contato@equipe360.com.br
-                </a>
-              </div>
-            </div>
+            </a>
 
-            <div className="flex items-center gap-3">
-              <div className="rounded-2xl bg-brand-petrol/10 p-3">
-                <Phone className="h-5 w-5 text-brand-petrol" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-medium text-brand-petrol">WhatsApp</p>
-                <a href="tel:+55" className="text-sm text-muted-foreground hover:text-brand-orange transition-colors">
-                  +55 (XX) XXXXX-XXXX
+            <a href="https://wa.me/5515997133311" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-brand-petrol/10 p-3 hover:bg-brand-orange transition-colors">
+                  <Phone className="h-5 w-5 text-brand-petrol" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-medium text-brand-petrol">WhatsApp</p>
+                  <a className="text-sm text-muted-foreground hover:text-brand-orange transition-colors">
+                  +55 (15) 99713-3311
                 </a>
               </div>
             </div>
+            </a>
           </motion.div>
 
           {/* Redes sociais */}

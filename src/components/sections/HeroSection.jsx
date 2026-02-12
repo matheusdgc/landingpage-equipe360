@@ -3,6 +3,7 @@ import { Clock } from "lucide-react"
 import { PulseBeams } from "@/components/ui/pulse-beams"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { fadeIn, ctaBeams, ctaGradientColors } from "@/lib/constants.jsx"
+import profile1 from "@/public/images/profile1.jpeg"
 
 export default function HeroSection() {
   return (
@@ -49,11 +50,10 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Hero photo */}
-          <motion.div initial={{ opacity: 0, x: 100 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="hidden lg:flex items-center justify-center">
-            <div className="relative h-[400px] xl:h-[440px] w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5 flex flex-col items-center justify-center text-white/40 gap-4">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" fill="rgba(255,255,255,0.15)" /><ellipse cx="40" cy="62" rx="22" ry="14" fill="rgba(255,255,255,0.15)" /></svg>
-              <span className="text-sm font-medium">Foto João Paulino</span>
+          {/* Hero photo – visible on all breakpoints */}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="flex items-center justify-center order-first lg:order-last">
+            <div className="relative w-72 h-72 sm:w-[336px] sm:h-[336px] md:w-96 md:h-96 lg:h-[400px] xl:h-[440px] lg:w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5">
+              <img src={profile1} alt="João Paulino" className="w-full h-full object-cover" draggable={false} />
             </div>
           </motion.div>
         </div>
