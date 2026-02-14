@@ -6,9 +6,11 @@ import profile2 from "@/public/images/profile2.jpeg"
 
 const SPEAKER = {
   name: "João Paulino",
-  title: "Palestrante & Facilitador de Desenvolvimento Comportamental",
+  title: "Desenvolvimento Comportamental Aplicado à Realidade Empresarial",
   description:
-    "João Paulino é palestrante e facilitador de desenvolvimento comportamental, com foco em maturidade emocional, postura profissional e intraempreendedorismo. Seu trabalho é ajudar colaboradores comuns a se tornarem profissionais conscientes, responsáveis e preparados para crescer — dentro da empresa e na vida.",
+    "João Paulino trabalha com desenvolvimento comportamental aplicado à realidade de colaboradores CLT, dentro da rotina real das empresas.",
+  methodology: "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, e Resultado e visão de futuro. Com encontros mensais que constroem maturidade de forma progressiva e consistente.",
+  philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   imageUrl: profile2,
   socials: [
     { icon: Instagram, url: "#", label: "Instagram" },
@@ -30,21 +32,14 @@ export default function SobreSection() {
       >
         {/* Cabeçalho */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-10 sm:mb-14">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block rounded-3xl bg-brand-orange/10 text-brand-orange px-4 py-1 text-sm font-medium"
-          >
-            Sobre o Palestrante
-          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
           >
-            Quem é João Paulino
+            Não é inspiração.{" "}
+            <span className="text-brand-orange">É construção.</span>
           </motion.h2>
         </div>
 
@@ -57,7 +52,7 @@ export default function SobreSection() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="w-[420px] lg:w-[500px] h-[420px] lg:h-[500px] rounded-3xl overflow-hidden bg-muted flex-shrink-0 border-2 border-muted"
+              className="w-[520px] lg:w-[500px] h-[420px] lg:h-[500px] rounded-3xl overflow-hidden bg-muted flex-shrink-0 border-muted"
             >
               {SPEAKER.imageUrl ? (
                 <img
@@ -93,9 +88,18 @@ export default function SobreSection() {
                 </p>
               </div>
 
-              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8">
+              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-6">
                 {SPEAKER.description}
               </p>
+
+              <div className="bg-brand-petrol/5 rounded-2xl p-6 mb-6 border-l-4 border-brand-orange">
+                <p className="text-base lg:text-lg text-foreground leading-relaxed mb-4 font-medium">
+                  {SPEAKER.methodology}
+                </p>
+                <p className="text-sm lg:text-base text-muted-foreground italic leading-relaxed">
+                  {SPEAKER.philosophy}
+                </p>
+              </div>
 
               {/* Badges */}
               <div className="flex flex-wrap gap-3 mb-8">
@@ -135,7 +139,7 @@ export default function SobreSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="w-full aspect-square bg-muted rounded-3xl overflow-hidden mb-6 border-2 border-muted"
+              className="w-full aspect-square bg-muted rounded-3xl overflow-hidden mb-6 border-muted"
             >
               {SPEAKER.imageUrl ? (
                 <img
@@ -168,9 +172,18 @@ export default function SobreSection() {
               <p className="text-sm font-semibold text-brand-orange tracking-wide uppercase mb-4">
                 {SPEAKER.title}
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                 {SPEAKER.description}
               </p>
+
+              <div className="bg-brand-petrol/5 rounded-2xl p-4 mb-6 border-l-4 border-brand-orange">
+                <p className="text-sm text-foreground leading-relaxed mb-3 font-medium">
+                  {SPEAKER.methodology}
+                </p>
+                <p className="text-xs text-muted-foreground italic leading-relaxed">
+                  {SPEAKER.philosophy}
+                </p>
+              </div>
 
               <div className="flex flex-wrap justify-center gap-2 mb-6">
                 {SPEAKER_BADGES.map((badge, i) => (

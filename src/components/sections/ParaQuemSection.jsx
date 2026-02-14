@@ -7,22 +7,22 @@ const CARD_DATA = [
   {
     icon: <TrendingUp className="h-7 w-7" />,
     title: IS_FOR[0],
-    desc: "Profissionais que buscam evolução contínua e querem alcançar novos patamares.",
+    desc: "Não esperam ordens. Identificam problemas e resolvem com maturidade e iniciativa.",
   },
   {
     icon: <Star className="h-7 w-7" />,
     title: IS_FOR[1],
-    desc: "Colaboradores que desejam se destacar e construir uma reputação sólida.",
+    desc: "Cuidam do negócio como se fosse seu. Agem com compromisso real, não apenas cumprindo tarefas.",
   },
   {
     icon: <Rocket className="h-7 w-7" />,
     title: IS_FOR[2],
-    desc: "Pessoas com visão de longo prazo, dispostas a investir no próprio desenvolvimento.",
+    desc: "Entregam resultados consistentes, com qualidade e sem necessidade de retrabalho.",
   },
   {
     icon: <Heart className="h-7 w-7" />,
     title: IS_FOR[3],
-    desc: "Quem entende que o crescimento começa pela mudança de atitude e comportamento.",
+    desc: "Fortalecem o time ao invés de drenar energia. Colaboram, não complicam.",
   },
 ]
 
@@ -31,7 +31,7 @@ export default function ParaQuemSection() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.85", "start 0.35"],
+    offset: ["start 0.95", "start 0.55"],
   })
 
   const curtainL = useTransform(scrollYProgress, [0, 1], [50, 0])
@@ -52,29 +52,22 @@ export default function ParaQuemSection() {
       >
         {/* Cabeçalho */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block rounded-3xl bg-brand-petrol/10 px-4 py-1 text-sm font-medium text-brand-petrol"
-          >
-            Público-alvo
-          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
           >
-            Para quem é o EQUIPE 360?
+            O tipo de{" "}
+            <span className="text-brand-orange">colaborador</span> que você precisa
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-2xl text-muted-foreground text-base sm:text-lg"
+            className="max-w-2xl text-muted-foreground text-base sm:text-lg leading-relaxed"
           >
-            Se você se identifica com algum desses perfis, o programa foi feito para você.
+            EQUIPE 360 forma profissionais conscientes, responsáveis e preparados para crescer junto com o negócio.
           </motion.p>
         </div>
 
@@ -84,7 +77,7 @@ export default function ParaQuemSection() {
           style={{ clipPath }}
           className="mx-auto max-w-5xl mt-10 sm:mt-14 rounded-3xl bg-brand-petrol"
         >
-          <div className="grid gap-4 sm:gap-6 py-8 sm:py-12 px-4 sm:px-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-6 py-8 sm:py-12 px-4 sm:px-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {CARD_DATA.map((card, i) => (
               <div
                 key={i}

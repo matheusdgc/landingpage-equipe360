@@ -1,42 +1,146 @@
 import { motion } from "framer-motion"
-import { Clock } from "lucide-react"
-import { fadeIn, staggerContainer, itemFadeIn, JOURNEY } from "@/lib/constants.jsx"
+import { fadeIn, staggerContainer, itemFadeIn, JOURNEY_STRUCTURE } from "@/lib/constants.jsx"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 export default function JornadaSection() {
   return (
     <section id="jornada" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl bg-muted/10">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl bg-muted/10"
+      >
         <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-petrol/10 text-brand-petrol px-4 py-1 text-sm font-medium">
-            <Clock className="h-3.5 w-3.5" />
-            Conteúdo da Palestra
-          </motion.div>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol">
-            Temas Abordados na Palestra
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
+          >
+            12 Temas da{" "}
+            <span className="text-brand-orange">EQUIPE 360</span>
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mx-auto max-w-[700px] text-sm sm:text-base text-muted-foreground md:text-lg">
-            Uma palestra completa que conecta 8 temas essenciais para transformar postura, mentalidade e resultados.
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mx-auto max-w-[800px] text-sm sm:text-base text-muted-foreground md:text-lg leading-relaxed"
+          >
+            Um programa progressivo que desenvolve colaboradores por completo, do equilíbrio emocional até a visão estratégica de longo prazo.
           </motion.p>
         </div>
 
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto grid max-w-6xl gap-3 py-6 sm:py-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {JOURNEY.map((item, i) => (
-            <motion.div key={i} variants={itemFadeIn} whileHover={{ y: -6, transition: { duration: 0.3 } }} className="group relative overflow-hidden rounded-3xl border p-5 shadow-sm transition-all hover:shadow-md bg-background/80">
-              <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-brand-orange/5 group-hover:bg-brand-orange/10 transition-all duration-300" />
-              <div className="relative flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-2xl bg-brand-petrol text-white flex items-center justify-center font-bold text-sm">
-                  {item.num}
+        {/* Desktop: Grid de 4 colunas */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 py-8 max-w-7xl mx-auto items-start"
+        >
+          {JOURNEY_STRUCTURE.map((pillar, idx) => (
+            <motion.div
+              key={idx}
+              variants={itemFadeIn}
+              className="flex flex-col h-full"
+            >
+              {/* Cabeçalho do pilar */}
+              <div className={`${pillar.color} rounded-2xl p-5 mb-4 text-center shadow-lg h-30 flex flex-col items-center justify-center`}>
+                <div className="flex justify-center mb-3">
+                  {pillar.icon}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-brand-orange">{item.icon}</span>
-                    <h3 className="font-bold text-brand-petrol text-sm leading-tight">{item.title}</h3>
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                </div>
+                <h3 className="text-base font-bold text-white leading-tight">
+                  {pillar.pillar}
+                </h3>
+              </div>
+
+              {/* Itens do pilar */}
+              <div className="space-y-3 flex-1 flex flex-col">
+                {pillar.items.map((item, itemIdx) => (
+                  <motion.div
+                    key={itemIdx}
+                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    className="bg-background/90 rounded-xl border border-muted p-4 hover:shadow-md hover:border-brand-orange/30 transition-all group flex-1 min-h-35 flex flex-col justify-between"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="shrink-0 w-8 h-8 rounded-lg bg-brand-petrol text-white flex items-center justify-center font-bold text-xs">
+                        {item.num}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-brand-orange shrink-0">{item.icon}</span>
+                          <h4 className="font-bold text-brand-petrol text-sm leading-tight">
+                            {item.title}
+                          </h4>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Mobile: Accordion */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="md:hidden py-6 px-2"
+        >
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            {JOURNEY_STRUCTURE.map((pillar, idx) => (
+              <AccordionItem
+                key={idx}
+                value={`journey-${idx}`}
+                className="border border-muted rounded-2xl overflow-hidden bg-background/80"
+              >
+                <AccordionTrigger className="hover:no-underline px-4 py-4">
+                  <div className="flex items-center gap-3 w-full">
+                    <div className={`${pillar.color} rounded-xl p-2.5 shrink-0 shadow-md`}>
+                      {pillar.icon}
+                    </div>
+                    <span className="text-left font-bold text-brand-petrol text-base flex-1">
+                      {pillar.pillar}
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4">
+                  <div className="space-y-3 pt-2">
+                    {pillar.items.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="bg-muted/30 rounded-xl p-4 border border-muted/50"
+                      >
+                        <div className="flex items-start gap-3 mb-2">
+                          <div className="shrink-0 w-7 h-7 rounded-lg bg-brand-petrol text-white flex items-center justify-center font-bold text-xs">
+                            {item.num}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-brand-orange shrink-0">{item.icon}</span>
+                              <h4 className="font-bold text-brand-petrol text-sm leading-tight">
+                                {item.title}
+                              </h4>
+                            </div>
+                            <p className="text-xs text-muted-foreground leading-relaxed">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </motion.div>
       </motion.div>
     </section>

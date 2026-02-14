@@ -7,12 +7,9 @@ export default function DorRealSection() {
     <section className="w-full py-10 sm:py-12 md:py-20 lg:py-28" id="dor">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl">
         <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="inline-block rounded-3xl bg-red-50 text-red-600 px-4 py-1 text-sm font-medium">
-            O desafio real
-          </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol">
             O problema não é técnico.{" "}
-            <span className="text-brand-orange">É comportamental.</span>
+            <span className="text-brand-orange">É emocional.</span>
           </motion.h2>
         </div>
 
@@ -27,10 +24,18 @@ export default function DorRealSection() {
           ))}
         </motion.div>
 
-        <div className="flex justify-center pb-10">
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-petrol text-white px-6 py-3 text-base font-semibold">
+        <div className="flex flex-col items-center gap-6 pb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="text-base sm:text-lg md:text-xl text-muted-foreground text-center max-w-2xl"
+          >
+            Nenhuma empresa cresce além da maturidade das pessoas que a compõem.
+          </motion.p>
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-orange text-white px-6 py-3 text-base font-bold shadow-lg">
             <Eye className="h-5 w-5" />
-            O EQUIPE 360 nasce para resolver isso pela raiz.
+            Desperte o nível extraordinário da sua equipe
           </motion.div>
         </div>
       </motion.div>

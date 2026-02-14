@@ -98,11 +98,71 @@ export const NAV_LINKS = [
 ]
 
 export const PAINS = [
-  { icon: <Shield className="h-6 w-6" />, text: "Bons profissionais travados emocionalmente" },
-  { icon: <Zap className="h-6 w-6" />, text: "Falta de iniciativa e responsabilidade" },
-  { icon: <Flame className="h-6 w-6" />, text: "Conflitos, clima pesado e retrabalho" },
-  { icon: <TrendingUp className="h-6 w-6" />, text: "Pessoas que trabalham muito, mas não evoluem" },
-  { icon: <Target className="h-6 w-6" />, text: "Dificuldade em intraempreender dentro da empresa" },
+  { icon: <Shield className="h-6 w-6" />, text: "Colaboradores talentosos travados emocionalmente" },
+  { icon: <Flame className="h-6 w-6" />, text: "Conflitos que drenam energia do time" },
+  { icon: <Zap className="h-6 w-6" />, text: "Pessoas que fazem o mínimo necessário" },
+  { icon: <TrendingUp className="h-6 w-6" />, text: "Potencial desperdiçado" },
+  { icon: <Target className="h-6 w-6" />, text: "Equipes que cumprem tarefas, mas não constroem o negócio" },
+]
+
+export const ENTREPRENEUR_CHALLENGES = [
+  { icon: <Crown className="h-6 w-6" />, text: "Carrega a responsabilidade do negócio" },
+  { icon: <Shield className="h-6 w-6" />, text: "Assume riscos todos os dias" },
+  { icon: <Handshake className="h-6 w-6" />, text: "Precisa de pessoas confiáveis" },
+  { icon: <Brain className="h-6 w-6" />, text: "Não pode depender de colaboradores imaturos" },
+  { icon: <Lightbulb className="h-6 w-6" />, text: "Precisa de gente que resolva, não que complique" },
+]
+
+export const PROGRAM_PILLARS_NEW = [
+  { title: "Base emocional", desc: "Equilíbrio emocional para lidar com pressão e desafios." },
+  { title: "Postura profissional", desc: "Atitude que gera respeito e credibilidade." },
+  { title: "Performance e intraempreendedorismo", desc: "Iniciativa e execução com padrão elevado." },
+  { title: "Resultado e visão de futuro", desc: "Crescimento consistente junto com a empresa." },
+]
+
+export const EQUIPE_ACRONYM = [
+  {
+    letter: "E",
+    title: "Equilíbrio",
+    subtitle: "Emocional",
+    icon: <Brain className="h-10 w-10 text-brand-orange" />,
+    desc: "Manter controle emocional sob pressão. Responder com maturidade aos desafios e frustrações do dia a dia."
+  },
+  {
+    letter: "Q",
+    title: "Qualidade",
+    subtitle: "Na Execução",
+    icon: <Star className="h-10 w-10 text-brand-orange" />,
+    desc: "Entregar trabalhos bem feitos, sem necessidade de retrabalho. Atenção aos detalhes e padrão elevado."
+  },
+  {
+    letter: "U",
+    title: "União",
+    subtitle: "Trabalho em Equipe",
+    icon: <Users className="h-10 w-10 text-brand-orange" />,
+    desc: "Fortalecer colaboração e confiança. Construir junto ao invés de trabalhar isolado ou contra o time."
+  },
+  {
+    letter: "I",
+    title: "Iniciativa",
+    subtitle: "Proatividade",
+    icon: <Zap className="h-10 w-10 text-brand-orange" />,
+    desc: "Antecipar problemas e propor soluções. Agir sem esperar ordens, com senso de urgência e dono."
+  },
+  {
+    letter: "P",
+    title: "Performance",
+    subtitle: "Resultados Consistentes",
+    icon: <Gauge className="h-10 w-10 text-brand-orange" />,
+    desc: "Entregar resultados de forma constante e previsível. Transformar esforço em impacto real para o negócio."
+  },
+  {
+    letter: "E",
+    title: "Excelência",
+    subtitle: "Padrão Elevado",
+    icon: <Award className="h-10 w-10 text-brand-orange" />,
+    desc: "Buscar o melhor resultado possível. Não se contentar com o mínimo aceitável ou resultado mediano."
+  },
 ]
 
 export const PILLARS = [
@@ -114,10 +174,10 @@ export const PILLARS = [
 ]
 
 export const IS_FOR = [
-  "Pessoas que querem crescer",
-  "Pessoas que querem ser reconhecidas",
-  "Pessoas que pensam no futuro",
-  "Pessoas dispostas a mudar postura",
+  "Colaboradores que assumem responsabilidade",
+  "Profissionais que pensam como donos",
+  "Pessoas que executam com padrão elevado",
+  "Equipes que reduzem conflitos",
 ]
 
 export const NOT_FOR = [
@@ -137,13 +197,56 @@ export const JOURNEY = [
   { num: "08", title: "Propósito e Crescimento", icon: <Rocket className="h-5 w-5" />, desc: "Conectar trabalho, vida e evolução profissional." },
 ]
 
+export const JOURNEY_STRUCTURE = [
+  {
+    pillar: "Base emocional",
+    icon: <Heart className="h-6 w-6 text-white" />,
+    color: "bg-gradient-to-br from-red-500 to-pink-600",
+    items: [
+      { num: "01", title: "Gratidão", icon: <Heart className="h-4 w-4" />, desc: "Reconhecer o valor do que se tem e construir a partir disso" },
+      { num: "02", title: "Gestão emocional", icon: <Brain className="h-4 w-4" />, desc: "Manter equilíbrio em cenários de alta pressão e exigência" },
+      { num: "03", title: "Autocontrole", icon: <Shield className="h-4 w-4" />, desc: "Dominar reações e responder com maturidade aos desafios" },
+    ]
+  },
+  {
+    pillar: "Postura profissional",
+    icon: <Award className="h-6 w-6 text-white" />,
+    color: "bg-gradient-to-br from-blue-600 to-cyan-600",
+    items: [
+      { num: "04", title: "Postura profissional", icon: <Award className="h-4 w-4" />, desc: "Atitude que gera respeito e credibilidade no ambiente de trabalho" },
+      { num: "05", title: "Responsabilidade", icon: <Shield className="h-4 w-4" />, desc: "Assumir compromissos e entregar resultados com excelência" },
+      { num: "06", title: "Comunicação assertiva", icon: <Megaphone className="h-4 w-4" />, desc: "Expressar ideias com clareza, ouvir com empatia e resolver conflitos" },
+    ]
+  },
+  {
+    pillar: "Performance e intraempreendedorismo",
+    icon: <Rocket className="h-6 w-6 text-white" />,
+    color: "bg-gradient-to-br from-orange-500 to-amber-600",
+    items: [
+      { num: "07", title: "Mentalidade de dono", icon: <Crown className="h-4 w-4" />, desc: "Cuidar do negócio como se fosse seu, com comprometimento total" },
+      { num: "08", title: "Trabalho em equipe", icon: <Users className="h-4 w-4" />, desc: "Fortalecer colaboração, confiança e senso de pertencimento" },
+      { num: "09", title: "Iniciativa e proatividade", icon: <Zap className="h-4 w-4" />, desc: "Antecipar problemas, propor soluções e agir sem esperar ordens" },
+    ]
+  },
+  {
+    pillar: "Resultado e visão de futuro",
+    icon: <Target className="h-6 w-6 text-white" />,
+    color: "bg-gradient-to-br from-emerald-600 to-teal-600",
+    items: [
+      { num: "10", title: "Foco em resultado", icon: <Target className="h-4 w-4" />, desc: "Alinhar ações diárias com objetivos estratégicos mensuráveis" },
+      { num: "11", title: "Propósito e crescimento", icon: <Rocket className="h-4 w-4" />, desc: "Conectar trabalho, vida pessoal e evolução profissional contínua" },
+      { num: "12", title: "Visão de longo prazo", icon: <Compass className="h-4 w-4" />, desc: "Pensar estrategicamente e construir carreira sustentável" },
+    ]
+  },
+]
+
 export const RESULTS = [
-  { icon: <MessageCircle className="h-6 w-6" />, text: "Melhora imediata de postura e comunicação" },
-  { icon: <Target className="h-6 w-6" />, text: "Aumento da responsabilidade individual" },
-  { icon: <Rocket className="h-6 w-6" />, text: "Mais iniciativa e senso de dono" },
-  { icon: <Handshake className="h-6 w-6" />, text: "Redução de conflitos e ruídos" },
-  { icon: <TrendingUp className="h-6 w-6" />, text: "Melhores resultados no dia a dia" },
-  { icon: <ShieldCheck className="h-6 w-6" />, text: "Fortalecimento da cultura e da segurança (HSE-IT como consequência)" },
+  { icon: <Flame className="h-6 w-6" />, text: "Menos conflito" },
+  { icon: <Target className="h-6 w-6" />, text: "Menos retrabalho" },
+  { icon: <Shield className="h-6 w-6" />, text: "Menos risco" },
+  { icon: <Gauge className="h-6 w-6" />, text: "Mais produtividade" },
+  { icon: <TrendingUp className="h-6 w-6" />, text: "Mais crescimento" },
+  { icon: <ShieldCheck className="h-6 w-6" />, text: "Mais estabilidade" },
 ]
 
 export const SPEAKER_BADGES = [

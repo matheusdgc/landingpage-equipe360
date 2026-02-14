@@ -36,16 +36,6 @@ export default function ContatoSection() {
         className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
       >
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block rounded-3xl bg-white/10 border border-white/20 text-white/90 px-4 py-1.5 text-sm font-medium mb-6"
-          >
-            Contato
-          </motion.div>
-
           {/* Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
