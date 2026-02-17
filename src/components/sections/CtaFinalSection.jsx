@@ -9,6 +9,8 @@ import {
   Crown,
   Check,
   CreditCard,
+  AlertTriangle,
+  UserPlus,
 } from "lucide-react"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { fadeIn, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
@@ -39,7 +41,6 @@ const DELIVERABLES = [
 const PAYMENT_OPTIONS = [
   "Pagamento à vista com desconto",
   "Parcelamento em até 12x",
-  "Nota fiscal e contrato formal",
 ]
 
 export default function CtaFinalSection() {
@@ -137,53 +138,158 @@ export default function CtaFinalSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="p-6 sm:p-8"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <CreditCard className="h-5 w-5 text-brand-orange" />
-                <h3 className="font-bold text-white text-base sm:text-lg">
-                  Condições de pagamento
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {PAYMENT_OPTIONS.map((option, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 rounded-full bg-white/10 border border-white/10 px-4 py-2 text-xs sm:text-sm text-white/80"
-                  >
-                    <Check className="h-3.5 w-3.5 text-brand-green shrink-0" />
-                    {option}
-                  </div>
-                ))}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="h-4 w-4 text-brand-orange shrink-0" />
+                  <span className="font-semibold text-white text-sm">
+                    Condições:
+                  </span>
+                </div>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {PAYMENT_OPTIONS.map((option, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-5 py-2.5 text-sm text-white font-medium"
+                    >
+                      <Check className="h-4 w-4 text-brand-green shrink-0" />
+                      {option}
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
             {/* Divider */}
             <div className="h-px bg-white/10" />
 
-            {/* CTA area */}
+            {/* Pricing */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="p-6 sm:p-8 md:p-10 flex flex-col items-center text-center"
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="p-6 sm:p-8 md:p-10"
             >
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3">
-                PROGRAMA EQUIPE 360
-              </h3>
-              <p className="text-white/80 text-sm sm:text-base md:text-lg mb-6 font-medium">
-                Desenvolvimento comportamental para empresas que{" "}
-                <span className="text-brand-orange font-bold">não aceitam resultados comuns.</span>
-              </p>
+              <div className="text-center mb-8">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+                  PROGRAMA EQUIPE 360
+                </h3>
+                <p className="text-white/60 text-sm sm:text-base">
+                  Até 5 colaboradores inclusos
+                </p>
+              </div>
 
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* Valor especulativo - Ancoragem */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="text-center mb-6"
               >
-                <InteractiveHoverButton
-                  text="Quero transformar minha equipe"
-                  className="border-white/30 bg-brand-orange text-white text-sm sm:text-base font-bold"
-                />
-              </a>
+                <p className="text-white/50 text-sm sm:text-base mb-1">
+                  Se você contratasse cada módulo separadamente, investiria mais de
+                </p>
+                <p className="text-white/40 text-3xl sm:text-4xl font-bold line-through decoration-red-400/60 decoration-2">
+                  R$ 10.000
+                </p>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+                className="text-center text-brand-orange font-bold text-lg sm:text-xl mb-8"
+              >
+                Mas você não vai pagar isso.
+              </motion.p>
+
+              {/* Preços - Card branco */}
+              <div className="rounded-2xl bg-white shadow-2xl p-6 sm:p-8 md:p-10 mb-6">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+                  {/* Parcelado */}
+                  <div className="text-center">
+                    <p className="text-brand-petrol/50 text-xs uppercase tracking-wider font-semibold mb-2">Parcelado</p>
+                    <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
+                      12x <span className="text-brand-orange">R$ 375</span>
+                    </p>
+                  </div>
+
+                  <div className="hidden sm:block w-px h-20 bg-brand-petrol/15" />
+                  <div className="sm:hidden w-24 h-px bg-brand-petrol/15" />
+
+                  {/* À vista */}
+                  <div className="text-center">
+                    <p className="text-brand-petrol/50 text-xs uppercase tracking-wider font-semibold mb-2">À vista</p>
+                    <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
+                      <span className="text-brand-green">R$ 3.750</span>
+                    </p>
+                    <p className="text-brand-green text-xs mt-2 font-bold">
+                      Economia de R$ 750
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 text-brand-petrol/60 text-xs sm:text-sm mt-6 pt-6 border-t border-brand-petrol/10">
+                  <UserPlus className="h-4 w-4 text-brand-orange shrink-0" />
+                  <p>Colaborador adicional: <span className="text-brand-petrol font-bold">+ R$ 75/mês</span> por pessoa</p>
+                </div>
+              </div>
+
+              {/* Vagas limitadas */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="relative mx-auto w-fit mb-8"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-red-500/20 blur-xl animate-pulse" />
+                <div className="relative rounded-2xl bg-linear-to-r from-red-600 to-red-500 px-8 py-4 sm:px-10 sm:py-5 shadow-lg shadow-red-500/30">
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="relative">
+                      <AlertTriangle className="h-6 w-6 text-white shrink-0" />
+                      <div className="absolute inset-0 animate-ping">
+                        <AlertTriangle className="h-6 w-6 text-white/50" />
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-white font-black text-base sm:text-lg md:text-xl uppercase tracking-wider block">
+                        Vagas limitadas
+                      </span>
+                      <span className="text-red-100/80 text-xs sm:text-sm font-medium">
+                        Não perca a oportunidade — garanta a sua agora
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <AlertTriangle className="h-6 w-6 text-white shrink-0" />
+                      <div className="absolute inset-0 animate-ping">
+                        <AlertTriangle className="h-6 w-6 text-white/50" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* CTA */}
+              <div className="flex flex-col items-center text-center">
+                <p className="text-white/80 text-sm sm:text-base md:text-lg mb-8 font-medium">
+                  Desenvolvimento comportamental para empresas que{" "}
+                  <span className="text-brand-orange font-bold">não aceitam resultados comuns.</span>
+                </p>
+
+                <div className="relative group">
+                  <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-400 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
+                  <a
+                    href="https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20programa%20EQUIPE%20360!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block"
+                  >
+                    <InteractiveHoverButton
+                      text="Quero transformar minha equipe"
+                      className="border-brand-orange/30 bg-linear-to-r from-brand-orange to-amber-500 text-white text-base sm:text-lg md:text-xl font-black uppercase tracking-wide px-8 py-4 sm:px-12 sm:py-5 shadow-xl shadow-brand-orange/30"
+                    />
+                  </a>
+                </div>
+              </div>
             </motion.div>
           </div>
         </motion.div>

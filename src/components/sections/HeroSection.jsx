@@ -44,7 +44,7 @@ export default function HeroSection() {
             </div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }} className="pt-1 sm:pt-2">
-              <a href="#dor">
+              <a href="#contato">
                 <InteractiveHoverButton
                   text="Desperte o nível extraordinário da sua equipe"
                   className="border-white/30 bg-brand-orange text-white text-sm sm:text-base"
