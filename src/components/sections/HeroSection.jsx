@@ -41,7 +41,7 @@ export default function HeroSection() {
               <a href="#contato">
                 <InteractiveHoverButton
                   text="Desperte o nível extraordinário da sua equipe"
-                  className="border-white/30 bg-brand-orange text-white text-sm sm:text-base"
+                  className="border-white/30 bg-brand-orange text-brand-petrol text-sm sm:text-base"
                 />
               </a>
             </motion.div>

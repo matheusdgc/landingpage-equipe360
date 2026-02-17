@@ -33,7 +33,7 @@ export default function DorRealSection() {
           >
             Nenhuma empresa cresce além da maturidade das pessoas que a compõem.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-orange text-white px-6 py-3 text-base font-bold shadow-lg">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-orange text-brand-petrol px-6 py-3 text-base font-bold shadow-lg">
             <Eye className="h-5 w-5" />
             Desperte o nível extraordinário da sua equipe
           </motion.div>

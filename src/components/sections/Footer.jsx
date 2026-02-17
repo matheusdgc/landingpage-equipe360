@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Instagram, Linkedin } from "lucide-react"
-import logoImg from "@/public/images/logo.jpeg"
+import logoImg from "@/public/images/logo-2.png"
 import { fadeIn, NAV_LINKS } from "@/lib/constants.jsx"
 
 export default function Footer() {

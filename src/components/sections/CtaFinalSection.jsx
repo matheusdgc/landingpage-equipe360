@@ -276,7 +276,7 @@ export default function CtaFinalSection() {
                 </p>
 
                 <div className="relative group">
-                  <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-400 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
+                  <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-300 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
                   <a
                     href="https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20programa%20EQUIPE%20360!"
                     target="_blank"
@@ -285,7 +285,7 @@ export default function CtaFinalSection() {
                   >
                     <InteractiveHoverButton
                       text="Quero transformar minha equipe"
-                      className="border-brand-orange/30 bg-linear-to-r from-brand-orange to-amber-500 text-white text-base sm:text-lg md:text-xl font-black uppercase tracking-wide px-8 py-4 sm:px-12 sm:py-5 shadow-xl shadow-brand-orange/30"
+                      className="border-brand-orange/30 bg-linear-to-r from-brand-orange to-yellow-500 text-brand-petrol text-base sm:text-lg md:text-xl font-black uppercase tracking-wide px-8 py-4 sm:px-12 sm:py-5 shadow-xl shadow-brand-orange/30"
                     />
                   </a>
                 </div>

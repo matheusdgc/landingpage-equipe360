@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight, Rocket } from "lucide-react"
-import logoImg from "@/public/images/logo.jpeg"
+import logoImg from "@/public/images/logo-2.png"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { NAV_LINKS, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
 
@@ -45,7 +45,7 @@ export default function Header() {
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <InteractiveHoverButton
                 text="Quero levar para minha empresa"
-                className="border-brand-orange/30 bg-brand-orange text-white text-xs xl:text-sm py-2 px-4 xl:px-6"
+                className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs xl:text-sm py-2 px-4 xl:px-6"
               />
             </a>
           </div>
@@ -83,7 +83,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
-                  className="flex w-full items-center justify-center gap-2 rounded-3xl bg-brand-orange hover:bg-brand-orange-hover text-white font-semibold py-3 transition-colors"
+                  className="flex w-full items-center justify-center gap-2 rounded-3xl bg-brand-orange hover:bg-brand-orange-hover text-brand-petrol font-semibold py-3 transition-colors"
                 >
                   <Rocket className="h-4 w-4" />
                   Quero levar para minha empresa
@@ -102,7 +102,7 @@ export default function Header() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: scrollY > 400 ? 1 : 0, opacity: scrollY > 400 ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        className="fixed bottom-6 right-6 z-40 lg:hidden flex items-center gap-2 rounded-full bg-brand-orange text-white px-5 py-3.5 shadow-lg shadow-brand-orange/30 hover:bg-brand-orange-hover transition-colors font-semibold text-sm"
+        className="fixed bottom-6 right-6 z-40 lg:hidden flex items-center gap-2 rounded-full bg-brand-orange text-brand-petrol px-5 py-3.5 shadow-lg shadow-brand-orange/30 hover:bg-brand-orange-hover transition-colors font-semibold text-sm"
         aria-label="Ir para checkout"
       >
         <Rocket className="h-5 w-5" />
