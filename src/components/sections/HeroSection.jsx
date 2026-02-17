@@ -1,5 +1,4 @@
 import { motion } from "framer-motion"
-import { Clock } from "lucide-react"
 import { PulseBeams } from "@/components/ui/pulse-beams"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { fadeIn, ctaBeams, ctaGradientColors } from "@/lib/constants.jsx"
@@ -21,11 +20,6 @@ export default function HeroSection() {
         <div className="grid gap-6 lg:grid-cols-[1fr_280px] lg:gap-6 xl:grid-cols-[1fr_440px] xl:gap-8 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col justify-center space-y-4 sm:space-y-5">
             <div className="space-y-3 sm:space-y-4">
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="inline-flex items-center rounded-3xl bg-white/10 border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm text-white/90">
-                <Clock className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                Palestra presencial
-              </motion.div>
-
               <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl xl:text-5xl/none leading-tight">
                 Para empresários que se recusam a aceitar{" "}
                 <span className="text-brand-orange">equipes comuns</span>

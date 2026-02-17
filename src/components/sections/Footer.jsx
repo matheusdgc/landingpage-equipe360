@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Instagram, Linkedin } from "lucide-react"
-import Logo from "@/components/Logo"
+import logoImg from "@/public/images/logo.jpeg"
 import { fadeIn, NAV_LINKS } from "@/lib/constants.jsx"
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="w-full border-t">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto grid gap-6 sm:gap-8 px-4 py-8 sm:py-12 md:px-6 grid-cols-1 sm:grid-cols-3 text-center sm:text-left">
         <div className="space-y-4 flex flex-col items-center sm:items-start">
-          <Logo />
+          <img src={logoImg} alt="EQUIPE 360" className="h-12 sm:h-14 w-auto" draggable={false} />
           <p className="text-sm text-muted-foreground leading-relaxed">
             João Paulino — Palestrante e Facilitador de Desenvolvimento Comportamental. Ajudando colaboradores comuns a se tornarem profissionais extraordinários.
           </p>

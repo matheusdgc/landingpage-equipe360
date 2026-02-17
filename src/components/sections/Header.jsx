@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight, Rocket } from "lucide-react"
-import Logo from "@/components/Logo"
+import logoImg from "@/public/images/logo.jpeg"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { NAV_LINKS, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
 
@@ -30,7 +30,7 @@ export default function Header() {
       >
         <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-4 md:px-6">
           <a href="#" className="flex items-center" onClick={closeMenu}>
-            <Logo />
+            <img src={logoImg} alt="EQUIPE 360" className="h-10 sm:h-12 w-auto" draggable={false} />
           </a>
 
           <nav className="hidden lg:flex gap-4 xl:gap-6">
@@ -62,7 +62,7 @@ export default function Header() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-background lg:hidden">
             <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-4">
               <a href="#" className="flex items-center" onClick={closeMenu}>
-                <Logo />
+                <img src={logoImg} alt="EQUIPE 360" className="h-10 sm:h-12 w-auto" draggable={false} />
               </a>
               <button onClick={toggleMenu} aria-label="Fechar menu">
                 <X className="h-6 w-6" />
