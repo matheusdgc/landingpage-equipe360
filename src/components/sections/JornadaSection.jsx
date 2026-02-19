@@ -4,7 +4,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 
 export default function JornadaSection() {
   return (
-    <section id="jornada" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
+    <section id="jornada" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -19,8 +19,8 @@ export default function JornadaSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
           >
-            12 Temas da{" "}
-            <span className="text-brand-orange">EQUIPE 360</span>
+            O que os participantes do{" "}
+            <span className="text-brand-orange">EQUIPE 360</span> receberão?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ export default function JornadaSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mx-auto max-w-[800px] text-sm sm:text-base text-muted-foreground md:text-lg leading-relaxed"
           >
-            Um programa progressivo que desenvolve colaboradores por completo, do equilíbrio emocional até a visão estratégica de longo prazo.
+            Trabalharemos 12 temas distribuídos nos quatro principais pilares do desenvolvimento comportamental
           </motion.p>
         </div>
 

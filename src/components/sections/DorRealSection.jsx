@@ -4,8 +4,8 @@ import { fadeIn, staggerContainer, itemFadeIn, PAINS } from "@/lib/constants.jsx
 
 export default function DorRealSection() {
   return (
-    <section className="w-full py-10 sm:py-12 md:py-20 lg:py-28" id="dor">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl">
+    <section className="w-full py-3 sm:py-4 md:py-6 lg:py-8 bg-brand-petrol/10" id="dor">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl bg-brand-petrol/5">
         <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol">
             O problema não é técnico.{" "}
@@ -31,7 +31,7 @@ export default function DorRealSection() {
             transition={{ delay: 0.5 }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground text-center max-w-2xl"
           >
-            Nenhuma empresa cresce além da maturidade das pessoas que a compõem.
+            Nenhuma empresa cresce além da maturidade do seu time.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="inline-flex items-center gap-2 rounded-3xl bg-brand-orange text-brand-petrol px-6 py-3 text-base font-bold shadow-lg">
             <Eye className="h-5 w-5" />

@@ -22,7 +22,7 @@ const CARD_DATA = [
   {
     icon: <Heart className="h-7 w-7" />,
     title: IS_FOR[3],
-    desc: "Fortalecem o time ao invés de drenar energia. Colaboram, não complicam.",
+    desc: "Fortalecem o time ao invés de acabar com a energia. Colaboram, não complicam.",
   },
 ]
 
@@ -42,7 +42,7 @@ export default function ParaQuemSection() {
   )
 
   return (
-    <section id="para-quem" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
+    <section id="para-quem" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -58,16 +58,16 @@ export default function ParaQuemSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
           >
-            O tipo de{" "}
-            <span className="text-brand-orange">colaborador</span> que você precisa
+            Que tipo de{" "}
+            <span className="text-brand-orange">colaborador</span> sua empresa precisa?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-2xl text-muted-foreground text-base sm:text-lg leading-relaxed"
+            className="max-w-2xl text-muted-foreground text-base sm:text-lg leading-relaxed font-semibold"
           >
-            EQUIPE 360 forma profissionais conscientes, responsáveis e preparados para crescer junto com o negócio.
+            Empreendedores querem...
           </motion.p>
         </div>
 

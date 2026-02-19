@@ -3,7 +3,7 @@ import { fadeIn, staggerContainer, itemFadeIn, RESULTS } from "@/lib/constants.j
 
 export default function ResultadosSection() {
   return (
-    <section id="resultados" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
+    <section id="resultados" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl">
         <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol">

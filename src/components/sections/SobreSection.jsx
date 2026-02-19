@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Instagram, Linkedin, Youtube, Mail } from "lucide-react"
+import { Instagram, Mail } from "lucide-react"
 import { fadeIn, SPEAKER_BADGES } from "@/lib/constants.jsx"
 import { cn } from "@/lib/utils"
 import profile2 from "@/public/images/profile2.jpeg"
@@ -8,21 +8,19 @@ const SPEAKER = {
   name: "João Paulino",
   title: "Desenvolvimento Comportamental Aplicado à Realidade Empresarial",
   description:
-    "João Paulino trabalha com desenvolvimento comportamental aplicado à realidade de colaboradores CLT, dentro da rotina real das empresas.",
+    "João Paulino trabalha com desenvolvimento comportamental aplicado à realidade de colaboradores, dentro da rotina real das empresas.",
   methodology: "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, e Resultado e visão de futuro. Com encontros mensais que constroem maturidade de forma progressiva e consistente.",
   philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   imageUrl: profile2,
   socials: [
     { icon: Instagram, url: "#", label: "Instagram" },
-    { icon: Linkedin, url: "#", label: "LinkedIn" },
-    { icon: Youtube, url: "#", label: "YouTube" },
     { icon: Mail, url: "#", label: "E-mail" },
   ],
 }
 
 export default function SobreSection() {
   return (
-    <section id="sobre" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
+    <section id="sobre" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -52,7 +50,7 @@ export default function SobreSection() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="w-[520px] lg:w-[500px] h-[420px] lg:h-[500px] rounded-3xl overflow-hidden bg-muted flex-shrink-0 border-muted"
+              className="w-[520px] lg:w-[500px] h-[420px] lg:h-[500px] rounded-3xl overflow-hidden bg-background shrink-0 border-muted"
             >
               {SPEAKER.imageUrl ? (
                 <img
@@ -139,7 +137,7 @@ export default function SobreSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="w-full aspect-square bg-muted rounded-3xl overflow-hidden mb-6 border-muted"
+              className="w-full aspect-square bg-background rounded-3xl overflow-hidden mb-6 border-muted"
             >
               {SPEAKER.imageUrl ? (
                 <img

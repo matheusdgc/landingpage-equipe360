@@ -99,7 +99,7 @@ export const NAV_LINKS = [
 
 export const PAINS = [
   { icon: <Shield className="h-6 w-6" />, text: "Colaboradores talentosos travados emocionalmente" },
-  { icon: <Flame className="h-6 w-6" />, text: "Conflitos que drenam energia do time" },
+  { icon: <Flame className="h-6 w-6" />, text: "Conflitos que acabam com a energia do time" },
   { icon: <Zap className="h-6 w-6" />, text: "Pessoas que fazem o mínimo necessário" },
   { icon: <TrendingUp className="h-6 w-6" />, text: "Potencial desperdiçado" },
   { icon: <Target className="h-6 w-6" />, text: "Equipes que cumprem tarefas, mas não constroem o negócio" },
@@ -251,6 +251,6 @@ export const RESULTS = [
 
 export const SPEAKER_BADGES = [
   { icon: <MessageCircle className="h-4 w-4" />, text: "Linguagem simples" },
-  { icon: <Handshake className="h-4 w-4" />, text: "Conexão real com CLT" },
-  { icon: <Gauge className="h-4 w-4" />, text: "Foco em prática, não discurso" },
+  { icon: <Handshake className="h-4 w-4" />, text: "Conexão real" },
+  { icon: <Gauge className="h-4 w-4" />, text: "Foco em prática" },
 ]

@@ -1,7 +1,7 @@
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
   Instagram,
-  Linkedin,
   Youtube,
   Mic,
   Users,
@@ -11,6 +11,7 @@ import {
   CreditCard,
   AlertTriangle,
   UserPlus,
+  Clock,
 } from "lucide-react"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { fadeIn, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
@@ -44,11 +45,79 @@ const PAYMENT_OPTIONS = [
 ]
 
 export default function CtaFinalSection() {
+  const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 })
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { hours, minutes, seconds } = prev
+
+        if (seconds > 0) {
+          seconds--
+        } else if (minutes > 0) {
+          minutes--
+          seconds = 59
+        } else if (hours > 0) {
+          hours--
+          minutes = 59
+          seconds = 59
+        } else {
+          clearInterval(timer)
+          return prev
+        }
+
+        return { hours, minutes, seconds }
+      })
+    }, 1000)
+
+    const handleScroll = () => {
+      const section = document.getElementById("contato")
+      if (section) {
+        const rect = section.getBoundingClientRect()
+        setIsVisible(rect.top <= 0 && rect.bottom > 0)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+
+    return () => {
+      clearInterval(timer)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
   return (
     <section
       id="contato"
-      className="w-full py-16 sm:py-20 md:py-28 lg:py-36 bg-gradient-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light relative overflow-hidden"
+      className="w-full py-5 sm:py-6 md:py-8 lg:py-11 bg-linear-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light relative overflow-hidden"
     >
+      {/* Sticky Urgency Header */}
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: isVisible ? 0 : -100, opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-0 left-0 right-0 z-50 bg-linear-to-r from-red-600 via-red-500 to-red-600 shadow-lg"
+      >
+        <div className="container mx-auto px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-pulse" />
+              <span className="text-white font-black text-sm sm:text-base md:text-lg uppercase tracking-wide">
+                Vagas Limitadas
+              </span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2">
+              <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+              <span className="text-white font-mono font-bold text-base sm:text-lg">
+                {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+              </span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Decorative blurs */}
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand-orange/5 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl pointer-events-none" />
@@ -89,6 +158,15 @@ export default function CtaFinalSection() {
               Então estamos falando a mesma língua.
             </p>
           </motion.div>
+
+          <motion.h3
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-orange text-center mt-8"
+          >
+            Como entregamos o programa EQUIPE 360
+          </motion.h3>
         </div>
 
         {/* Main card */}
@@ -131,30 +209,44 @@ export default function CtaFinalSection() {
             {/* Divider */}
             <div className="h-px bg-white/10" />
 
-            {/* Payment conditions */}
+            {/* Price Comparison */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="p-6 sm:p-8"
+              className="p-6 sm:p-8 md:p-10 bg-white/3"
             >
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="h-4 w-4 text-brand-orange shrink-0" />
-                  <span className="font-semibold text-white text-sm">
-                    Condições:
-                  </span>
+              <h3 className="text-lg sm:text-xl font-bold text-white text-center mb-6">
+                Comparativo de Investimento
+              </h3>
+
+              <div className="space-y-3 max-w-2xl mx-auto mb-6">
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-white/80 text-sm sm:text-base">Palestras esporádicas</span>
+                  <span className="text-white font-bold text-sm sm:text-base">R$ 100,00/mês por pessoa</span>
                 </div>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {PAYMENT_OPTIONS.map((option, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-5 py-2.5 text-sm text-white font-medium"
-                    >
-                      <Check className="h-4 w-4 text-brand-green shrink-0" />
-                      {option}
-                    </div>
-                  ))}
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-white/80 text-sm sm:text-base">Conteúdo digital para desenvolvimento</span>
+                  <span className="text-white font-bold text-sm sm:text-base">R$ 100,00/mês por pessoa</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-white/80 text-sm sm:text-base">Dinâmicas vivenciais na empresa</span>
+                  <span className="text-white font-bold text-sm sm:text-base">R$ 200,00/mês por pessoa</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-white/80 text-sm sm:text-base">Comunidade de desenvolvimento</span>
+                  <span className="text-white font-bold text-sm sm:text-base">R$ 250,00/mês por pessoa</span>
+                </div>
+              </div>
+
+              <div className="border-t border-white/20 pt-4 space-y-2">
+                <div className="flex justify-between items-center max-w-2xl mx-auto">
+                  <span className="text-white font-bold text-base sm:text-lg">Total para 5 pessoas/mês:</span>
+                  <span className="text-brand-orange font-black text-xl sm:text-2xl">R$ 3.250,00</span>
+                </div>
+                <div className="flex justify-between items-center max-w-2xl mx-auto">
+                  <span className="text-white/70 text-sm sm:text-base">Investimento anual:</span>
+                  <span className="text-white/90 font-bold text-lg sm:text-xl">R$ 39.000,00</span>
                 </div>
               </div>
             </motion.div>
@@ -169,13 +261,14 @@ export default function CtaFinalSection() {
               transition={{ duration: 0.5, delay: 0.45 }}
               className="p-6 sm:p-8 md:p-10"
             >
-              <div className="text-center mb-8">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+              <div className="text-center mb-6">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
                   PROGRAMA EQUIPE 360
                 </h3>
-                <p className="text-white/60 text-sm sm:text-base">
-                  Até 5 colaboradores inclusos
-                </p>
+                <div className="inline-flex items-center gap-2 rounded-full bg-brand-orange/20 border border-brand-orange/40 px-6 py-3">
+                  <UserPlus className="h-5 w-5 text-brand-orange" />
+                  <span className="text-white font-bold text-base sm:text-lg">5 colaboradores</span>
+                </div>
               </div>
 
               {/* Valor especulativo - Ancoragem */}
@@ -186,11 +279,16 @@ export default function CtaFinalSection() {
                 className="text-center mb-6"
               >
                 <p className="text-white/50 text-sm sm:text-base mb-1">
-                  Se você contratasse cada módulo separadamente, investiria mais de
+                  Se você contratasse cada módulo separadamente, investiria
                 </p>
-                <p className="text-white/40 text-3xl sm:text-4xl font-bold line-through decoration-red-400/60 decoration-2">
-                  R$ 10.000
-                </p>
+                <div className="relative inline-block">
+                  <p className="text-white/40 text-3xl sm:text-4xl md:text-5xl font-black">
+                    R$ 39.000,00
+                  </p>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-full h-1 sm:h-1.5 bg-red-600 rotate-[-8deg] rounded-full"></div>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.p
@@ -231,6 +329,27 @@ export default function CtaFinalSection() {
                 <div className="flex items-center justify-center gap-2 text-brand-petrol/60 text-xs sm:text-sm mt-6 pt-6 border-t border-brand-petrol/10">
                   <UserPlus className="h-4 w-4 text-brand-orange shrink-0" />
                   <p>Colaborador adicional: <span className="text-brand-petrol font-bold">+ R$ 75/mês</span> por pessoa</p>
+                </div>
+              </div>
+
+              {/* Payment conditions */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="h-4 w-4 text-brand-orange shrink-0" />
+                  <span className="font-semibold text-white text-sm">
+                    Condições:
+                  </span>
+                </div>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {PAYMENT_OPTIONS.map((option, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-5 py-2.5 text-sm text-white font-medium"
+                    >
+                      <Check className="h-4 w-4 text-brand-green shrink-0" />
+                      {option}
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -303,7 +422,6 @@ export default function CtaFinalSection() {
         >
           {[
             { icon: <Instagram className="h-5 w-5" />, label: "Instagram", href: "#" },
-            { icon: <Linkedin className="h-5 w-5" />, label: "LinkedIn", href: "#" },
             { icon: <Youtube className="h-5 w-5" />, label: "YouTube", href: "#" },
           ].map((s, i) => (
             <motion.a

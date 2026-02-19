@@ -3,7 +3,7 @@ import { fadeIn, staggerContainer, itemFadeIn, EQUIPE_ACRONYM } from "@/lib/cons
 
 export default function ProgramaSection() {
   return (
-    <section id="programa" className="w-full py-10 sm:py-12 md:py-24 lg:py-32">
+    <section id="programa" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -75,8 +75,8 @@ export default function ProgramaSection() {
                   </p>
                 </div>
 
-                {/* Descrição */}
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                {/* Descrição - Apenas em desktop */}
+                <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed">
                   {item.desc}
                 </p>
               </div>

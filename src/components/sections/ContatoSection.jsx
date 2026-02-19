@@ -22,7 +22,7 @@ export default function ContatoSection() {
   return (
     <section
       id="contato"
-      className="w-full py-16 sm:py-20 md:py-28 lg:py-36 bg-gradient-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light relative overflow-hidden"
+      className="w-full py-5 sm:py-6 md:py-8 lg:py-11 bg-linear-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light relative overflow-hidden"
     >
       {/* Subtle decorative circles */}
       <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-brand-orange/5 blur-3xl pointer-events-none" />
