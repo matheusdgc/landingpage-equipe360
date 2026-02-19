@@ -9,7 +9,7 @@ const SPEAKER = {
   title: "Desenvolvimento Comportamental Aplicado à Realidade Empresarial",
   description:
     "João Paulino trabalha com desenvolvimento comportamental aplicado à realidade de colaboradores, dentro da rotina real das empresas.",
-  methodology: "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, e Resultado e visão de futuro. Com encontros mensais que constroem maturidade de forma progressiva e consistente.",
+  methodology: "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro. Com encontros mensais que constroem maturidade de forma progressiva e consistente.",
   philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   imageUrl: profile2,
   socials: [
@@ -20,7 +20,7 @@ const SPEAKER = {
 
 export default function SobreSection() {
   return (
-    <section id="sobre" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
+    <section id="sobre" className="w-full py-3 sm:py-4 md:py-7 lg:py-10" style={{ backgroundColor: "rgb(254, 254, 254)" }}>
       <motion.div
         initial="hidden"
         whileInView="visible"
