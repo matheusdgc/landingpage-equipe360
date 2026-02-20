@@ -418,7 +418,7 @@ export default function CtaFinalSection() {
           className="flex justify-center gap-4 mt-10"
         >
           {[
-            { icon: <Instagram className="h-5 w-5" />, label: "Instagram", href: "#" },
+            { icon: <Instagram className="h-5 w-5" />, label: "Instagram", href: "https://www.instagram.com/soujoaopaulino" },
             { icon: <Youtube className="h-5 w-5" />, label: "YouTube", href: "#" },
           ].map((s, i) => (
             <motion.a

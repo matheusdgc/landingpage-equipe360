@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Instagram, Linkedin } from "lucide-react"
+import { Instagram } from "lucide-react"
 import logoImg from "@/public/images/logo-2.png"
 import { fadeIn, NAV_LINKS } from "@/lib/constants.jsx"
 
@@ -13,14 +13,9 @@ export default function Footer() {
             João Paulino — Palestrante e Facilitador de Desenvolvimento Comportamental. Ajudando colaboradores comuns a se tornarem profissionais extraordinários.
           </p>
           <div className="flex gap-3">
-            {[
-              { icon: <Instagram className="h-5 w-5" />, label: "Instagram" },
-              { icon: <Linkedin className="h-5 w-5" />, label: "LinkedIn" },
-            ].map((s, i) => (
-              <motion.a key={i} href="#" whileHover={{ y: -4, scale: 1.1 }} className="text-muted-foreground hover:text-foreground" aria-label={s.label}>
-                {s.icon}
-              </motion.a>
-            ))}
+            <motion.a href="https://www.instagram.com/soujoaopaulino" target="_blank" rel="noopener noreferrer" whileHover={{ y: -4, scale: 1.1 }} className="text-muted-foreground hover:text-foreground" aria-label="Instagram">
+              <Instagram className="h-5 w-5" />
+            </motion.a>
           </div>
         </div>
 
