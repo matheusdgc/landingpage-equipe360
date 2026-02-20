@@ -6,7 +6,7 @@ import { fadeIn } from "@/lib/constants.jsx"
 const FAQ_ITEMS = [
   {
     question: "Como funciona o programa EQUIPE 360?",
-    answer: "O EQUIPE 360 é um programa de desenvolvimento comportamental com 12 encontros mensais presenciais de 2 horas cada. Cada encontro combina palestra + dinâmica vivencial, trabalhando os 4 pilares do desenvolvimento: Base emocional, Postura profissional, Performance e intraempreendedorismo, e Resultado e visão de futuro."
+    answer: "O EQUIPE 360 é um programa de desenvolvimento comportamental com 12 encontros, 1 por mês a longo do ano, presenciais de 2 horas cada. Cada encontro combina palestra + dinâmica vivencial, trabalhando os 4 pilares do desenvolvimento: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro."
   },
   {
     question: "Quantos colaboradores podem participar?",
