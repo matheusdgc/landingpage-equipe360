@@ -1,4 +1,5 @@
 import Header from "@/components/sections/Header"
+import ExitIntentPopup from "@/components/ExitIntentPopup"
 import HeroSection from "@/components/sections/HeroSection"
 import DorRealSection from "@/components/sections/DorRealSection"
 // import EmpatiaSection from "@/components/sections/EmpatiaSection"
@@ -28,6 +29,7 @@ export default function Equipe360Page() {
         <FAQSection />
       </main>
       <Footer />
+      <ExitIntentPopup />
     </div>
   )
 }
