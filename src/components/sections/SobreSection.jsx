@@ -13,8 +13,8 @@ const SPEAKER = {
   philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   imageUrl: profile2,
   socials: [
-    { icon: Instagram, url: "#", label: "Instagram" },
-    { icon: Mail, url: "#", label: "E-mail" },
+    { icon: Instagram, url: "https://www.instagram.com/soujoaopaulino", label: "Instagram" },
+    { icon: Mail, url: "mailto:joao@comautomacao.com", label: "E-mail" },
   ],
 }
 
@@ -50,7 +50,7 @@ export default function SobreSection() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="w-[520px] lg:w-[500px] h-[420px] lg:h-[500px] rounded-3xl overflow-hidden bg-background shrink-0 border-muted"
+              className="w-90 md:w-105 lg:w-115 xl:w-125 h-95 md:h-107.5 lg:h-120 xl:h-130 rounded-3xl overflow-hidden bg-background shrink-0 border-muted"
             >
               {SPEAKER.imageUrl ? (
                 <img

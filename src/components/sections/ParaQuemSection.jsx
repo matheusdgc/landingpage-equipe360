@@ -77,7 +77,7 @@ export default function ParaQuemSection() {
           style={{ clipPath }}
           className="mx-auto max-w-5xl mt-10 sm:mt-14 rounded-3xl bg-brand-petrol"
         >
-          <div className="grid gap-4 sm:gap-6 py-8 sm:py-12 px-4 sm:px-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+          <div className="grid gap-4 sm:gap-5 lg:gap-6 xl:gap-7 py-8 sm:py-12 px-4 sm:px-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {CARD_DATA.map((card, i) => (
               <div
                 key={i}

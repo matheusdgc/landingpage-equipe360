@@ -36,14 +36,14 @@ export default function ProgramaSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mx-auto grid max-w-7xl items-stretch gap-3 sm:gap-4 py-8 sm:py-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+          className="mx-auto grid max-w-7xl items-stretch gap-3 sm:gap-4 py-8 sm:py-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6"
         >
           {EQUIPE_ACRONYM.map((item, i) => (
             <motion.div
               key={i}
               variants={itemFadeIn}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group relative overflow-hidden rounded-3xl border-2 border-muted p-6 sm:p-7 shadow-sm transition-all hover:shadow-lg hover:border-brand-orange/50 bg-background text-center h-full flex flex-col"
+              className="group relative overflow-hidden rounded-3xl border-2 border-muted p-6 sm:p-7 xl:p-4 shadow-sm transition-all hover:shadow-lg hover:border-brand-orange/50 bg-background text-center h-full flex flex-col"
             >
               {/* Letra grande no background */}
               <div className="absolute -right-4 -top-4 text-[120px] sm:text-[140px] font-black text-brand-orange/5 group-hover:text-brand-orange/10 transition-colors leading-none select-none">
@@ -58,8 +58,8 @@ export default function ProgramaSection() {
 
                 {/* Letra destacada */}
                 <div className="flex items-center justify-center gap-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-petrol flex items-center justify-center">
-                    <span className="text-xl sm:text-2xl font-black text-white">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 xl:w-10 xl:h-10 rounded-xl bg-brand-petrol flex items-center justify-center">
+                    <span className="text-xl sm:text-2xl xl:text-xl font-black text-white">
                       {item.letter}
                     </span>
                   </div>
@@ -67,16 +67,16 @@ export default function ProgramaSection() {
 
                 {/* Título */}
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-black text-brand-petrol leading-tight mb-1">
+                  <h3 className="text-xl sm:text-2xl xl:text-lg font-black text-brand-petrol leading-tight mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-brand-orange uppercase tracking-wide">
+                  <p className="text-xs sm:text-sm xl:text-xs font-semibold text-brand-orange uppercase tracking-wide xl:tracking-normal">
                     {item.subtitle}
                   </p>
                 </div>
 
                 {/* Descrição - Apenas em desktop */}
-                <p className="hidden lg:block text-sm text-muted-foreground leading-relaxed">
+                <p className="hidden xl:block text-sm text-muted-foreground leading-relaxed">
                   {item.desc}
                 </p>
               </div>

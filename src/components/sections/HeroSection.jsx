@@ -17,10 +17,10 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light" />
         }
       >
-        <div className="grid gap-6 lg:grid-cols-[1fr_280px] lg:gap-6 xl:grid-cols-[1fr_440px] xl:gap-8 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
+        <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:gap-8 xl:grid-cols-[1fr_460px] xl:gap-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col justify-center space-y-4 sm:space-y-5">
             <div className="space-y-3 sm:space-y-4">
-              <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl xl:text-5xl/none leading-tight">
+              <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl/none leading-tight">
                 Para empresários que se recusam a aceitar{" "}
                 <span className="text-brand-orange">equipes comuns</span>
               </motion.h1>
@@ -49,7 +49,7 @@ export default function HeroSection() {
 
           {/* Hero photo – visible on all breakpoints */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="flex items-center justify-center order-first lg:order-last">
-            <div className="relative w-72 h-72 sm:w-[336px] sm:h-[336px] md:w-96 md:h-96 lg:h-[340px] xl:h-[440px] lg:w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5">
+            <div className="relative w-72 h-72 sm:w-[336px] sm:h-[336px] md:w-96 md:h-96 lg:h-95 xl:h-115 lg:w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5">
               <img src={profile1} alt="João Paulino" className="w-full h-full object-cover" draggable={false} />
             </div>
           </motion.div>

@@ -278,9 +278,6 @@ export default function CtaFinalSection() {
                 transition={{ duration: 0.4, delay: 0.5 }}
                 className="text-center mb-6"
               >
-                <p className="text-white/50 text-sm sm:text-base mb-1">
-                  Se você contratasse cada módulo separadamente, investiria
-                </p>
                 <div className="relative inline-block">
                   <p className="text-white/40 text-3xl sm:text-4xl md:text-5xl font-black">
                     R$ 39.000,00

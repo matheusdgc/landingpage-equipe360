@@ -3,7 +3,7 @@ import { fadeIn, staggerContainer, itemFadeIn, ENTREPRENEUR_CHALLENGES } from "@
 
 export default function EmpatiaSection() {
   return (
-    <section className="w-full py-10 sm:py-12 md:py-20 lg:py-32 relative overflow-hidden">
+    <section className="w-full py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 relative overflow-hidden">
       {/* Fundo decorativo */}
       <div className="absolute inset-0 bg-linear-to-b from-muted/30 via-transparent to-muted/30 pointer-events-none" />
 
@@ -34,7 +34,7 @@ export default function EmpatiaSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 mb-12 sm:mb-16"
+            className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-12 sm:mb-16"
           >
             {ENTREPRENEUR_CHALLENGES.map((challenge, i) => (
               <motion.div

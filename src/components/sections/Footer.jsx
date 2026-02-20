@@ -36,8 +36,7 @@ export default function Footer() {
         <div>
           <h3 className="text-base font-semibold">Contato</h3>
           <div className="mt-4 flex flex-col space-y-2 text-sm text-muted-foreground">
-            <span>contato@equipe360.com.br</span>
-            <span>+55 (XX) XXXXX-XXXX</span>
+            <span>joao@comautomacao.com</span>
           </div>
         </div>
       </motion.div>

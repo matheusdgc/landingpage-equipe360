@@ -5,7 +5,7 @@ import logoImg from "@/public/images/logo-2.png"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { NAV_LINKS, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
 
-const CHECKOUT_URL = "#"
+const CHECKOUT_URL = "https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20programa%20EQUIPE%20360!"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,7 +35,7 @@ export default function Header() {
 
           <nav className="hidden lg:flex gap-4 xl:gap-6">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-medium transition-colors hover:text-brand-orange whitespace-nowrap">
+              <a key={link.href} href={link.href} className="text-xs lg:text-sm font-medium transition-colors hover:text-brand-orange whitespace-nowrap">
                 {link.label}
               </a>
             ))}
@@ -45,7 +45,7 @@ export default function Header() {
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <InteractiveHoverButton
                 text="Quero levar para minha empresa"
-                className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs xl:text-sm py-2 px-4 xl:px-6"
+                className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs lg:text-sm py-2 px-4 lg:px-5 xl:px-6"
               />
             </a>
           </div>
