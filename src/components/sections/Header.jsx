@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight, Rocket } from "lucide-react"
 import logoImg from "@/public/images/logo-2.png"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { NAV_LINKS, staggerContainer, itemFadeIn, WA_INTEREST } from "@/lib/constants.jsx"
+import { NAV_LINKS, staggerContainer, itemFadeIn, TICKET_URL } from "@/lib/constants.jsx"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,7 +24,7 @@ export default function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${scrollY > 50 ? "shadow-md" : ""}`}
+        className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 ${scrollY > 50 ? "shadow-md" : ""}`}
       >
         <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-4 md:px-6">
           <a href="#" className="flex items-center" onClick={closeMenu}>
@@ -40,7 +40,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center">
-            <a href={WA_INTEREST} target="_blank" rel="noopener noreferrer">
+            <a href={TICKET_URL} target="_blank" rel="noopener noreferrer">
               <InteractiveHoverButton
                 text="Quero levar para minha empresa"
                 className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs lg:text-sm py-2 px-4 lg:px-5 xl:px-6"
@@ -77,7 +77,7 @@ export default function Header() {
               ))}
               <motion.div variants={itemFadeIn} className="pt-4">
                 <a
-                  href={WA_INTEREST}
+                  href={TICKET_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
@@ -94,7 +94,7 @@ export default function Header() {
 
       {/* Floating mobile checkout FAB */}
       <motion.a
-        href={WA_INTEREST}
+        href={TICKET_URL}
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0, opacity: 0 }}

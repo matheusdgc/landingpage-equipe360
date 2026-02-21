@@ -12,7 +12,7 @@ import {
   Clock,
 } from "lucide-react"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { fadeIn, staggerContainer, itemFadeIn, WA_INTEREST } from "@/lib/constants.jsx"
+import { fadeIn, staggerContainer, itemFadeIn, TICKET_URL } from "@/lib/constants.jsx"
 
 const DELIVERABLES = [
   {
@@ -390,7 +390,7 @@ export default function CtaFinalSection() {
                 <div className="relative group">
                   <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-300 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
                   <a
-                    href={WA_INTEREST}
+                    href={TICKET_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="relative block"

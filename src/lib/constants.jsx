@@ -7,7 +7,6 @@ import {
   Target,
   Zap,
   Star,
-  Clock,
   Award,
   Flame,
   Brain,
@@ -254,6 +253,9 @@ export const SPEAKER_BADGES = [
   { icon: <Handshake className="h-4 w-4" />, text: "Conexão real" },
   { icon: <Gauge className="h-4 w-4" />, text: "Foco em prática" },
 ]
+
+/* ─── Vendas ─── */
+export const TICKET_URL = "https://ticketcom.vc/br/event/equipe-360"
 
 /* ─── WhatsApp ─── */
 export const WA_PHONE = "5515997133311"
