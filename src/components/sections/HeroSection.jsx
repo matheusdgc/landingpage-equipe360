@@ -50,7 +50,7 @@ export default function HeroSection() {
           {/* Hero photo – visible on all breakpoints */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="flex items-center justify-center order-first lg:order-last">
             <div className="relative w-72 h-72 sm:w-[336px] sm:h-[336px] md:w-96 md:h-96 lg:h-95 xl:h-115 lg:w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5">
-              <img src={profile1} alt="João Paulino" className="w-full h-full object-cover" draggable={false} />
+              <img src={profile1} alt="João Paulino" className="w-full h-full object-cover" draggable={false} fetchpriority="high" />
             </div>
           </motion.div>
         </div>

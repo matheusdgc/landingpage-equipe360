@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { HelpCircle } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import { fadeIn } from "@/lib/constants.jsx"
+import { fadeIn, WA_DUVIDAS } from "@/lib/constants.jsx"
 
 const FAQ_ITEMS = [
   {
@@ -136,7 +136,7 @@ export default function FAQSection() {
             Ainda tem dúvidas?
           </p>
           <a
-            href="https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20d%C3%BAvidas%20sobre%20o%20programa%20EQUIPE%20360"
+            href={WA_DUVIDAS}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-brand-petrol font-bold px-6 py-3 transition-colors shadow-lg hover:shadow-xl"

@@ -107,7 +107,7 @@ export default function ContatoSection() {
 
             {/* Email - Secondary CTA */}
             <motion.a
-              href="mailto:joao@comautomacao.com.br?subject=Interesse%20na%20palestra%20EQUIPE%20360"
+              href="mailto:joao@comautomacao.com?subject=Interesse%20na%20palestra%20EQUIPE%20360"
               whileHover={{ scale: 1.03, y: -4 }}
               whileTap={{ scale: 0.98 }}
               className="group flex flex-col items-center gap-3 rounded-2xl bg-white/10 border border-white/15 p-6 sm:p-8 text-white hover:bg-white/15 transition-colors cursor-pointer"
@@ -120,7 +120,7 @@ export default function ContatoSection() {
                 Para propostas e orçamentos
               </span>
               <span className="mt-1 text-sm font-medium text-white/80 break-all">
-                joao@comautomacao.com.br
+                joao@comautomacao.com
               </span>
             </motion.a>
           </motion.div>

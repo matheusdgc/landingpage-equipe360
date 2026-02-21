@@ -254,3 +254,9 @@ export const SPEAKER_BADGES = [
   { icon: <Handshake className="h-4 w-4" />, text: "Conexão real" },
   { icon: <Gauge className="h-4 w-4" />, text: "Foco em prática" },
 ]
+
+/* ─── WhatsApp ─── */
+export const WA_PHONE = "5515997133311"
+export const WA_INTEREST = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent("Olá, tenho interesse no programa EQUIPE 360!")}`
+export const WA_DUVIDAS = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent("Olá, tenho dúvidas sobre o programa EQUIPE 360")}`
+export const WA_SABER_MAIS = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent("Olá, quero saber mais sobre o EQUIPE 360!")}`

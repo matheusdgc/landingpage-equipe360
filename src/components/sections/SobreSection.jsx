@@ -1,5 +1,13 @@
 import { motion } from "framer-motion"
-import { Instagram, Mail } from "lucide-react"
+import { Mail } from "lucide-react"
+
+const InstagramIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+)
 import { fadeIn, SPEAKER_BADGES } from "@/lib/constants.jsx"
 import { cn } from "@/lib/utils"
 import profile2 from "@/public/images/profile2.jpeg"
@@ -13,14 +21,14 @@ const SPEAKER = {
   philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   imageUrl: profile2,
   socials: [
-    { icon: Instagram, url: "https://www.instagram.com/soujoaopaulino", label: "Instagram" },
+    { icon: InstagramIcon, url: "https://www.instagram.com/soujoaopaulino", label: "Instagram" },
     { icon: Mail, url: "mailto:joao@comautomacao.com", label: "E-mail" },
   ],
 }
 
 export default function SobreSection() {
   return (
-    <section id="sobre" className="w-full py-3 sm:py-4 md:py-7 lg:py-10" style={{ backgroundColor: "rgb(254, 254, 254)" }}>
+    <section id="sobre" className="w-full py-3 sm:py-4 md:py-7 lg:py-10 bg-[rgb(254,254,254)]">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -58,6 +66,7 @@ export default function SobreSection() {
                   alt={SPEAKER.name}
                   className="w-full h-full object-cover"
                   draggable={false}
+                  loading="lazy"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-muted-foreground bg-gradient-to-br from-brand-petrol/5 to-brand-petrol/15">
@@ -145,6 +154,7 @@ export default function SobreSection() {
                   alt={SPEAKER.name}
                   className="w-full h-full object-cover"
                   draggable={false}
+                  loading="lazy"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-muted-foreground bg-gradient-to-br from-brand-petrol/5 to-brand-petrol/15">

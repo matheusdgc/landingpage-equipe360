@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joaopaulino.com.br/sitemap.xml

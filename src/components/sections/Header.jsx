@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight, Rocket } from "lucide-react"
 import logoImg from "@/public/images/logo-2.png"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { NAV_LINKS, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
-
-const CHECKOUT_URL = "https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20programa%20EQUIPE%20360!"
+import { NAV_LINKS, staggerContainer, itemFadeIn, WA_INTEREST } from "@/lib/constants.jsx"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -42,7 +40,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center">
-            <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
+            <a href={WA_INTEREST} target="_blank" rel="noopener noreferrer">
               <InteractiveHoverButton
                 text="Quero levar para minha empresa"
                 className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs lg:text-sm py-2 px-4 lg:px-5 xl:px-6"
@@ -79,7 +77,7 @@ export default function Header() {
               ))}
               <motion.div variants={itemFadeIn} className="pt-4">
                 <a
-                  href={CHECKOUT_URL}
+                  href={WA_INTEREST}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
@@ -96,7 +94,7 @@ export default function Header() {
 
       {/* Floating mobile checkout FAB */}
       <motion.a
-        href={CHECKOUT_URL}
+        href={WA_INTEREST}
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0, opacity: 0 }}

@@ -1,20 +1,32 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ArrowRight } from "lucide-react"
+import { WA_SABER_MAIS } from "@/lib/constants.jsx"
 
 export default function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false)
-  const [hasShown, setHasShown] = useState(false)
+  const hasShownRef = useRef(false)
+
+  const showPopup = useCallback(() => {
+    if (hasShownRef.current) return
+    hasShownRef.current = true
+    setIsVisible(true)
+  }, [])
 
   const handleMouseLeave = useCallback((e) => {
-    if (hasShown) return
-    if (e.clientY <= 5) {
-      setIsVisible(true)
-      setHasShown(true)
-    }
-  }, [hasShown])
+    if (e.clientY <= 5) showPopup()
+  }, [showPopup])
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024
+
+    if (isMobile) {
+      // Mobile: mostrar após 35s de navegação
+      const timer = setTimeout(showPopup, 35000)
+      return () => clearTimeout(timer)
+    }
+
+    // Desktop: mostrar ao mover mouse para fora da janela
     const delay = setTimeout(() => {
       document.addEventListener("mouseleave", handleMouseLeave)
     }, 8000)
@@ -23,7 +35,7 @@ export default function ExitIntentPopup() {
       clearTimeout(delay)
       document.removeEventListener("mouseleave", handleMouseLeave)
     }
-  }, [handleMouseLeave])
+  }, [showPopup, handleMouseLeave])
 
   const handleClose = () => setIsVisible(false)
 
@@ -37,7 +49,7 @@ export default function ExitIntentPopup() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm"
             onClick={handleClose}
           />
 
@@ -47,7 +59,7 @@ export default function ExitIntentPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: -30 }}
             transition={{ type: "spring", stiffness: 280, damping: 22 }}
-            className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none"
+            className="fixed inset-0 z-101 flex items-center justify-center p-4 pointer-events-none"
           >
             <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden pointer-events-auto">
               {/* Top bar dourada */}
@@ -79,7 +91,7 @@ export default function ExitIntentPopup() {
 
                 {/* CTA principal */}
                 <a
-                  href="https://wa.me/5515997133311?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20EQUIPE%20360!"
+                  href={WA_SABER_MAIS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-orange hover:bg-brand-orange-hover text-brand-petrol font-black py-4 transition-colors shadow-lg shadow-brand-orange/25 text-base mb-3"

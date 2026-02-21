@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
-  Instagram,
-  Youtube,
   Mic,
   Users,
   BookOpen,
@@ -14,7 +12,7 @@ import {
   Clock,
 } from "lucide-react"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { fadeIn, staggerContainer, itemFadeIn } from "@/lib/constants.jsx"
+import { fadeIn, staggerContainer, itemFadeIn, WA_INTEREST } from "@/lib/constants.jsx"
 
 const DELIVERABLES = [
   {
@@ -49,27 +47,25 @@ export default function CtaFinalSection() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { hours, minutes, seconds } = prev
+    const STORAGE_KEY = "equipe360_deadline"
+    const DURATION_MS = 24 * 60 * 60 * 1000
+    let deadline = Number(localStorage.getItem(STORAGE_KEY))
+    if (!deadline || deadline < Date.now()) {
+      deadline = Date.now() + DURATION_MS
+      localStorage.setItem(STORAGE_KEY, String(deadline))
+    }
 
-        if (seconds > 0) {
-          seconds--
-        } else if (minutes > 0) {
-          minutes--
-          seconds = 59
-        } else if (hours > 0) {
-          hours--
-          minutes = 59
-          seconds = 59
-        } else {
-          clearInterval(timer)
-          return prev
-        }
-
-        return { hours, minutes, seconds }
+    const tick = () => {
+      const remaining = Math.max(0, deadline - Date.now())
+      setTimeLeft({
+        hours: Math.floor(remaining / 3600000),
+        minutes: Math.floor((remaining % 3600000) / 60000),
+        seconds: Math.floor((remaining % 60000) / 1000),
       })
-    }, 1000)
+    }
+
+    tick()
+    const timer = setInterval(tick, 1000)
 
     const handleScroll = () => {
       const section = document.getElementById("contato")
@@ -394,7 +390,7 @@ export default function CtaFinalSection() {
                 <div className="relative group">
                   <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-300 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
                   <a
-                    href="https://wa.me/5515997133311?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20programa%20EQUIPE%20360!"
+                    href={WA_INTEREST}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="relative block"
@@ -417,22 +413,20 @@ export default function CtaFinalSection() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex justify-center gap-4 mt-10"
         >
-          {[
-            { icon: <Instagram className="h-5 w-5" />, label: "Instagram", href: "https://www.instagram.com/soujoaopaulino" },
-            { icon: <Youtube className="h-5 w-5" />, label: "YouTube", href: "#" },
-          ].map((s, i) => (
-            <motion.a
-              key={i}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -4, scale: 1.1 }}
-              className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-colors"
-              aria-label={s.label}
-            >
-              {s.icon}
-            </motion.a>
-          ))}
+          <motion.a
+            href="https://www.instagram.com/soujoaopaulino"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -4, scale: 1.1 }}
+            className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-colors"
+            aria-label="Instagram"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>
