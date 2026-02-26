@@ -300,7 +300,7 @@ export default function CtaFinalSection() {
                   <div className="text-center">
                     <p className="text-brand-petrol/50 text-xs uppercase tracking-wider font-semibold mb-2">Parcelado</p>
                     <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
-                      12x <span className="text-brand-orange">R$ 375</span>
+                      12x <span className="text-brand-orange">R$ 387,84</span>
                     </p>
                   </div>
 
@@ -313,15 +313,12 @@ export default function CtaFinalSection() {
                     <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
                       <span className="text-brand-green">R$ 3.750</span>
                     </p>
-                    <p className="text-brand-green text-xs mt-2 font-bold">
-                      Economia de R$ 750
-                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-brand-petrol/60 text-xs sm:text-sm mt-6 pt-6 border-t border-brand-petrol/10">
                   <UserPlus className="h-4 w-4 text-brand-orange shrink-0" />
-                  <p>Colaborador adicional: <span className="text-brand-petrol font-bold">+ R$ 75/mês</span> por pessoa</p>
+                  <p>Colaborador adicional: <span className="text-brand-petrol font-bold">+ R$ 62,50/mês</span> por pessoa</p>
                 </div>
               </div>
 

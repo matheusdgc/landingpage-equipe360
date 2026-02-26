@@ -22,7 +22,7 @@ const SPEAKER = {
   imageUrl: profile2,
   socials: [
     { icon: InstagramIcon, url: "https://www.instagram.com/soujoaopaulino", label: "Instagram" },
-    { icon: Mail, url: "mailto:joao@comautomacao.com", label: "E-mail" },
+    { icon: Mail, url: "mailto:equipe360@joaopaulino.com.br", label: "E-mail" },
   ],
 }
 

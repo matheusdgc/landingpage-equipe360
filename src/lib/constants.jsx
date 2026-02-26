@@ -255,7 +255,7 @@ export const SPEAKER_BADGES = [
 ]
 
 /* ─── Vendas ─── */
-export const TICKET_URL = "https://ticketcom.vc/br/event/equipe-360"
+export const TICKET_URL = "https://payment.ticto.app/O6614913F?event=PageView&product_id=106081&offer_code=O6614913F%C2%A4cy=brl&_gl=&fbc=&fbp=&fbclid=&payment_method=credit_card&visitor_id=&fingerprint="
 
 /* ─── WhatsApp ─── */
 export const WA_PHONE = "5515997133311"

@@ -120,7 +120,7 @@ export default function ContatoSection() {
                 Para propostas e orçamentos
               </span>
               <span className="mt-1 text-sm font-medium text-white/80 break-all">
-                joao@comautomacao.com
+                equipe360@joaopaulino.com.br
               </span>
             </motion.a>
           </motion.div>
