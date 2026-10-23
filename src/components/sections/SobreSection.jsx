@@ -27,7 +27,7 @@ export default function SobreSection() {
           loading="lazy"
           draggable={false}
           style={motionOn ? { y: joaoY } : undefined}
-          className="mx-auto block h-auto w-full max-w-[644px] select-none"
+          className="mx-auto block h-auto w-full max-w-[644px] select-none lg:ml-[-2%] lg:w-[110%] lg:max-w-[708px]"
         />
 
         {/* Texto */}
