@@ -1,103 +1,64 @@
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { CheckCircle2, TrendingUp, Star, Rocket, Heart } from "lucide-react"
-import { fadeIn, IS_FOR } from "@/lib/constants.jsx"
+import { motion } from "framer-motion"
+import { Check, X } from "lucide-react"
+import { IS_FOR, NOT_FOR } from "@/lib/constants.jsx"
+import { DUR_UI, EASE_FIRM, useScrollScenes } from "@/lib/motion"
 
-const CARD_DATA = [
-  {
-    icon: <TrendingUp className="h-7 w-7" />,
-    title: IS_FOR[0],
-    desc: "Não esperam ordens. Identificam problemas e resolvem com maturidade e iniciativa.",
-  },
-  {
-    icon: <Star className="h-7 w-7" />,
-    title: IS_FOR[1],
-    desc: "Cuidam do negócio como se fosse seu. Agem com compromisso real, não apenas cumprindo tarefas.",
-  },
-  {
-    icon: <Rocket className="h-7 w-7" />,
-    title: IS_FOR[2],
-    desc: "Entregam resultados consistentes, com qualidade e sem necessidade de retrabalho.",
-  },
-  {
-    icon: <Heart className="h-7 w-7" />,
-    title: IS_FOR[3],
-    desc: "Fortalecem o time ao invés de acabar com a energia. Colaboram, não complicam.",
-  },
-]
+/*
+ * Cena 7, para quem é. A calma depois do retrato: fluxo simples, duas colunas
+ * de peso desigual. Cada item entra quando chega à tela, uma vez.
+ */
+const enter = (i) => ({
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "0px 0px -12% 0px" },
+  transition: { duration: DUR_UI, ease: EASE_FIRM, delay: i * 0.06 },
+})
 
 export default function ParaQuemSection() {
-  const containerRef = useRef(null)
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.95", "start 0.55"],
-  })
-
-  const curtainL = useTransform(scrollYProgress, [0, 1], [50, 0])
-  const curtainR = useTransform(scrollYProgress, [0, 1], [50, 100])
-  const clipPath = useTransform(
-    [curtainL, curtainR],
-    ([l, r]) => `polygon(${l}% 0, ${r}% 0, ${r}% 100%, ${l}% 100%)`
-  )
+  const motionOn = useScrollScenes()
+  const m = (i) => (motionOn ? enter(i) : {})
 
   return (
-    <section id="para-quem" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        className="container mx-auto px-3 sm:px-4 md:px-6"
-      >
-        {/* Cabeçalho */}
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
-          >
-            Que tipo de{" "}
-            <span className="text-brand-orange">colaborador</span> sua empresa precisa?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-2xl text-muted-foreground text-base sm:text-lg leading-relaxed font-semibold"
-          >
-            Empreendedores querem...
-          </motion.p>
-        </div>
+    <section id="para-quem" className="scene-petrol py-20 lg:py-32" aria-labelledby="para-quem-title">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-5 lg:gap-20 lg:px-10">
+        <header className="flex flex-col gap-4">
+          <p className="text-label text-brand-gold">Empreendedores querem...</p>
+          <h2 id="para-quem-title" className="display text-display-l max-w-[16ch]">
+            Que tipo de colaborador sua empresa precisa?
+          </h2>
+        </header>
 
-        {/* Container único — clip-path revela tudo (fundo + cards) */}
-        <motion.div
-          ref={containerRef}
-          style={{ clipPath }}
-          className="mx-auto max-w-5xl mt-10 sm:mt-14 rounded-3xl bg-brand-petrol"
-        >
-          <div className="grid gap-4 sm:gap-5 lg:gap-6 xl:gap-7 py-8 sm:py-12 px-4 sm:px-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-            {CARD_DATA.map((card, i) => (
-              <div
-                key={i}
-                className="group relative flex flex-col items-center text-center gap-4 rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 transition-colors hover:bg-white/20"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/15 text-brand-orange">
-                  {card.icon}
-                </div>
-                <h3 className="text-base font-bold text-white leading-tight">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-white/70 leading-relaxed">
-                  {card.desc}
-                </p>
-                <CheckCircle2 className="absolute top-3 right-3 h-5 w-5 text-brand-orange/50" />
-              </div>
-            ))}
+        <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
+          <div className="flex flex-col gap-6">
+            <h3 className="text-label text-brand-paper">O EQUIPE 360 é para</h3>
+            <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+              {IS_FOR.map((item, i) => (
+                <motion.li key={item.title} {...m(i)} className="flex flex-col gap-3">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-brand-gold text-brand-petrol-dark" aria-hidden="true">
+                    <Check className="h-5 w-5" strokeWidth={3} />
+                  </span>
+                  <h4 className="text-title">{item.title}</h4>
+                  <p className="text-body text-brand-haze">{item.desc}</p>
+                </motion.li>
+              ))}
+            </ul>
           </div>
-        </motion.div>
-      </motion.div>
+
+          <div className="flex flex-col gap-6 lg:border-l-2 lg:border-brand-line-dark lg:pl-14">
+            <h3 className="text-label text-brand-paper">Não é para</h3>
+            <ul className="flex flex-col gap-5">
+              {NOT_FOR.map((item, i) => (
+                <motion.li key={item} {...m(i + 4)} className="flex items-center gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border-2 border-brand-mist text-brand-mist" aria-hidden="true">
+                    <X className="h-5 w-5" strokeWidth={3} />
+                  </span>
+                  <span className="text-title text-brand-haze">{item}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

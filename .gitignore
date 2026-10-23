@@ -23,3 +23,7 @@ Thumbs.db
 *.log
 npm-debug.log*
 .vercel
+*.zip
+
+# Estado local de ferramentas
+.claude-flow/

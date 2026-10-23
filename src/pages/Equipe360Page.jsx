@@ -2,34 +2,39 @@ import Header from "@/components/sections/Header"
 import ExitIntentPopup from "@/components/ExitIntentPopup"
 import HeroSection from "@/components/sections/HeroSection"
 import DorRealSection from "@/components/sections/DorRealSection"
-// import EmpatiaSection from "@/components/sections/EmpatiaSection"
+import ViradaSection from "@/components/sections/ViradaSection"
 import ProgramaSection from "@/components/sections/ProgramaSection"
-import ParaQuemSection from "@/components/sections/ParaQuemSection"
 import JornadaSection from "@/components/sections/JornadaSection"
-import ResultadosSection from "@/components/sections/ResultadosSection"
 import SobreSection from "@/components/sections/SobreSection"
-import FAQSection from "@/components/sections/FAQSection"
+import ParaQuemSection from "@/components/sections/ParaQuemSection"
 import CtaFinalSection from "@/components/sections/CtaFinalSection"
+import FAQSection from "@/components/sections/FAQSection"
 import Footer from "@/components/sections/Footer"
 
+/* A jornada em 8 cenas (MASTER.md): recusa, dor, virada, método, 12 meses, João, para quem é, investimento */
 export default function Equipe360Page() {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background to-muted/20">
+    <>
+      <a
+        href="#conteudo"
+        className="btn-primary fixed left-4 top-4 z-[60] -translate-y-24 focus-visible:translate-y-0"
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <main className="flex-1">
+      <main id="conteudo">
         <HeroSection />
         <DorRealSection />
-        {/* <EmpatiaSection /> */}
-        <ParaQuemSection />
+        <ViradaSection />
         <ProgramaSection />
         <JornadaSection />
-        <ResultadosSection />
         <SobreSection />
+        <ParaQuemSection />
         <CtaFinalSection />
         <FAQSection />
       </main>
       <Footer />
       <ExitIntentPopup />
-    </div>
+    </>
   )
 }

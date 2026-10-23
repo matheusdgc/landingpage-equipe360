@@ -1,89 +1,59 @@
-import { motion } from "framer-motion"
-import { fadeIn, staggerContainer, itemFadeIn, EQUIPE_ACRONYM } from "@/lib/constants.jsx"
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { EQUIPE_ACRONYM } from "@/lib/constants.jsx"
+import { clamp01, easeOutCubic, useRange, useScrollScenes } from "@/lib/motion"
+
+/*
+ * Cena 4, o método. Cada letra é revelada por uma cortina guiada pela rolagem
+ * (clip-path subindo de baixo para cima), como uma placa sendo descoberta.
+ * Sem tela fixa: aqui a página volta a fluir.
+ */
+function Row({ item, motionOn }) {
+  const ref = useRef(null)
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start 95%", "start 50%"] })
+  const clipPath = useTransform(p, (v) => `inset(${(1 - easeOutCubic(clamp01(v))) * 100}% 0 0 0)`)
+  const textOpacity = useRange(p, [0.3, 0.8], [0, 1])
+  const textY = useRange(p, [0.3, 0.9], [20, 0])
+
+  return (
+    <li ref={ref} className="grid grid-cols-[minmax(0,auto)_1fr] items-end gap-x-5 sm:gap-x-10 lg:grid-cols-[minmax(0,0.75fr)_1fr]">
+      <motion.span
+        aria-hidden="true"
+        style={motionOn ? { clipPath } : undefined}
+        className="display block w-[0.62em] text-[clamp(104px,17vw,250px)] leading-[0.78] text-brand-petrol lg:justify-self-end lg:text-right"
+      >
+        {item.letter}
+      </motion.span>
+      <motion.div style={motionOn ? { opacity: textOpacity, y: textY } : undefined} className="flex flex-col gap-2 pb-1 sm:pb-3">
+        <h3 className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className="display text-[clamp(30px,3.6vw,48px)] leading-none text-brand-ink">{item.title}</span>
+          <span className="text-label text-brand-ink-soft">{item.subtitle}</span>
+        </h3>
+        <p className="text-body measure text-brand-ink-soft">{item.desc}</p>
+      </motion.div>
+    </li>
+  )
+}
 
 export default function ProgramaSection() {
+  const motionOn = useScrollScenes()
   return (
-    <section id="programa" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl bg-muted/20"
-      >
-        <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
-          >
-            O significado de{" "}
-            <span className="text-brand-orange">E.Q.U.I.P.E</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mx-auto max-w-[800px] text-sm sm:text-base text-muted-foreground md:text-lg leading-relaxed"
-          >
+    <section id="programa" className="scene-light py-20 lg:py-32" aria-labelledby="programa-title">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-5 lg:gap-20 lg:px-10">
+        <header className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+          <h2 id="programa-title" className="display text-display-l">
+            O significado de <span className="whitespace-nowrap">E.Q.U.I.P.E.</span>
+          </h2>
+          <p className="text-body-l measure text-brand-ink-soft">
             Cada letra representa um pilar essencial para formar colaboradores que assumem responsabilidade, pensam como donos e executam com padrão elevado.
-          </motion.p>
-        </div>
-
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mx-auto grid max-w-7xl items-stretch gap-3 sm:gap-4 py-8 sm:py-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6"
-        >
-          {EQUIPE_ACRONYM.map((item, i) => (
-            <motion.div
-              key={i}
-              variants={itemFadeIn}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group relative overflow-hidden rounded-3xl border-2 border-muted p-6 sm:p-7 xl:p-4 shadow-sm transition-all hover:shadow-lg hover:border-brand-orange/50 bg-background text-center h-full flex flex-col"
-            >
-              {/* Letra grande no background */}
-              <div className="absolute -right-4 -top-4 text-[120px] sm:text-[140px] font-black text-brand-orange/5 group-hover:text-brand-orange/10 transition-colors leading-none select-none">
-                {item.letter}
-              </div>
-
-              <div className="relative space-y-3 sm:space-y-4 flex flex-col flex-1 z-10">
-                {/* Ícone */}
-                <div className="mb-2 flex justify-center">
-                  {item.icon}
-                </div>
-
-                {/* Letra destacada */}
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 xl:w-10 xl:h-10 rounded-xl bg-brand-petrol flex items-center justify-center">
-                    <span className="text-xl sm:text-2xl xl:text-xl font-black text-white">
-                      {item.letter}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Título */}
-                <div>
-                  <h3 className="text-xl sm:text-2xl xl:text-lg font-black text-brand-petrol leading-tight mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm xl:text-xs font-semibold text-brand-orange uppercase tracking-wide xl:tracking-normal">
-                    {item.subtitle}
-                  </p>
-                </div>
-
-                {/* Descrição - Apenas em desktop */}
-                <p className="hidden xl:block text-sm text-muted-foreground leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
+          </p>
+        </header>
+        <ol className="flex flex-col gap-8 lg:gap-4" aria-label="E.Q.U.I.P.E., letra por letra">
+          {EQUIPE_ACRONYM.map((item) => (
+            <Row key={item.title} item={item} motionOn={motionOn} />
           ))}
-        </motion.div>
-      </motion.div>
+        </ol>
+      </div>
     </section>
   )
 }

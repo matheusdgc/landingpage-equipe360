@@ -4,50 +4,56 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Tokens: fonte única de verdade é MASTER.md (raiz do projeto). */
 :root {
   --radius: 0.625rem;
 
-  /* EQUIPE 360 Brand Theme */
-  --background: oklch(0.985 0.002 240);
-  --foreground: oklch(0.17 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.17 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.17 0.02 260);
-  --primary: oklch(0.32 0.06 240);
-  --primary-foreground: oklch(0.985 0.002 240);
-  --secondary: oklch(0.96 0.005 240);
-  --secondary-foreground: oklch(0.25 0.03 250);
-  --muted: oklch(0.95 0.005 240);
-  --muted-foreground: oklch(0.48 0.02 250);
-  --accent: oklch(0.95 0.005 240);
-  --accent-foreground: oklch(0.25 0.03 250);
+  /* EQUIPE 360 Brand Theme (shadcn segue a paleta do MASTER.md) */
+  --background: #EDF1F2;
+  --foreground: #0A2433;
+  --card: #EDF1F2;
+  --card-foreground: #0A2433;
+  --popover: #EDF1F2;
+  --popover-foreground: #0A2433;
+  --primary: #0B3D5C;
+  --primary-foreground: #F2F5F6;
+  --secondary: #E2E8EA;
+  --secondary-foreground: #0A2433;
+  --muted: #E2E8EA;
+  --muted-foreground: #4A5C66;
+  --accent: #E2E8EA;
+  --accent-foreground: #0A2433;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.90 0.005 240);
-  --input: oklch(0.90 0.005 240);
-  --ring: oklch(0.32 0.06 240);
-  --chart-1: oklch(0.32 0.06 240);
-  --chart-2: oklch(0.65 0.17 55);
-  --chart-3: oklch(0.60 0.15 155);
-  --chart-4: oklch(0.45 0.04 250);
-  --chart-5: oklch(0.72 0.16 55);
-  --sidebar: oklch(0.98 0.002 240);
-  --sidebar-foreground: oklch(0.17 0.02 260);
-  --sidebar-primary: oklch(0.32 0.06 240);
-  --sidebar-primary-foreground: oklch(0.985 0.002 240);
-  --sidebar-accent: oklch(0.95 0.005 240);
-  --sidebar-accent-foreground: oklch(0.25 0.03 250);
-  --sidebar-border: oklch(0.90 0.005 240);
-  --sidebar-ring: oklch(0.32 0.06 240);
+  --border: rgba(10, 36, 51, 0.18);
+  --input: rgba(10, 36, 51, 0.18);
+  --ring: #0B3D5C;
+  --chart-1: #0B3D5C;
+  --chart-2: #F5B800;
+  --chart-3: #2A9D5C;
+  --chart-4: #4A5C66;
+  --chart-5: #DCA500;
+  --sidebar: #EDF1F2;
+  --sidebar-foreground: #0A2433;
+  --sidebar-primary: #0B3D5C;
+  --sidebar-primary-foreground: #F2F5F6;
+  --sidebar-accent: #E2E8EA;
+  --sidebar-accent-foreground: #0A2433;
+  --sidebar-border: rgba(10, 36, 51, 0.18);
+  --sidebar-ring: #0B3D5C;
+
+  /* Movimento */
+  --ease-firm: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-ui: 240ms;
+
+  /* Altura do header fixo, usada no scroll-padding e nas cenas fixadas */
+  --header-h: 64px;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 64px;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
 }
 
 @theme inline {
@@ -58,6 +64,8 @@ body {
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --radius-btn: 10px;
+  --radius-frame: 14px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -90,15 +98,81 @@ body {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* EQUIPE 360 extra brand tokens */
+  /* EQUIPE 360 brand tokens (nomes existentes preservados) */
   --color-brand-petrol: #0B3D5C;
-  --color-brand-petrol-dark: #072A40;
+  --color-brand-petrol-dark: #061B27;
   --color-brand-petrol-light: #10506F;
-  --color-brand-orange: #FFD700;
-  --color-brand-orange-hover: #E6C200;
+  --color-brand-orange: #F5B800;
+  --color-brand-orange-hover: #DCA500;
   --color-brand-green: #2A9D5C;
   --color-brand-green-light: #E8F5EE;
   --color-brand-graphite: #3A3F47;
+
+  /* Novos tokens (MASTER.md) */
+  --color-brand-gold: #F5B800;
+  --color-brand-bone: #EDF1F2;
+  --color-brand-bone-deep: #E2E8EA;
+  --color-brand-ink: #0A2433;
+  --color-brand-ink-soft: #4A5C66;
+  --color-brand-paper: #F2F5F6;
+  --color-brand-mist: #9FB0BA;
+  --color-brand-haze: #C5D0D6;
+  --color-brand-steel: #7D8A92;
+  --color-brand-comum: #0D1F29;
+  --color-brand-comum-card: #13262F;
+  --color-brand-comum-edge: #22343D;
+  --color-brand-frame-dim: rgba(242, 245, 246, 0.28);
+  --color-brand-line-dark: rgba(242, 245, 246, 0.14);
+  --color-brand-line-light: rgba(10, 36, 51, 0.18);
+
+  --font-display: "Archivo", "Arial Narrow", "Roboto Condensed", system-ui, sans-serif;
+  --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --ease-firm: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ─── Escala de tipo (MASTER.md) ─── */
+@utility display {
+  font-family: var(--font-display);
+  font-stretch: 62%;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+@utility text-display-xl {
+  font-size: clamp(56px, 11vw, 168px);
+  line-height: 0.88;
+}
+@utility text-display-l {
+  font-size: clamp(44px, 7.5vw, 104px);
+  line-height: 0.9;
+}
+@utility text-display-m {
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 0.92;
+}
+@utility text-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+  font-weight: 700;
+}
+@utility text-body-l {
+  font-size: 20px;
+  line-height: 1.5;
+}
+@utility text-body {
+  font-size: 17px;
+  line-height: 1.6;
+}
+@utility text-label {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@utility measure {
+  max-width: 65ch;
 }
 
 @layer base {
@@ -106,6 +180,180 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-brand-petrol-dark text-brand-paper;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-kerning: normal;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-brand-gold);
+    color: var(--color-brand-petrol-dark);
+  }
+}
+
+@layer components {
+/* ─── Cenas: o chão de cada cena redefine tinta e foco ─── */
+.scene-dark {
+  background: var(--color-brand-petrol-dark);
+  color: var(--color-brand-paper);
+  --focus: var(--color-brand-gold);
+}
+.scene-petrol {
+  background: var(--color-brand-petrol);
+  color: var(--color-brand-paper);
+  --focus: var(--color-brand-gold);
+}
+.scene-light {
+  background: var(--color-brand-bone);
+  color: var(--color-brand-ink);
+  --focus: var(--color-brand-petrol);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus, var(--color-brand-gold));
+  outline-offset: 3px;
+}
+
+/* ─── Botão principal: dourado, preenchimento varre da esquerda ─── */
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 22px;
+  border-radius: var(--radius-btn);
+  border: 2px solid var(--color-brand-gold);
+  background: var(--color-brand-gold);
+  color: var(--color-brand-petrol-dark);
+  font-weight: 750;
+  font-size: 16px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-firm), transform var(--dur-fast) var(--ease-firm);
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--sweep, var(--color-brand-petrol-dark));
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-ui) var(--ease-firm);
+}
+.scene-light .btn-primary { --sweep: var(--color-brand-petrol); }
+.btn-primary .btn-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-firm);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { color: var(--color-brand-gold); }
+  .btn-primary:hover::before { clip-path: inset(0 0 0 0); }
+  .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+}
+.btn-primary:active { transform: translateY(1px) scale(0.985); }
+.btn-primary[aria-disabled="true"],
+.btn-primary:disabled {
+  background: transparent;
+  border-color: var(--color-brand-steel);
+  color: var(--color-brand-steel);
+  cursor: not-allowed;
+}
+.btn-primary[aria-disabled="true"]::before,
+.btn-primary:disabled::before { display: none; }
+
+/* ─── Botão secundário: contorno, nunca outro dourado ─── */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: var(--radius-btn);
+  border: 2px solid currentColor;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-firm), color var(--dur-fast) var(--ease-firm);
+}
+.scene-dark .btn-secondary,
+.scene-petrol .btn-secondary { color: var(--color-brand-paper); border-color: var(--color-brand-mist); }
+.scene-light .btn-secondary { color: var(--color-brand-ink); }
+@media (hover: hover) and (pointer: fine) {
+  .scene-dark .btn-secondary:hover,
+  .scene-petrol .btn-secondary:hover { background: var(--color-brand-paper); color: var(--color-brand-petrol-dark); }
+  .scene-light .btn-secondary:hover { background: var(--color-brand-ink); color: var(--color-brand-bone); }
+}
+.btn-secondary:active { transform: translateY(1px); }
+
+/* ─── Link de texto ─── */
+.link {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-thickness var(--dur-fast) var(--ease-firm);
+}
+.scene-dark .link, .scene-petrol .link { text-decoration-color: var(--color-brand-gold); }
+.scene-light .link { text-decoration-color: var(--color-brand-petrol); }
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-thickness: 3px; }
+}
+
+/* ─── A virada: cartas que giram no próprio eixo ─── */
+.flip-stack { perspective: 1100px; }
+.flip-card {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: var(--radius-btn);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.flip-front {
+  background: var(--color-brand-comum-card);
+  color: var(--color-brand-mist);
+  border: 2px solid var(--color-brand-comum-edge);
+}
+.flip-back {
+  background: var(--color-brand-gold);
+  color: var(--color-brand-petrol-dark);
+  transform: rotateX(180deg);
+}
+
+/* Rolagem horizontal sem barra visível onde o trilho é nativo (movimento reduzido) */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+@keyframes faq-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -1,148 +1,124 @@
-import { motion } from "framer-motion"
-import { fadeIn, staggerContainer, itemFadeIn, JOURNEY_STRUCTURE } from "@/lib/constants.jsx"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { useLayoutEffect, useRef, useState } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { JOURNEY_STRUCTURE } from "@/lib/constants.jsx"
+import { useScrollScenes } from "@/lib/motion"
+
+/*
+ * Cena 5, os 12 meses. A rolagem vertical vira deslocamento lateral:
+ * o ano passa de lado, encontro a encontro, agrupado nos 4 pilares.
+ * A régua da base mostra em que ponto do ano o visitante está.
+ */
+function Encounter({ item, pillar }) {
+  return (
+    <li className="flex w-[78vw] max-w-[340px] shrink-0 flex-col gap-4 rounded-[14px] border-2 border-brand-line-dark p-6 sm:w-[320px] lg:w-[340px] lg:p-7">
+      <div className="flex items-baseline justify-between gap-4">
+        <span className="display text-[72px] leading-[0.8] text-brand-gold tabular-nums lg:text-[88px]">{item.num}</span>
+        <span className="text-label text-right text-brand-mist">{pillar}</span>
+      </div>
+      <h4 className="text-title text-brand-paper">{item.title}</h4>
+      <p className="text-body text-brand-mist">{item.desc}</p>
+    </li>
+  )
+}
+
+function Track({ innerRef }) {
+  return (
+    <ol ref={innerRef} className="flex w-max gap-10 pr-[max(20px,8vw)] pl-5 lg:gap-14 lg:pl-10" aria-label="Os 12 encontros">
+      {JOURNEY_STRUCTURE.map((group) => (
+        <li key={group.pillar} className="flex flex-col gap-5">
+          <div className="flex items-center gap-4">
+            <h3 className="display text-[clamp(28px,3vw,40px)] leading-none text-brand-paper">{group.pillar}</h3>
+            <span aria-hidden="true" className="h-[2px] min-w-12 flex-1 bg-brand-gold" />
+          </div>
+          <ol className="flex gap-4">
+            {group.items.map((item) => (
+              <Encounter key={item.num} item={item} pillar={group.pillar} />
+            ))}
+          </ol>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function Intro() {
+  return (
+    <header className="flex flex-col gap-4 px-5 lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-10">
+      <h2 id="jornada-title" className="display text-display-m max-w-[18ch]">
+        O que os participantes do <span className="whitespace-nowrap text-brand-gold">EQUIPE 360</span> receberão?
+      </h2>
+      <p className="text-body measure text-brand-mist lg:max-w-[44ch]">
+        Trabalharemos 12 temas distribuídos nos quatro principais pilares do desenvolvimento comportamental, um por mês.
+      </p>
+    </header>
+  )
+}
 
 export default function JornadaSection() {
-  return (
-    <section id="jornada" className="w-full py-3 sm:py-4 md:py-7 lg:py-10">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        className="container mx-auto px-3 sm:px-4 md:px-6 border border-muted rounded-3xl bg-muted/10"
-      >
-        <div className="flex flex-col items-center justify-center space-y-4 text-center py-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-brand-petrol"
-          >
-            O que os participantes do{" "}
-            <span className="text-brand-orange">EQUIPE 360</span> receberão?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mx-auto max-w-[800px] text-sm sm:text-base text-muted-foreground md:text-lg leading-relaxed"
-          >
-            Trabalharemos 12 temas distribuídos nos quatro principais pilares do desenvolvimento comportamental
-          </motion.p>
+  const sectionRef = useRef(null)
+  const trackRef = useRef(null)
+  const motionOn = useScrollScenes()
+  const [distance, setDistance] = useState(0)
+
+  useLayoutEffect(() => {
+    if (!motionOn) return
+    const measure = () => {
+      const el = trackRef.current
+      if (el) setDistance(Math.max(0, el.scrollWidth - window.innerWidth))
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    if (trackRef.current) ro.observe(trackRef.current)
+    window.addEventListener("resize", measure)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener("resize", measure)
+    }
+  }, [motionOn])
+
+  const { scrollYProgress: p } = useScroll({ target: sectionRef, offset: ["start start", "end end"] })
+  // 6% de respiro no início e no fim, para o primeiro e o último encontro assentarem
+  const x = useTransform(p, (v) => -Math.min(1, Math.max(0, (v - 0.06) / 0.88)) * distance)
+  const ruler = useTransform(p, (v) => Math.min(1, Math.max(0, (v - 0.06) / 0.88)))
+
+  if (!motionOn) {
+    return (
+      <section id="jornada" className="scene-dark py-20 lg:py-32" aria-labelledby="jornada-title">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
+          <Intro />
+          <div className="no-scrollbar overflow-x-auto pb-4" tabIndex={0} aria-label="Os 12 encontros, role para o lado">
+            <Track />
+          </div>
         </div>
+      </section>
+    )
+  }
 
-        {/* Desktop: Grid de 4 colunas */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 py-8 max-w-7xl mx-auto items-start"
-        >
-          {JOURNEY_STRUCTURE.map((pillar, idx) => (
-            <motion.div
-              key={idx}
-              variants={itemFadeIn}
-              className="flex flex-col h-full"
-            >
-              {/* Cabeçalho do pilar */}
-              <div className={`${pillar.color} rounded-2xl p-5 mb-4 text-center shadow-lg h-30 flex flex-col items-center justify-center`}>
-                <div className="flex justify-center mb-3">
-                  {pillar.icon}
-                </div>
-                <h3 className="text-base font-bold text-white leading-tight">
-                  {pillar.pillar}
-                </h3>
-              </div>
-
-              {/* Itens do pilar */}
-              <div className="space-y-3 flex-1 flex flex-col">
-                {pillar.items.map((item, itemIdx) => (
-                  <motion.div
-                    key={itemIdx}
-                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                    className="bg-background/90 rounded-xl border border-muted p-4 hover:shadow-md hover:border-brand-orange/30 transition-all group flex-1 min-h-35 flex flex-col justify-between"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="shrink-0 w-8 h-8 rounded-lg bg-brand-petrol text-white flex items-center justify-center font-bold text-xs">
-                        {item.num}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-brand-orange shrink-0">{item.icon}</span>
-                          <h4 className="font-bold text-brand-petrol text-sm leading-tight">
-                            {item.title}
-                          </h4>
-                        </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+  return (
+    <section
+      id="jornada"
+      ref={sectionRef}
+      className="scene-dark relative"
+      style={{ height: `calc(100svh + ${Math.round(distance * 1.1)}px)` }}
+      aria-labelledby="jornada-title"
+    >
+      <div className="sticky top-0 flex h-svh flex-col justify-center gap-10 overflow-hidden pt-[var(--header-h)] lg:gap-14">
+        <div className="mx-auto w-full max-w-[1280px]">
+          <Intro />
+        </div>
+        <motion.div style={{ x }}>
+          <Track innerRef={trackRef} />
         </motion.div>
-
-        {/* Mobile: Accordion */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="md:hidden py-6 px-2"
-        >
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {JOURNEY_STRUCTURE.map((pillar, idx) => (
-              <AccordionItem
-                key={idx}
-                value={`journey-${idx}`}
-                className="border border-muted rounded-2xl overflow-hidden bg-background/80"
-              >
-                <AccordionTrigger className="hover:no-underline px-4 py-4">
-                  <div className="flex items-center gap-3 w-full">
-                    <div className={`${pillar.color} rounded-xl p-2.5 shrink-0 shadow-md`}>
-                      {pillar.icon}
-                    </div>
-                    <span className="text-left font-bold text-brand-petrol text-base flex-1">
-                      {pillar.pillar}
-                    </span>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-4 pb-4">
-                  <div className="space-y-3 pt-2">
-                    {pillar.items.map((item, itemIdx) => (
-                      <div
-                        key={itemIdx}
-                        className="bg-muted/30 rounded-xl p-4 border border-muted/50"
-                      >
-                        <div className="flex items-start gap-3 mb-2">
-                          <div className="shrink-0 w-7 h-7 rounded-lg bg-brand-petrol text-white flex items-center justify-center font-bold text-xs">
-                            {item.num}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-brand-orange shrink-0">{item.icon}</span>
-                              <h4 className="font-bold text-brand-petrol text-sm leading-tight">
-                                {item.title}
-                              </h4>
-                            </div>
-                            <p className="text-xs text-muted-foreground leading-relaxed">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </motion.div>
-      </motion.div>
+        <div className="mx-auto w-full max-w-[1280px] px-5 lg:px-10" aria-hidden="true">
+          <div className="h-[2px] w-full bg-brand-line-dark">
+            <motion.div style={{ scaleX: ruler }} className="h-full origin-left bg-brand-gold" />
+          </div>
+          <div className="mt-3 flex justify-between text-label text-brand-mist">
+            <span>Mês 1</span>
+            <span>Mês 12</span>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

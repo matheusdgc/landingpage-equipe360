@@ -1,60 +1,97 @@
-import { motion } from "framer-motion"
-import { PulseBeams } from "@/components/ui/pulse-beams"
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { fadeIn, ctaBeams, ctaGradientColors } from "@/lib/constants.jsx"
-import profile1 from "@/public/images/profile1.jpeg"
+import { useRef } from "react"
+import { motion, useScroll } from "framer-motion"
+import { TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
+import { useRange, useScrollScenes } from "@/lib/motion"
+import joao from "@/public/images/joao-piramide.webp"
 
+/*
+ * Cena 1, a recusa. Quatro planos com ritmos diferentes:
+ * fundo (EQUIPE COMUM gigante) < João recortado < névoa da base < manchete.
+ * A base do recorte é o ponto de contato: o João escala a partir dela.
+ */
 export default function HeroSection() {
+  const ref = useRef(null)
+  const motionOn = useScrollScenes()
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
+
+  const backX = useRange(p, [0, 1], [0, -22], { unit: "vw" })
+  const backY = useRange(p, [0, 1], [0, -3], { unit: "vh" })
+  const joaoY = useRange(p, [0, 1], [0, -4], { unit: "vh" })
+  const joaoScale = useRange(p, [0, 1], [1, 1.07])
+  const fogY = useRange(p, [0, 1], [0, -9], { unit: "vh" })
+  const copyY = useRange(p, [0, 1], [0, -16], { unit: "vh" })
+  const copyOpacity = useRange(p, [0.55, 0.92], [1, 0])
+
+  const m = (style) => (motionOn ? style : undefined)
+
   return (
-    <section className="w-full overflow-hidden">
-      <PulseBeams
-        className="!h-auto min-h-[100svh] sm:min-h-[90svh] md:min-h-[85svh]"
-        beams={ctaBeams}
-        gradientColors={ctaGradientColors}
-        baseColor="rgba(255,255,255,0.08)"
-        accentColor="rgba(232,119,46,0.3)"
-        background={
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light" />
-        }
-      >
-        <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:gap-8 xl:grid-cols-[1fr_460px] xl:gap-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col justify-center space-y-4 sm:space-y-5">
-            <div className="space-y-3 sm:space-y-4">
-              <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl/none leading-tight">
-                Para empresários que se recusam a aceitar{" "}
-                <span className="text-brand-orange">equipes comuns</span>
-              </motion.h1>
+    <section
+      id="topo"
+      ref={ref}
+      className={`scene-dark relative ${motionOn ? "h-[165svh]" : "min-h-svh"}`}
+      aria-labelledby="hero-title"
+    >
+      <div className={`${motionOn ? "sticky top-0" : "relative"} h-svh min-h-[620px] overflow-hidden`}>
+        {/* Plano 1: a palavra que o empresário recusa */}
+        <motion.p
+          aria-hidden="true"
+          style={m({ x: backX, y: backY })}
+          className="display pointer-events-none absolute bottom-[30svh] left-[-1vw] whitespace-nowrap text-[clamp(120px,27vw,440px)] leading-[0.8] text-[#0F4767] lg:bottom-[8svh]"
+        >
+          Equipe comum
+        </motion.p>
 
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="text-base sm:text-lg md:text-xl text-white/80 font-normal leading-relaxed">
-                Você pode investir em tecnologia.<br />
-                Pode melhorar processos.<br />
-                Pode contratar consultorias técnicas.
-              </motion.p>
+        {/* Plano 2: o João, ancorado na base */}
+        <motion.img
+          src={joao}
+          alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
+          width="735"
+          height="971"
+          fetchPriority="high"
+          draggable={false}
+          style={m({ y: joaoY, scale: joaoScale })}
+          className="absolute bottom-0 right-[-14vw] h-[60svh] w-auto max-w-none origin-bottom select-none sm:right-[-4vw] lg:right-[4vw] lg:h-[88svh] lg:max-h-[960px]"
+        />
 
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="max-w-[560px] text-base sm:text-lg md:text-xl text-white font-semibold leading-relaxed">
-                Mas se o comportamento da sua equipe continuar o mesmo...<br />
-                o resultado continuará limitado.
-              </motion.p>
-            </div>
+        {/* Plano 3: névoa da base, esconde o corte do recorte e afasta o fundo */}
+        <motion.div
+          aria-hidden="true"
+          style={m({ y: fogY })}
+          className="pointer-events-none absolute inset-x-0 bottom-[-12svh] h-[34svh] bg-gradient-to-t from-brand-petrol-dark from-45% to-transparent"
+        />
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }} className="pt-1 sm:pt-2">
-              <a href="#contato">
-                <InteractiveHoverButton
-                  text="Desperte o nível extraordinário da sua equipe"
-                  className="border-white/30 bg-brand-orange text-brand-petrol text-sm sm:text-base"
-                />
+        {/* Densidade só onde a manchete fica */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,var(--color-brand-petrol-dark)_0%,var(--color-brand-petrol-dark)_34%,transparent_62%)] lg:bg-[linear-gradient(90deg,rgba(6,27,39,0.94)_0%,rgba(6,27,39,0.8)_34%,transparent_52%)]"
+        />
+
+        {/* Plano 4: a manchete */}
+        <motion.div
+          style={m({ y: copyY, opacity: copyOpacity })}
+          className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col justify-start pt-[calc(var(--header-h)+5svh)] lg:justify-center lg:pt-[var(--header-h)]"
+        >
+          <div
+            className="flex max-w-[640px] flex-col gap-5 lg:gap-7"
+            style={{
+              paddingLeft: "max(20px, env(safe-area-inset-left, 0px))",
+              paddingRight: "max(20px, env(safe-area-inset-right, 0px))",
+            }}
+          >
+            <h1 id="hero-title" className="display text-[clamp(40px,6.6vw,92px)] leading-[0.9]">
+              Para empresários que se recusam a aceitar <span className="text-brand-gold">equipes comuns</span>
+            </h1>
+            <p className="measure max-w-[44ch] text-[17px] leading-relaxed text-brand-mist sm:text-body-l">
+              Desenvolvimento comportamental contínuo para empresas: 12 encontros presenciais com palestras vivenciais e dinâmicas práticas com João Paulino.
+            </p>
+            <div>
+              <a href={TICKET_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                {CTA_LABEL} <span className="btn-arrow" aria-hidden="true">→</span>
               </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Hero photo – visible on all breakpoints */}
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="flex items-center justify-center order-first lg:order-last">
-            <div className="relative w-72 h-72 sm:w-[336px] sm:h-[336px] md:w-96 md:h-96 lg:h-95 xl:h-115 lg:w-full overflow-hidden rounded-3xl border-2 border-white/10 bg-white/5">
-              <img src={profile1} alt="João Paulino" className="w-full h-full object-cover" draggable={false} fetchpriority="high" />
             </div>
-          </motion.div>
-        </div>
-      </PulseBeams>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }

@@ -1,431 +1,142 @@
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import {
-  Mic,
-  Users,
-  BookOpen,
-  Crown,
-  Check,
-  CreditCard,
-  AlertTriangle,
-  UserPlus,
-  Clock,
-} from "lucide-react"
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { fadeIn, staggerContainer, itemFadeIn, TICKET_URL } from "@/lib/constants.jsx"
+import { useRef } from "react"
+import { motion, useScroll } from "framer-motion"
+import { Check } from "lucide-react"
+import { DELIVERABLES, PRICE_COMPARISON, PRICING, TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
+import { useRange, useScrollScenes } from "@/lib/motion"
 
-const DELIVERABLES = [
-  {
-    icon: Mic,
-    title: "24 horas de palestras",
-    description: "12 encontros presenciais de 2h cada",
-  },
-  {
-    icon: Users,
-    title: "12 dinâmicas vivenciais",
-    description: "Atividades práticas a cada encontro",
-  },
-  {
-    icon: BookOpen,
-    title: "Acesso ao conteúdo por 12 meses",
-    description: "Material completo disponível online",
-  },
-  {
-    icon: Crown,
-    title: "Grupo exclusivo de desenvolvimento",
-    description: "Comunidade de crescimento contínuo",
-  },
-]
-
-const PAYMENT_OPTIONS = [
-  "Pagamento à vista com desconto",
-  "Parcelamento em até 12x",
-]
-
+/*
+ * Cena 8, o investimento. O fecho firme no claro: entregáveis com números reais,
+ * o comparativo, um painel escuro com o preço e um único botão.
+ * Aqui a moldura do "360" no topo fecha a volta.
+ */
 export default function CtaFinalSection() {
-  const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 })
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const STORAGE_KEY = "equipe360_deadline"
-    const DURATION_MS = 24 * 60 * 60 * 1000
-    let deadline = Number(localStorage.getItem(STORAGE_KEY))
-    if (!deadline || deadline < Date.now()) {
-      deadline = Date.now() + DURATION_MS
-      localStorage.setItem(STORAGE_KEY, String(deadline))
-    }
-
-    const tick = () => {
-      const remaining = Math.max(0, deadline - Date.now())
-      setTimeLeft({
-        hours: Math.floor(remaining / 3600000),
-        minutes: Math.floor((remaining % 3600000) / 60000),
-        seconds: Math.floor((remaining % 60000) / 1000),
-      })
-    }
-
-    tick()
-    const timer = setInterval(tick, 1000)
-
-    const handleScroll = () => {
-      const section = document.getElementById("contato")
-      if (section) {
-        const rect = section.getBoundingClientRect()
-        setIsVisible(rect.top <= 0 && rect.bottom > 0)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    handleScroll()
-
-    return () => {
-      clearInterval(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+  const ref = useRef(null)
+  const motionOn = useScrollScenes()
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start end", "start start"] })
+  const markScale = useRange(p, [0.45, 0.75], [0, 1])
 
   return (
-    <section
-      id="contato"
-      className="w-full py-5 sm:py-6 md:py-8 lg:py-11 bg-linear-to-br from-brand-petrol-dark via-brand-petrol to-brand-petrol-light relative overflow-hidden"
-    >
-      {/* Sticky Urgency Header */}
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: isVisible ? 0 : -100, opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-linear-to-r from-red-600 via-red-500 to-red-600 shadow-lg"
-      >
-        <div className="container mx-auto px-4 py-3 sm:py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-pulse" />
-              <span className="text-white font-black text-sm sm:text-base md:text-lg uppercase tracking-wide">
-                Vagas Limitadas
-              </span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2">
-              <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-              <span className="text-white font-mono font-bold text-base sm:text-lg">
-                {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-              </span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Decorative blurs */}
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand-orange/5 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl pointer-events-none" />
-
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
-      >
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl text-white"
-          >
+    <section id="contato" ref={ref} className="scene-light py-20 lg:py-32" aria-labelledby="contato-title">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-16 px-5 lg:gap-24 lg:px-10">
+        {/* Abertura */}
+        <header className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-16">
+          <h2 id="contato-title" className="display text-display-l">
             Empresas extraordinárias são formadas por{" "}
-            <span className="text-brand-orange">equipes conscientes</span>
-          </motion.h2>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-6 space-y-4 max-w-2xl mx-auto"
-          >
-            <p className="text-sm sm:text-base md:text-lg text-white/70 leading-relaxed">
-              Se você busca apenas cumprir calendário com palestras pontuais,{" "}
-              <span className="text-white font-semibold">EQUIPE 360 não é para você.</span>
+            <span className="relative inline-block">
+              <motion.span
+                aria-hidden="true"
+                style={motionOn ? { scaleX: markScale } : undefined}
+                className="absolute inset-x-[-0.08em] inset-y-[0.04em] origin-left bg-brand-gold"
+              />
+              <span className="relative">equipes conscientes</span>
+            </span>
+          </h2>
+          <div className="flex flex-col gap-4 text-body measure text-brand-ink-soft">
+            <p>
+              Se você busca apenas cumprir calendário com palestras pontuais, <strong className="text-brand-ink">EQUIPE 360 não é para você.</strong>
             </p>
-            <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed font-medium">
+            <p>
               Mas se você deseja elevar o padrão do seu time, formar colaboradores preparados para crescer, fortalecer cultura e segurança, e construir uma empresa sólida e sustentável...
             </p>
-            <p className="text-base sm:text-lg md:text-xl text-brand-orange font-bold">
-              Então estamos falando a mesma língua.
-            </p>
-          </motion.div>
+            <p className="text-body-l font-bold text-brand-ink">Então estamos falando a mesma língua.</p>
+          </div>
+        </header>
 
-          <motion.h3
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-orange text-center mt-8"
-          >
-            Como entregamos o programa EQUIPE 360
-          </motion.h3>
+        {/* Entregáveis */}
+        <div className="flex flex-col gap-8">
+          <h3 className="text-title">Como entregamos o programa EQUIPE 360</h3>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+            {DELIVERABLES.map((d) => (
+              <li key={d.title} className="flex flex-col gap-2 border-t-2 border-brand-ink pt-5">
+                <span className="display text-[clamp(56px,7vw,96px)] leading-[0.85] text-brand-petrol tabular-nums">{d.figure}</span>
+                <span className="font-bold text-brand-ink">{d.title}</span>
+                <span className="text-[15px] leading-snug text-brand-ink-soft">{d.desc}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Main card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="rounded-3xl bg-white/[0.07] border border-white/10 backdrop-blur-sm overflow-hidden">
-            {/* Deliverables grid */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5"
-            >
-              {DELIVERABLES.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemFadeIn}
-                  className="flex items-start gap-4 p-6 sm:p-8 bg-white/[0.02] hover:bg-white/[0.06] transition-colors"
-                >
-                  <div className="shrink-0 rounded-2xl bg-brand-orange/15 p-3">
-                    <item.icon className="h-6 w-6 text-brand-orange" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base sm:text-lg">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-white/60 mt-1">
-                      {item.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Divider */}
-            <div className="h-px bg-white/10" />
-
-            {/* Price Comparison */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="p-6 sm:p-8 md:p-10 bg-white/3"
-            >
-              <h3 className="text-lg sm:text-xl font-bold text-white text-center mb-6">
-                Comparativo de Investimento
-              </h3>
-
-              <div className="space-y-3 max-w-2xl mx-auto mb-6">
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white/80 text-sm sm:text-base">Palestras esporádicas</span>
-                  <span className="text-white font-bold text-sm sm:text-base">R$ 100,00/mês por pessoa</span>
-                </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white/80 text-sm sm:text-base">Conteúdo digital para desenvolvimento</span>
-                  <span className="text-white font-bold text-sm sm:text-base">R$ 100,00/mês por pessoa</span>
-                </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white/80 text-sm sm:text-base">Dinâmicas vivenciais na empresa</span>
-                  <span className="text-white font-bold text-sm sm:text-base">R$ 200,00/mês por pessoa</span>
-                </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white/80 text-sm sm:text-base">Comunidade de desenvolvimento</span>
-                  <span className="text-white font-bold text-sm sm:text-base">R$ 250,00/mês por pessoa</span>
-                </div>
-              </div>
-
-              <div className="border-t border-white/20 pt-4 space-y-2">
-                <div className="flex justify-between items-center max-w-2xl mx-auto">
-                  <span className="text-white font-bold text-base sm:text-lg">Total para 5 pessoas/mês:</span>
-                  <span className="text-brand-orange font-black text-xl sm:text-2xl">R$ 3.250,00</span>
-                </div>
-                <div className="flex justify-between items-center max-w-2xl mx-auto">
-                  <span className="text-white/70 text-sm sm:text-base">Investimento anual:</span>
-                  <span className="text-white/90 font-bold text-lg sm:text-xl">R$ 39.000,00</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Divider */}
-            <div className="h-px bg-white/10" />
-
-            {/* Pricing */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="p-6 sm:p-8 md:p-10"
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4">
-                  PROGRAMA EQUIPE 360
-                </h3>
-                <div className="inline-flex items-center gap-2 rounded-full bg-brand-orange/20 border border-brand-orange/40 px-6 py-3">
-                  <UserPlus className="h-5 w-5 text-brand-orange" />
-                  <span className="text-white font-bold text-base sm:text-lg">5 colaboradores</span>
-                </div>
-              </div>
-
-              {/* Valor especulativo - Ancoragem */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-                className="text-center mb-6"
-              >
-                <div className="relative inline-block">
-                  <p className="text-white/40 text-3xl sm:text-4xl md:text-5xl font-black">
-                    R$ 39.000,00
-                  </p>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-1 sm:h-1.5 bg-red-600 rotate-[-8deg] rounded-full"></div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.6 }}
-                className="text-center text-brand-orange font-bold text-lg sm:text-xl mb-8"
-              >
-                Mas você não vai pagar isso.
-              </motion.p>
-
-              {/* Preços - Card branco */}
-              <div className="rounded-2xl bg-white shadow-2xl p-6 sm:p-8 md:p-10 mb-6">
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
-                  {/* Parcelado */}
-                  <div className="text-center">
-                    <p className="text-brand-petrol/50 text-xs uppercase tracking-wider font-semibold mb-2">Parcelado</p>
-                    <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
-                      12x <span className="text-brand-orange">R$ 387,84</span>
-                    </p>
-                  </div>
-
-                  <div className="hidden sm:block w-px h-20 bg-brand-petrol/15" />
-                  <div className="sm:hidden w-24 h-px bg-brand-petrol/15" />
-
-                  {/* À vista */}
-                  <div className="text-center">
-                    <p className="text-brand-petrol/50 text-xs uppercase tracking-wider font-semibold mb-2">À vista</p>
-                    <p className="text-brand-petrol font-black text-4xl sm:text-5xl leading-none">
-                      <span className="text-brand-green">R$ 3.750</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 text-brand-petrol/60 text-xs sm:text-sm mt-6 pt-6 border-t border-brand-petrol/10">
-                  <UserPlus className="h-4 w-4 text-brand-orange shrink-0" />
-                  <p>Colaborador adicional: <span className="text-brand-petrol font-bold">+ R$ 62,50/mês</span> por pessoa</p>
-                </div>
-              </div>
-
-              {/* Payment conditions */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="h-4 w-4 text-brand-orange shrink-0" />
-                  <span className="font-semibold text-white text-sm">
-                    Condições:
-                  </span>
-                </div>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {PAYMENT_OPTIONS.map((option, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-5 py-2.5 text-sm text-white font-medium"
-                    >
-                      <Check className="h-4 w-4 text-brand-green shrink-0" />
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Vagas limitadas */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="relative mx-auto w-fit mb-8"
-              >
-                <div className="absolute inset-0 rounded-2xl bg-red-500/20 blur-xl animate-pulse" />
-                <div className="relative rounded-2xl bg-linear-to-r from-red-600 to-red-500 px-8 py-4 sm:px-10 sm:py-5 shadow-lg shadow-red-500/30">
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="relative">
-                      <AlertTriangle className="h-6 w-6 text-white shrink-0" />
-                      <div className="absolute inset-0 animate-ping">
-                        <AlertTriangle className="h-6 w-6 text-white/50" />
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <span className="text-white font-black text-base sm:text-lg md:text-xl uppercase tracking-wider block">
-                        Vagas limitadas
-                      </span>
-                      <span className="text-red-100/80 text-xs sm:text-sm font-medium">
-                        Não perca a oportunidade — garanta a sua agora
-                      </span>
-                    </div>
-                    <div className="relative">
-                      <AlertTriangle className="h-6 w-6 text-white shrink-0" />
-                      <div className="absolute inset-0 animate-ping">
-                        <AlertTriangle className="h-6 w-6 text-white/50" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CTA */}
-              <div className="flex flex-col items-center text-center">
-                <p className="text-white/80 text-sm sm:text-base md:text-lg mb-8 font-medium">
-                  Desenvolvimento comportamental para empresas que{" "}
-                  <span className="text-brand-orange font-bold">não aceitam resultados comuns.</span>
-                </p>
-
-                <div className="relative group">
-                  <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-brand-orange via-yellow-300 to-brand-orange opacity-70 blur-lg group-hover:opacity-100 transition-opacity animate-pulse" />
-                  <a
-                    href={TICKET_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative block"
-                  >
-                    <InteractiveHoverButton
-                      text="Quero transformar minha equipe"
-                      className="border-brand-orange/30 bg-linear-to-r from-brand-orange to-yellow-500 text-brand-petrol text-base sm:text-lg md:text-xl font-black uppercase tracking-wide px-8 py-4 sm:px-12 sm:py-5 shadow-xl shadow-brand-orange/30"
-                    />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+        {/* Comparativo e preço */}
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-16">
+          <div className="flex flex-col gap-6">
+            <h3 className="text-title">Comparativo de investimento</h3>
+            <p className="text-body text-brand-ink-soft">Quanto custaria montar o mesmo desenvolvimento por partes, por pessoa, por mês:</p>
+            <table className="w-full border-collapse text-left tabular-nums">
+              <caption className="sr-only">Custo mensal por pessoa de cada parte do desenvolvimento</caption>
+              <thead>
+                <tr className="text-label text-brand-ink-soft">
+                  <th scope="col" className="pb-3 font-[650]">Item</th>
+                  <th scope="col" className="pb-3 text-right font-[650]">Por pessoa/mês</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PRICE_COMPARISON.map((row) => (
+                  <tr key={row.label} className="border-t border-brand-line-light">
+                    <th scope="row" className="py-3 pr-4 font-semibold text-brand-ink">{row.label}</th>
+                    <td className="whitespace-nowrap py-3 text-right font-bold text-brand-ink">{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr className="border-t-2 border-brand-ink">
+                  <th scope="row" className="pt-4 pr-4 font-bold text-brand-ink">Total para 5 pessoas/mês</th>
+                  <td className="display whitespace-nowrap pt-4 text-right text-[clamp(24px,3vw,32px)] leading-none text-brand-petrol">{PRICING.monthlyTotal}</td>
+                </tr>
+                <tr>
+                  <th scope="row" className="pt-2 pr-4 font-semibold text-brand-ink-soft">Investimento anual</th>
+                  <td className="whitespace-nowrap pt-2 text-right font-bold text-brand-ink">{PRICING.yearlyTotal}</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
-        </motion.div>
 
-        {/* Social icons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex justify-center gap-4 mt-10"
-        >
-          <motion.a
-            href="https://www.instagram.com/soujoaopaulino"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ y: -4, scale: 1.1 }}
-            className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white hover:border-white/50 transition-colors"
-            aria-label="Instagram"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-            </svg>
-          </motion.a>
-        </motion.div>
-      </motion.div>
+          {/* Painel de preço: ilha escura no claro */}
+          <div className="scene-dark flex flex-col gap-7 rounded-[14px] border-[3px] border-brand-gold p-6 sm:p-10">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 className="display text-[clamp(30px,3.2vw,42px)] leading-none">Programa EQUIPE 360</h3>
+              <span className="text-label text-brand-gold">{PRICING.people}</span>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p className="display text-[clamp(32px,4vw,52px)] leading-none text-brand-steel line-through decoration-[3px]">
+                <span className="sr-only">De </span>{PRICING.yearlyTotal}
+              </p>
+              <p className="text-body-l font-bold text-brand-gold">Mas você não vai pagar isso.</p>
+            </div>
+
+            <dl className="flex flex-col border-t-2 border-brand-line-dark">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-brand-line-dark py-4">
+                <dt className="text-label text-brand-mist">Parcelado</dt>
+                <dd className="display whitespace-nowrap text-[clamp(38px,4.2vw,56px)] normal-case leading-none tabular-nums">{PRICING.installments}</dd>
+              </div>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">
+                <dt className="text-label text-brand-mist">À vista</dt>
+                <dd className="display whitespace-nowrap text-[clamp(38px,4.2vw,56px)] leading-none text-brand-gold tabular-nums">{PRICING.upfront}</dd>
+              </div>
+            </dl>
+
+            <p className="text-[15px] text-brand-mist">
+              Colaborador adicional: <strong className="text-brand-paper">{PRICING.extraPerson}</strong> por pessoa
+            </p>
+
+            <ul className="flex flex-col gap-2">
+              {PRICING.payment.map((opt) => (
+                <li key={opt} className="flex items-center gap-3 text-[15px] text-brand-paper">
+                  <Check className="h-4 w-4 shrink-0 text-brand-gold" strokeWidth={3} aria-hidden="true" />
+                  {opt}
+                </li>
+              ))}
+            </ul>
+
+            <a href={TICKET_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full !min-h-[60px] !text-[17px]">
+              {CTA_LABEL} <span className="btn-arrow" aria-hidden="true">→</span>
+            </a>
+            <p className="text-center text-[15px] text-brand-mist">
+              Desenvolvimento comportamental para empresas que <span className="font-bold text-brand-paper">não aceitam resultados comuns.</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

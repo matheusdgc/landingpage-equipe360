@@ -1,111 +1,175 @@
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronRight, Rocket } from "lucide-react"
-import logoImg from "@/public/images/logo-2.png"
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { NAV_LINKS, staggerContainer, itemFadeIn, TICKET_URL } from "@/lib/constants.jsx"
+import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import { Menu, X } from "lucide-react"
+import Logo from "@/components/Logo"
+import { NAV_LINKS, TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
+import { EASE_FIRM, DUR_UI } from "@/lib/motion"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
+  const [solid, setSolid] = useState(false)
+  const [showBar, setShowBar] = useState(false)
+  const endRef = useRef(1)
+  const { scrollY } = useScroll()
 
+  // A volta do "360" fecha quando o fim do investimento chega à base da tela
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    const measure = () => {
+      const contato = document.getElementById("contato")
+      const end = contato
+        ? contato.offsetTop + contato.offsetHeight - window.innerHeight
+        : document.documentElement.scrollHeight - window.innerHeight
+      endRef.current = Math.max(1, end)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(document.body)
+    window.addEventListener("resize", measure)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener("resize", measure)
+    }
   }, [])
 
-  const toggleMenu = () => setIsMenuOpen((v) => !v)
+  const progress = useTransform(scrollY, (v) => Math.min(1, Math.max(0, v / endRef.current)))
+
+  useMotionValueEvent(scrollY, "change", (v) => {
+    const isSolid = v > 24
+    if (isSolid !== solid) setSolid(isSolid)
+    // Barra de compra no celular: depois do hero, some quando o investimento está na tela
+    const contato = document.getElementById("contato")
+    const inContato = contato
+      ? v + window.innerHeight > contato.offsetTop + 120 && v < contato.offsetTop + contato.offsetHeight
+      : false
+    const bar = v > window.innerHeight * 0.9 && !inContato
+    if (bar !== showBar) setShowBar(bar)
+  })
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const onKey = (e) => e.key === "Escape" && setIsMenuOpen(false)
+    document.addEventListener("keydown", onKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = ""
+    }
+  }, [isMenuOpen])
+
   const closeMenu = () => setIsMenuOpen(false)
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 ${scrollY > 50 ? "shadow-md" : ""}`}
+      <header
+        className={`scene-dark fixed inset-x-0 top-0 z-50 border-b transition-colors duration-[240ms] ease-[cubic-bezier(.2,.8,.2,1)] ${
+          solid ? "border-brand-line-dark !bg-brand-petrol-dark" : "border-transparent !bg-transparent"
+        }`}
+        style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >
-        <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-4 md:px-6">
-          <a href="#" className="flex items-center" onClick={closeMenu}>
-            <img src={logoImg} alt="EQUIPE 360" className="h-10 sm:h-12 w-auto" draggable={false} />
+        <div
+          className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-6"
+          style={{
+            paddingLeft: "max(20px, env(safe-area-inset-left, 0px))",
+            paddingRight: "max(20px, env(safe-area-inset-right, 0px))",
+          }}
+        >
+          <a href="#topo" onClick={closeMenu} className="block h-8 rounded-[4px] sm:h-9" aria-label="EQUIPE 360, voltar ao início">
+            <Logo progress={progress} className="h-full" />
           </a>
 
-          <nav className="hidden lg:flex gap-4 xl:gap-6">
+          <nav aria-label="Seções" className="hidden items-center gap-7 lg:flex">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="text-xs lg:text-sm font-medium transition-colors hover:text-brand-orange whitespace-nowrap">
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-[15px] font-semibold text-brand-paper/85 underline-offset-[6px] decoration-brand-gold decoration-2 transition-colors duration-[160ms] hover:text-brand-paper hover:underline"
+              >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center">
-            <a href={TICKET_URL} target="_blank" rel="noopener noreferrer">
-              <InteractiveHoverButton
-                text="Quero levar para minha empresa"
-                className="border-brand-orange/30 bg-brand-orange text-brand-petrol text-xs lg:text-sm py-2 px-4 lg:px-5 xl:px-6"
-              />
+          <div className="flex items-center gap-3">
+            <a
+              href={TICKET_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary hidden !min-h-11 !px-4 !py-2 !text-[15px] lg:inline-flex"
+            >
+              {CTA_LABEL}
             </a>
+            <button
+              type="button"
+              className="flex h-11 w-11 items-center justify-center rounded-[10px] border-2 border-brand-line-dark text-brand-paper lg:hidden"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="menu-mobile"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
-
-          <button className="flex lg:hidden" onClick={toggleMenu} aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}>
-            <Menu className="h-6 w-6" />
-          </button>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
+      {/* Menu do celular */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-background lg:hidden">
-            <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between px-4">
-              <a href="#" className="flex items-center" onClick={closeMenu}>
-                <img src={logoImg} alt="EQUIPE 360" className="h-10 sm:h-12 w-auto" draggable={false} />
-              </a>
-              <button onClick={toggleMenu} aria-label="Fechar menu">
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            <motion.nav variants={staggerContainer} initial="hidden" animate="visible" className="container mx-auto grid gap-2 px-4 pb-8 pt-6">
+          <motion.div
+            key="menu-mobile"
+            id="menu-mobile"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: DUR_UI, ease: EASE_FIRM } }}
+            exit={{ opacity: 0, transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }}
+            className="scene-dark fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto pb-8 pt-24 lg:hidden"
+            style={{
+              paddingLeft: "max(20px, env(safe-area-inset-left, 0px))",
+              paddingRight: "max(20px, env(safe-area-inset-right, 0px))",
+            }}
+          >
+            <nav aria-label="Seções" className="flex flex-col">
               {NAV_LINKS.map((link, i) => (
-                <motion.div key={i} variants={itemFadeIn}>
-                  <a href={link.href} className="flex items-center justify-between rounded-2xl px-4 py-3 text-lg font-medium hover:bg-accent" onClick={closeMenu}>
-                    {link.label}
-                    <ChevronRight className="h-4 w-4" />
-                  </a>
-                </motion.div>
-              ))}
-              <motion.div variants={itemFadeIn} className="pt-4">
-                <a
-                  href={TICKET_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <motion.a
+                  key={link.href}
+                  href={link.href}
                   onClick={closeMenu}
-                  className="flex w-full items-center justify-center gap-2 rounded-3xl bg-brand-orange hover:bg-brand-orange-hover text-brand-petrol font-semibold py-3 transition-colors"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: DUR_UI, ease: EASE_FIRM, delay: 0.04 * i } }}
+                  className="display border-b-2 border-brand-line-dark py-4 text-[44px] leading-none text-brand-paper"
                 >
-                  <Rocket className="h-4 w-4" />
-                  Quero levar para minha empresa
-                </a>
-              </motion.div>
-            </motion.nav>
+                  {link.label}
+                </motion.a>
+              ))}
+            </nav>
+            <a href={TICKET_URL} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="btn-primary mt-10 w-full">
+              {CTA_LABEL} <span className="btn-arrow" aria-hidden="true">→</span>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating mobile checkout FAB */}
-      <motion.a
-        href={TICKET_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: scrollY > 400 ? 1 : 0, opacity: scrollY > 400 ? 1 : 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        className="fixed bottom-6 right-6 z-40 lg:hidden flex items-center gap-2 rounded-full bg-brand-orange text-brand-petrol px-5 py-3.5 shadow-lg shadow-brand-orange/30 hover:bg-brand-orange-hover transition-colors font-semibold text-sm"
-        aria-label="Ir para checkout"
-      >
-        <Rocket className="h-5 w-5" />
-        <span className="hidden sm:inline">Comprar agora</span>
-      </motion.a>
+      {/* Barra de compra no celular, na zona do polegar */}
+      <AnimatePresence>
+        {showBar && !isMenuOpen && (
+          <motion.div
+            key="buy-bar"
+            initial={{ y: "110%" }}
+            animate={{ y: 0, transition: { duration: DUR_UI, ease: EASE_FIRM } }}
+            exit={{ y: "110%", transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }}
+            className="scene-dark fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-line-dark lg:hidden"
+            style={{
+              paddingBottom: "calc(12px + env(safe-area-inset-bottom, 0px))",
+              paddingTop: "12px",
+              paddingLeft: "max(16px, env(safe-area-inset-left, 0px))",
+              paddingRight: "max(16px, env(safe-area-inset-right, 0px))",
+            }}
+          >
+            <a href={TICKET_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full">
+              {CTA_LABEL} <span className="btn-arrow" aria-hidden="true">→</span>
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
