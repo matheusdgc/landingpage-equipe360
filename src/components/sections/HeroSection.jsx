@@ -11,13 +11,18 @@ import joao from "@/public/images/joao-bracos.webp"
  *
  * Até lg a cena empilha: manchete em cima, palco do João embaixo, ocupando só o
  * espaço que sobra (o João nunca cobre o botão). A partir de lg, palco e manchete
- * se sobrepõem lado a lado. Só fixa na tela no modo "full".
+ * se sobrepõem lado a lado. Só fixa na tela no modo "full"; no celular os planos
+ * se separam enquanto o hero sai da tela, sem rolagem extra.
  */
 export default function HeroSection() {
   const ref = useRef(null)
   const mode = useSceneMode()
   const pinned = mode === "full"
+  const compact = mode === "compact"
+  // Desktop/tablet: a cena fica fixa e os planos andam durante o tempo fixado
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  // Celular: a cena não fixa (rolagem curta); os planos se separam enquanto o hero sai da tela
+  const { scrollYProgress: q } = useScroll({ target: ref, offset: ["start start", "end start"] })
 
   const backX = useRange(p, [0, 1], [0, -22], { unit: "vw" })
   const backY = useRange(p, [0, 1], [0, -3], { unit: "vh" })
@@ -26,7 +31,16 @@ export default function HeroSection() {
   const copyY = useRange(p, [0, 1], [0, -10], { unit: "vh" })
   const copyOpacity = useRange(p, [0.35, 0.75], [1, 0])
 
-  const m = (style) => (pinned ? style : undefined)
+  // Celular: o plano mais distante anda menos que a página (fica para trás), o mais próximo anda mais
+  const cBackX = useRange(q, [0, 1], [0, -38], { unit: "vw" })
+  const cBackY = useRange(q, [0, 1], [0, 26], { unit: "vh" })
+  const cJoaoY = useRange(q, [0, 1], [0, 14], { unit: "vh" })
+  const cJoaoScale = useRange(q, [0, 1], [1, 1.1])
+  const cFogY = useRange(q, [0, 1], [0, -4], { unit: "vh" })
+  const cCopyY = useRange(q, [0, 1], [0, -10], { unit: "vh" })
+  const cCopyOpacity = useRange(q, [0.15, 0.6], [1, 0])
+
+  const pick = (full, mobile) => (pinned ? full : compact ? mobile : undefined)
 
   return (
     <section id="topo" ref={ref} className={`scene-dark relative ${pinned ? "h-[140svh]" : ""}`} aria-labelledby="hero-title">
@@ -35,7 +49,7 @@ export default function HeroSection() {
       >
         {/* Manchete */}
         <motion.div
-          style={m({ y: copyY, opacity: copyOpacity })}
+          style={pick({ y: copyY, opacity: copyOpacity }, { y: cCopyY, opacity: cCopyOpacity })}
           className="relative z-10 mx-auto w-full max-w-[1280px] pt-[calc(var(--header-h)+24px)] sm:pt-[calc(var(--header-h)+40px)] lg:flex lg:h-full lg:items-center lg:pt-[var(--header-h)]"
         >
           <div
@@ -64,7 +78,7 @@ export default function HeroSection() {
           {/* Plano 1: a palavra que o empresário recusa */}
           <motion.p
             aria-hidden="true"
-            style={m({ x: backX, y: backY })}
+            style={pick({ x: backX, y: backY }, { x: cBackX, y: cBackY })}
             className="display pointer-events-none absolute left-[-1vw] top-[6%] whitespace-nowrap text-[clamp(110px,27vw,440px)] leading-[0.8] text-[#0F4767] lg:bottom-[8svh] lg:top-auto"
           >
             Equipe 360
@@ -78,14 +92,14 @@ export default function HeroSection() {
             height="1000"
             fetchPriority="high"
             draggable={false}
-            style={m({ scale: joaoScale })}
+            style={pick({ scale: joaoScale }, { y: cJoaoY, scale: cJoaoScale })}
             className="absolute bottom-0 right-[-10%] h-full w-auto max-w-none origin-bottom select-none sm:right-[-4%] lg:right-0 lg:h-[84svh] lg:max-h-[900px]"
           />
 
           {/* Plano 3: névoa da base, esconde o corte do recorte e afasta o fundo */}
           <motion.div
             aria-hidden="true"
-            style={m({ y: fogY })}
+            style={pick({ y: fogY }, { y: cFogY })}
             className="pointer-events-none absolute inset-x-0 bottom-[-6%] h-[30%] bg-gradient-to-t from-brand-petrol-dark from-40% to-transparent lg:bottom-[-12svh] lg:h-[34svh]"
           />
 
