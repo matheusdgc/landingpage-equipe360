@@ -17,7 +17,7 @@ export default function SobreSection() {
 
   return (
     <section id="sobre" ref={ref} className="scene-light overflow-hidden py-20 lg:py-32" aria-labelledby="sobre-title">
-      <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-10">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[1.08fr_1fr] lg:gap-20 lg:px-10">
         {/* Retrato: a foto já traz a quebra da moldura (os braços saem do quadro) */}
         <motion.img
           src={joao}
@@ -27,14 +27,14 @@ export default function SobreSection() {
           loading="lazy"
           draggable={false}
           style={motionOn ? { y: joaoY } : undefined}
-          className="mx-auto block h-auto w-full max-w-[560px] select-none"
+          className="mx-auto block h-auto w-full max-w-[644px] select-none"
         />
 
         {/* Texto */}
         <div className="flex flex-col gap-8">
-          <h2 id="sobre-title" className="display text-display-l">
+          <h2 id="sobre-title" className="display text-[clamp(44px,6vw,84px)] leading-[0.9]">
             Não é inspiração.{" "}
-            <span className="relative inline-block">
+            <span className="relative inline-block whitespace-nowrap">
               <motion.span
                 aria-hidden="true"
                 style={motionOn ? { scaleX: markScale } : undefined}
