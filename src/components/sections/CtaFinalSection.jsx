@@ -78,12 +78,8 @@ export default function CtaFinalSection() {
               </tbody>
               <tfoot>
                 <tr className="border-t-2 border-brand-ink">
-                  <th scope="row" className="pt-4 pr-4 font-bold text-brand-ink">Total para 5 pessoas/mês</th>
-                  <td className="display whitespace-nowrap pt-4 text-right text-[clamp(24px,3vw,32px)] leading-none text-brand-petrol">{PRICING.monthlyTotal}</td>
-                </tr>
-                <tr>
-                  <th scope="row" className="pt-2 pr-4 font-semibold text-brand-ink-soft">Investimento anual</th>
-                  <td className="whitespace-nowrap pt-2 text-right font-bold text-brand-ink">{PRICING.yearlyTotal}</td>
+                  <th scope="row" className="pt-4 pr-4 font-bold text-brand-ink">Investimento anual</th>
+                  <td className="display whitespace-nowrap pt-4 text-right text-[clamp(24px,3vw,32px)] leading-none text-brand-petrol">{PRICING.yearlyTotal}</td>
                 </tr>
               </tfoot>
             </table>

@@ -87,7 +87,6 @@ export const PRICE_COMPARISON = [
 
 export const PRICING = {
   people: "5 colaboradores",
-  monthlyTotal: "R$ 3.250,00",
   yearlyTotal: "R$ 10.000,00",
   installments: "12x R$ 387,84",
   upfront: "R$ 3.750",
