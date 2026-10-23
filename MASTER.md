@@ -5,7 +5,7 @@ Modo: **parcial**. Logo e família petróleo + dourado preservados; nomes de tok
 
 ## Teses (validadas em 2026-10-22)
 
-**Visual.** Petróleo profundo como chão e dourado #F5B800 como única cor de ação, em cenas que alternam escuro e claro frio. Display em Archivo Extra Condensado 850, em caixa alta e escala enorme, porque o português é longo ("intraempreendedorismo") e só uma face condensada mantém essas palavras gigantes, inclusive no celular. Texto em Archivo normal. Respiro amplo nas cenas de impacto e densidade de tabela no investimento. Componentes retos com o raio da moldura do logo (14px), contorno de 2px, preenchimento sólido, sem sombra e sem vidro.
+**Visual.** Petróleo profundo como chão e dourado #F5B800 como única cor de ação, em cenas que alternam escuro e claro frio. Display em Bricolage Grotesque 800, em caixa alta e baixa, largura 85% e escala enorme: firme como manchete, mas com desenho humano (autoridade com conexão), e o eixo de largura mantém as palavras longas do português grandes no celular. Texto em Bricolage Grotesque 400. (Trocada da Archivo Extra Condensado em 2026-10-23, após comparação de 4 opções.) Respiro amplo nas cenas de impacto e densidade de tabela no investimento. Componentes retos com o raio da moldura do logo (14px), contorno de 2px, preenchimento sólido, sem sombra e sem vidro.
 
 **Movimento.** Seco e firme: interações de 160 a 240ms em `cubic-bezier(.2,.8,.2,1)`, sem quique, sem elástico. Hover do botão é um preenchimento que varre da esquerda. Cada cena tem um comportamento próprio guiado pela rolagem (fixar e montar, virar, deslizar na horizontal, revelar), nunca o mesmo duas vezes seguidas. Proibido: animação infinita, pulsar, brilho neon, glassmorphism, manchas desfocadas e contagem regressiva falsa.
 
@@ -36,14 +36,14 @@ Foco: dourado em cenas escuras, petróleo em cenas claras (`--focus` por cena). 
 
 ## Tipo
 
-Família única: **Archivo** (Google Fonts, `wdth 62..125`, `wght 400..900`, `display=swap`). Fallback: `"Arial Narrow", "Roboto Condensed", system-ui`.
+Família única: **Bricolage Grotesque** (Google Fonts, `opsz 12..96`, `wdth 75..100`, `wght 400..800`, `display=swap`). Fallback: `"Segoe UI", Roboto, system-ui`.
 
 | Passo | Tamanho | Peso / altura |
 |---|---|---|
-| `display` (utilitário) | ancho 62%, caixa alta, −0.005em | 850 |
-| `text-display-xl` | clamp(56px, 11vw, 168px) | lh .88 |
-| `text-display-l` | clamp(44px, 7.5vw, 104px) | lh .9 |
-| `text-display-m` | clamp(34px, 5vw, 64px) | lh .92 |
+| `display` (utilitário) | `wdth` 85, `opsz` 96, −0.012em, caixa alta e baixa | 800 |
+| `text-display-xl` | clamp(52px, 10vw, 156px) | lh .95 |
+| `text-display-l` | clamp(40px, 7vw, 96px) | lh .96 |
+| `text-display-m` | clamp(32px, 4.6vw, 60px) | lh 1 |
 | `text-title` | clamp(22px, 2.4vw, 30px) | 700, lh 1.15 |
 | `text-body-l` | 20px | lh 1.5 |
 | `text-body` | 17px | lh 1.6, `measure` 65ch |

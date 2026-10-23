@@ -22,13 +22,13 @@ function Portrait({ motionOn, p }) {
   const sy = useSpring(py, SPRING)
   const rotateY = useTransform(sx, (v) => v * 9)
   const rotateX = useTransform(sy, (v) => v * -7)
-  const fgX = useTransform(sx, (v) => v * 16)
-  const bgX = useTransform(sx, (v) => v * -12)
-  const bgPointerY = useTransform(sy, (v) => v * -8)
+  const fgX = useTransform(sx, (v) => v * 7)
+  const bgX = useTransform(sx, (v) => v * -5)
+  const bgPointerY = useTransform(sy, (v) => v * -4)
 
   // Rolagem: o fundo quase não anda, o João anda mais
-  const bgScrollY = useRange(p, [0, 1], [18, -18])
-  const fgScrollY = useRange(p, [0, 1], [60, -60])
+  const bgScrollY = useRange(p, [0, 1], [14, -14])
+  const fgScrollY = useRange(p, [0, 1], [32, -32])
   const bgY = useTransform([bgScrollY, bgPointerY], ([a, b]) => a + b)
 
   const onMove = (e) => {
@@ -59,7 +59,7 @@ function Portrait({ motionOn, p }) {
           height="879"
           loading="lazy"
           draggable={false}
-          style={motionOn ? { x: bgX, y: bgY, z: tilt ? -50 : 0, scale: 0.97 } : undefined}
+          style={motionOn ? { x: bgX, y: bgY, z: tilt ? -20 : 0, scale: 0.97 } : undefined}
           className="absolute inset-0 h-full w-full"
         />
         <motion.img
@@ -69,7 +69,7 @@ function Portrait({ motionOn, p }) {
           height="879"
           loading="lazy"
           draggable={false}
-          style={motionOn ? { x: fgX, y: fgScrollY, z: tilt ? 50 : 0 } : undefined}
+          style={motionOn ? { x: fgX, y: fgScrollY, z: tilt ? 20 : 0 } : undefined}
           className="absolute inset-0 h-full w-full"
         />
       </motion.div>
@@ -90,7 +90,7 @@ export default function SobreSection() {
 
         {/* Texto */}
         <div className="flex flex-col gap-8">
-          <h2 id="sobre-title" className="display text-[clamp(44px,6vw,84px)] leading-[0.9]">
+          <h2 id="sobre-title" className="display text-[clamp(44px,6vw,84px)] leading-[0.96]">
             Não é inspiração.{" "}
             <span className="relative inline-block whitespace-nowrap">
               <motion.span

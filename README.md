@@ -8,7 +8,7 @@ Site: https://joaopaulino.com.br/
 - React 19 + Vite 7
 - Tailwind CSS 4 (tokens em `src/styles/global.css`)
 - framer-motion 12 (cenas guiadas pela rolagem)
-- Fonte: Archivo (Google Fonts)
+- Fonte: Bricolage Grotesque (Google Fonts)
 
 ## Rodar localmente
 

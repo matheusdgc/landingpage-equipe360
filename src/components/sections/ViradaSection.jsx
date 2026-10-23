@@ -33,7 +33,7 @@ function Heading({ className = "" }) {
   return (
     <div className={`flex flex-col gap-3 sm:gap-5 ${className}`}>
       <p className="text-label text-brand-steel">Equipe comum</p>
-      <h2 id="virada-title" className="display max-w-[13ch] text-[clamp(30px,5.4vw,78px)] leading-[0.9] text-brand-mist">
+      <h2 id="virada-title" className="display max-w-[13ch] text-[clamp(30px,5.4vw,78px)] leading-[0.96] text-brand-mist">
         Comportamento é a variável que define o resultado
       </h2>
       <p className="text-body hidden max-w-[40ch] text-brand-mist sm:block">
@@ -105,7 +105,7 @@ export default function ViradaSection() {
                 <FlipCard key={v.pain} p={p} index={i} pain={v.pain} result={v.result} />
               ))}
             </ol>
-            <motion.p style={{ opacity: endOpacity, y: endY }} className="display mt-2 text-[clamp(28px,5vw,64px)] leading-[0.92] text-brand-paper sm:mt-4">
+            <motion.p style={{ opacity: endOpacity, y: endY }} className="display mt-2 text-[clamp(28px,5vw,64px)] leading-[0.98] text-brand-paper sm:mt-4">
               Não é motivação. É causa e efeito.
             </motion.p>
           </motion.div>

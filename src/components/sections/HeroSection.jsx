@@ -78,7 +78,7 @@ export default function HeroSection() {
               paddingRight: "max(20px, env(safe-area-inset-right, 0px))",
             }}
           >
-            <h1 id="hero-title" className="display text-[clamp(40px,6.6vw,92px)] leading-[0.9]">
+            <h1 id="hero-title" className="display text-[clamp(40px,6.6vw,92px)] leading-[0.96]">
               Para empresários que se recusam a aceitar <span className="text-brand-gold">equipes comuns</span>
             </h1>
             <p className="measure max-w-[44ch] text-[17px] leading-relaxed text-brand-mist sm:text-body-l">
