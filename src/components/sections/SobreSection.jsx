@@ -2,41 +2,33 @@ import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { SPEAKER, INSTAGRAM_URL, EMAIL } from "@/lib/constants.jsx"
 import { useRange, useScrollScenes } from "@/lib/motion"
-import joao from "@/public/images/joao-piramide.webp"
+import joao from "@/public/images/joao-profile2.webp"
 
 /*
- * Cena 6, o João. Um bloco petróleo sem borda vira o retrato: o recorte fica dentro dele
- * e a cabeça rompe o topo. Bloco e João sobem em ritmos diferentes.
+ * Cena 6, o João. O retrato (joao-profile2) já rompe a própria moldura;
+ * ele sobe num ritmo um pouco diferente do texto.
  */
 export default function SobreSection() {
   const ref = useRef(null)
   const motionOn = useScrollScenes()
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start end", "end start"] })
-  const frameY = useRange(p, [0, 1], [24, -24])
-  const joaoY = useRange(p, [0, 1], [56, -40])
+  const joaoY = useRange(p, [0, 1], [40, -40])
   const markScale = useRange(p, [0.22, 0.38], [0, 1])
 
   return (
     <section id="sobre" ref={ref} className="scene-light overflow-hidden py-20 lg:py-32" aria-labelledby="sobre-title">
       <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-10">
-        {/* Retrato */}
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-[520px] [clip-path:inset(-40%_0_0_0)]">
-          <motion.div
-            aria-hidden="true"
-            style={motionOn ? { y: frameY } : undefined}
-            className="absolute inset-x-0 bottom-[-40px] top-[30%] rounded-[14px] bg-brand-petrol"
-          />
-          <motion.img
-            src={joao}
-            alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
-            width="735"
-            height="971"
-            loading="lazy"
-            draggable={false}
-            style={motionOn ? { y: joaoY } : undefined}
-            className="absolute bottom-[-24px] left-1/2 w-full max-w-none -translate-x-1/2 select-none"
-          />
-        </div>
+        {/* Retrato: a foto já traz a quebra da moldura (os braços saem do quadro) */}
+        <motion.img
+          src={joao}
+          alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
+          width="900"
+          height="879"
+          loading="lazy"
+          draggable={false}
+          style={motionOn ? { y: joaoY } : undefined}
+          className="mx-auto block h-auto w-full max-w-[560px] select-none"
+        />
 
         {/* Texto */}
         <div className="flex flex-col gap-8">

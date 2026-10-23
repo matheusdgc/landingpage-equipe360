@@ -82,7 +82,7 @@ Números alinhados usam `tabular-nums`.
 | 3. A virada (pico) | `#resultados` | Alívio | Dores giram 180°; a camada "comum" é varrida |
 | 4. O método | `#programa` | Clareza | E.Q.U.I.P.E. revelado em cortina |
 | 5. 8 encontros | `#jornada` | Confiança | Trilho horizontal com régua da semana 1 à 8 |
-| 6. O João | `#sobre` | Respeito | Recorte rompendo o bloco petróleo (sem borda), paralaxe |
+| 6. O João | `#sobre` | Respeito | Foto joao-profile2 com a quebra de moldura própria, sem borda, paralaxe leve |
 | 7. Para quem é | `#para-quem` | "Sou desse lado" | Fluxo simples |
 | 8. Investimento | `#contato` | Decisão | Fecho no claro, painel escuro de preço |
 

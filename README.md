@@ -61,5 +61,6 @@ Textos, preços e links ficam em `src/lib/constants.jsx`.
 
 ### Imagens
 
-- `joao-piramide.webp` e `joao-bracos.webp`: recortes com fundo transparente gerados a partir de `profile2.jpeg` e `profile1.jpeg` (rembg, local).
+- `joao-bracos.webp` (hero): recorte com fundo transparente de `profile1.jpeg` (rembg, local).
+- `joao-profile2.webp` (seção do João): `profile2.jpeg` com o fundo branco transparente, mantendo a quebra da moldura da foto original.
 - `logo-light-gold.png`: versão do `logo-2.png` para fundo escuro ("equipe" em branco, "360" no bloco amarelo).
