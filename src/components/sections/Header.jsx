@@ -134,7 +134,7 @@ export default function Header() {
             initial={{ y: "110%" }}
             animate={{ y: 0, transition: { duration: DUR_UI, ease: EASE_FIRM } }}
             exit={{ y: "110%", transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }}
-            className="scene-dark fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-line-dark lg:hidden"
+            className="scene-dark fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-line-dark lg:hidden [@media(max-height:560px)]:hidden"
             style={{
               paddingBottom: "calc(12px + env(safe-area-inset-bottom, 0px))",
               paddingTop: "12px",

@@ -63,7 +63,11 @@ Números alinhados usam `tabular-nums`.
 - `--ease-firm` cubic-bezier(.2,.8,.2,1); saída: cubic-bezier(.4,0,1,1).
 - `--dur-fast` 160ms (hover, foco), `--dur-ui` 240ms (menu, FAQ, popup, barra de compra).
 - Cenas guiadas pela rolagem não têm duração: a posição da página é o tempo. Mapeamento sempre por função (`useRange` em `src/lib/motion.js`).
-- Movimento reduzido: nenhuma cena fixa; cada cena vira um layout estático completo.
+- Modos de cena (`useSceneMode` em `src/lib/motion.js`):
+  - `full` (largura ≥ 768px): cenas fixadas com todo o espaço de rolagem (hero 140svh, dor 280svh, virada 360svh, trilho dos encontros pela rolagem).
+  - `compact` (celular em pé, < 768px): hero sem fixar, dor 175svh, virada 220svh, encontros em carrossel nativo com o dedo. Página ~16 telas em vez de ~22.
+  - `static` (movimento reduzido ou altura ≤ 560px, celular deitado): nenhuma cena fixa; cada cena vira um layout estático completo. A barra de compra fixa some em telas baixas.
+- Tamanhos de título nas cenas fixadas usam `min(vw, svh)`: dependem da largura e da altura, para caber em celulares baixos.
 
 ## Componentes
 

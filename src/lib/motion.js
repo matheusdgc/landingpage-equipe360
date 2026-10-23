@@ -40,8 +40,23 @@ export function useMediaQuery(query) {
 
 export const useIsDesktop = () => useMediaQuery("(min-width: 1024px)")
 
-/* Cenas fixadas só existem quando o movimento é permitido */
+/* Efeitos ligados à rolagem só existem quando o movimento é permitido */
 export function useScrollScenes() {
   const reduce = useReducedMotion()
   return !reduce
+}
+
+/*
+ * Como as cenas fixadas se comportam nesta tela:
+ * "full"    → desktop e tablet: cena fixada com todo o espaço de rolagem.
+ * "compact" → celular em pé: menos rolagem por cena (o polegar cansa) e trilhos nativos.
+ * "static"  → movimento reduzido ou tela baixa (celular deitado, até 560px de altura):
+ *             nenhuma cena fixa, cada uma vira um layout estático completo.
+ */
+export function useSceneMode() {
+  const reduce = useReducedMotion()
+  const short = useMediaQuery("(max-height: 560px)")
+  const compact = useMediaQuery("(max-width: 767px)")
+  if (reduce || short) return "static"
+  return compact ? "compact" : "full"
 }

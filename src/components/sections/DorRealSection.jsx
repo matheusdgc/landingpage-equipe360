@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { DOR_LINES } from "@/lib/constants.jsx"
-import { useRange, useScrollScenes } from "@/lib/motion"
+import { useRange, useSceneMode } from "@/lib/motion"
 
 /*
  * Cena 2, a dor. A tela fixa e as frases se montam uma a uma.
@@ -18,7 +18,7 @@ function Line({ p, index, children }) {
   const y = useRange(p, [start, start + 0.08], [28, 0])
   const color = useTransform(p, [start + 0.1, start + 0.16], [INK, INK_SOFT])
   return (
-    <motion.p style={{ opacity, y, color }} className="display text-display-m">
+    <motion.p style={{ opacity, y, color }} className="display text-[clamp(22px,min(7.8vw,4.4svh),40px)] sm:text-display-m">
       {children}
     </motion.p>
   )
@@ -26,14 +26,15 @@ function Line({ p, index, children }) {
 
 export default function DorRealSection() {
   const ref = useRef(null)
-  const motionOn = useScrollScenes()
+  const mode = useSceneMode()
+  const motionOn = mode !== "static"
   // O progresso começa quando a cena chega a 55% da tela: a primeira frase já entra subindo, antes de fixar
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start 55%", "end end"] })
 
   const butOpacity = useRange(p, [0.36, 0.44], [0, 1])
   const butY = useRange(p, [0.36, 0.46], [32, 0])
-  const stageAOpacity = useRange(p, [0.58, 0.64], [1, 0])
-  const stageAY = useRange(p, [0.56, 0.66], [0, -14], { unit: "vh" })
+  const stageAOpacity = useRange(p, [0.56, 0.61], [1, 0])
+  const stageAY = useRange(p, [0.56, 0.66], [0, -8], { unit: "vh" })
   const stageBOpacity = useRange(p, [0.62, 0.7], [0, 1])
   const stageBY = useRange(p, [0.62, 0.72], [10, 0], { unit: "vh" })
   const markScale = useRange(p, [0.74, 0.84], [0, 1])
@@ -41,13 +42,13 @@ export default function DorRealSection() {
 
   if (!motionOn) {
     return (
-      <section id="dor" className="scene-light py-20 lg:py-32" aria-labelledby="dor-title">
+      <section id="dor" className="scene-light py-14 sm:py-20 lg:py-32" aria-labelledby="dor-title">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-5 lg:px-10">
           <div className="flex flex-col gap-2">
             {DOR_LINES.map((l) => (
-              <p key={l} className="display text-display-m text-brand-ink-soft">{l}</p>
+              <p key={l} className="display text-[clamp(22px,min(7.8vw,4.4svh),40px)] sm:text-display-m text-brand-ink-soft">{l}</p>
             ))}
-            <p className="display text-display-m mt-6 max-w-[18ch]">Mas se o comportamento da sua equipe continuar o mesmo, o resultado continuará limitado.</p>
+            <p className="display text-[clamp(22px,min(7.8vw,4.4svh),40px)] sm:text-display-m mt-6 max-w-[18ch]">Mas se o comportamento da sua equipe continuar o mesmo, o resultado continuará limitado.</p>
           </div>
           <h2 id="dor-title" className="display text-display-l">
             O problema não é técnico. <span className="bg-brand-gold px-2 text-brand-petrol-dark">É emocional.</span>
@@ -59,15 +60,15 @@ export default function DorRealSection() {
   }
 
   return (
-    <section id="dor" ref={ref} className="scene-light relative h-[280svh]" aria-labelledby="dor-title">
+    <section id="dor" ref={ref} className={`scene-light relative ${mode === "compact" ? "h-[175svh]" : "h-[280svh]"}`} aria-labelledby="dor-title">
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
-        <div className="relative mx-auto grid w-full max-w-[1280px] px-5 pt-[var(--header-h)] lg:px-10">
+        <div className="relative mx-auto grid w-full max-w-[1280px] px-5 pb-[104px] pt-[var(--header-h)] lg:px-10 lg:pb-0">
           {/* Etapa A */}
           <motion.div style={{ opacity: stageAOpacity, y: stageAY }} className="col-start-1 row-start-1 flex flex-col gap-1 self-center">
             {DOR_LINES.map((l, i) => (
               <Line key={l} p={p} index={i}>{l}</Line>
             ))}
-            <motion.p style={{ opacity: butOpacity, y: butY }} className="display text-display-m mt-6 max-w-[24ch] text-brand-ink lg:mt-10">
+            <motion.p style={{ opacity: butOpacity, y: butY }} className="display text-[clamp(22px,min(7.8vw,4.4svh),40px)] sm:text-display-m mt-6 max-w-[24ch] text-brand-ink lg:mt-10">
               Mas se o comportamento da sua equipe continuar o mesmo, o resultado continuará limitado.
             </motion.p>
           </motion.div>

@@ -16,7 +16,7 @@ export default function CtaFinalSection() {
   const markScale = useRange(p, [0.45, 0.75], [0, 1])
 
   return (
-    <section id="contato" ref={ref} className="scene-light py-20 lg:py-32" aria-labelledby="contato-title">
+    <section id="contato" ref={ref} className="scene-light py-14 sm:py-20 lg:py-32" aria-labelledby="contato-title">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-16 px-5 lg:gap-24 lg:px-10">
         {/* Abertura */}
         <header className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-16">

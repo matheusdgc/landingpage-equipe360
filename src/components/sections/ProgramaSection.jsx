@@ -21,7 +21,7 @@ function Row({ item, motionOn }) {
       <motion.span
         aria-hidden="true"
         style={motionOn ? { clipPath } : undefined}
-        className="display block w-[0.62em] text-[clamp(104px,17vw,250px)] leading-[0.78] text-brand-petrol lg:justify-self-end lg:text-right"
+        className="display block w-[0.62em] text-[clamp(76px,17vw,250px)] leading-[0.78] text-brand-petrol lg:justify-self-end lg:text-right"
       >
         {item.letter}
       </motion.span>
@@ -39,8 +39,8 @@ function Row({ item, motionOn }) {
 export default function ProgramaSection() {
   const motionOn = useScrollScenes()
   return (
-    <section id="programa" className="scene-light py-20 lg:py-32" aria-labelledby="programa-title">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-5 lg:gap-20 lg:px-10">
+    <section id="programa" className="scene-light py-14 sm:py-20 lg:py-32" aria-labelledby="programa-title">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-5 sm:gap-14 lg:gap-20 lg:px-10">
         <header className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end">
           <div className="flex flex-col gap-6">
             <Logo tone="light" className="h-8 lg:h-10" />
@@ -52,7 +52,7 @@ export default function ProgramaSection() {
             Cada letra representa um pilar essencial para formar colaboradores que assumem responsabilidade, pensam como donos e executam com padrão elevado.
           </p>
         </header>
-        <ol className="flex flex-col gap-8 lg:gap-4" aria-label="E.Q.U.I.P.E., letra por letra">
+        <ol className="flex flex-col gap-6 sm:gap-8 lg:gap-4" aria-label="E.Q.U.I.P.E., letra por letra">
           {EQUIPE_ACRONYM.map((item) => (
             <Row key={item.title} item={item} motionOn={motionOn} />
           ))}

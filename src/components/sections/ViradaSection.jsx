@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { VIRADA } from "@/lib/constants.jsx"
 import Logo from "@/components/Logo"
-import { easeInOutQuad, easeOutCubic, useIsDesktop, useRange, useScrollScenes } from "@/lib/motion"
+import { easeInOutQuad, easeOutCubic, useIsDesktop, useRange, useSceneMode } from "@/lib/motion"
 
 /*
  * Cena 3, a virada (o pico da página, a cena mais longa).
@@ -19,10 +19,10 @@ function FlipCard({ p, index, pain, result }) {
   const start = FLIP_START + index * FLIP_STEP
   const rotateX = useRange(p, [start, start + FLIP_SPAN], [0, 180], { ease: easeOutCubic })
   return (
-    <li className="flip-card h-[62px] sm:h-[72px] lg:h-[84px]">
+    <li className="flip-card h-[clamp(38px,7.2svh,62px)] sm:h-[72px] lg:h-[clamp(60px,9.4svh,84px)]">
       <motion.div style={{ rotateX }} className="relative h-full w-full [transform-style:preserve-3d]">
-        <span className="flip-face flip-front text-[15px] sm:text-[18px] lg:text-[20px]">{pain}</span>
-        <span className="flip-face flip-back display text-[24px] sm:text-[30px] lg:text-[36px]" aria-hidden="true">{result}</span>
+        <span className="flip-face flip-front text-[14px] leading-tight sm:text-[18px] lg:text-[20px]">{pain}</span>
+        <span className="flip-face flip-back display text-[clamp(19px,3.4svh,24px)] sm:text-[30px] lg:text-[36px]" aria-hidden="true">{result}</span>
       </motion.div>
       <span className="sr-only">{pain}: {result}</span>
     </li>
@@ -33,7 +33,7 @@ function Heading({ className = "" }) {
   return (
     <div className={`flex flex-col gap-3 sm:gap-5 ${className}`}>
       <p className="text-label text-brand-steel">Equipe comum</p>
-      <h2 id="virada-title" className="display max-w-[13ch] text-[clamp(30px,5.4vw,78px)] leading-[0.96] text-brand-mist">
+      <h2 id="virada-title" className="display text-[min(7.4vw,4.6svh)] sm:max-w-[13ch] leading-[0.98] text-brand-mist sm:text-[clamp(30px,5.4vw,78px)] sm:leading-[0.96]">
         Comportamento é a variável que define o resultado
       </h2>
       <p className="text-body hidden max-w-[40ch] text-brand-mist sm:block">
@@ -45,7 +45,8 @@ function Heading({ className = "" }) {
 
 export default function ViradaSection() {
   const ref = useRef(null)
-  const motionOn = useScrollScenes()
+  const mode = useSceneMode()
+  const motionOn = mode !== "static"
   const desktop = useIsDesktop()
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
 
@@ -60,7 +61,7 @@ export default function ViradaSection() {
 
   if (!motionOn) {
     return (
-      <section id="resultados" className="scene-petrol py-20 lg:py-32" aria-labelledby="virada-title">
+      <section id="resultados" className="scene-petrol py-14 sm:py-20 lg:py-32" aria-labelledby="virada-title">
         <div className="mx-auto grid max-w-[1280px] gap-12 px-5 lg:grid-cols-2 lg:px-10">
           <Heading />
           <div className="flex flex-col gap-4">
@@ -81,7 +82,7 @@ export default function ViradaSection() {
   }
 
   return (
-    <section id="resultados" ref={ref} className="scene-petrol relative h-[360svh]" aria-labelledby="virada-title">
+    <section id="resultados" ref={ref} className={`scene-petrol relative ${mode === "compact" ? "h-[220svh]" : "h-[360svh]"}`} aria-labelledby="virada-title">
       <div className="sticky top-0 h-svh overflow-hidden">
         {/* O lado comum: camada que será varrida */}
         <motion.div
@@ -91,23 +92,32 @@ export default function ViradaSection() {
           <div className="h-full w-full lg:border-r-2 lg:border-brand-gold" />
         </motion.div>
 
-        <div className="relative z-20 mx-auto grid h-full max-w-[1280px] grid-rows-[auto_1fr] gap-4 px-5 pb-[104px] pt-[calc(var(--header-h)+20px)] sm:gap-6 lg:grid-cols-2 lg:grid-rows-1 lg:items-center lg:gap-16 lg:px-10 lg:pb-0">
+        <div className="relative z-20 mx-auto grid h-full max-w-[1280px] grid-rows-[auto_1fr] gap-4 px-5 pb-[104px] pt-[calc(var(--header-h)+12px)] sm:gap-6 lg:grid-cols-2 lg:grid-rows-1 lg:items-center lg:gap-16 lg:px-10 lg:pb-0">
           {/* Título do lado comum, viaja com a camada */}
-          <motion.div style={desktop ? { x: sweepX, opacity: headOpacity } : { opacity: headOpacity }} className="lg:pr-8">
-            <Heading />
-          </motion.div>
+          <div className="grid lg:block">
+            <motion.div style={desktop ? { x: sweepX, opacity: headOpacity } : { opacity: headOpacity }} className="col-start-1 row-start-1 lg:pr-8">
+              <Heading />
+            </motion.div>
+            {!desktop && (
+              <motion.p style={{ opacity: endOpacity, y: endY }} className="display col-start-1 row-start-1 self-end text-[min(9vw,5.6svh)] leading-[0.98] text-brand-paper">
+                Não é motivação. É causa e efeito.
+              </motion.p>
+            )}
+          </div>
 
           {/* As cartas */}
           <motion.div style={desktop ? { x: stackX } : undefined} className="flex flex-col justify-end gap-4 self-end lg:self-center">
-            <Logo className="h-7 lg:h-8" />
+            <Logo className="h-6 sm:h-7 lg:h-8" />
             <ol className="flip-stack flex flex-col gap-2 sm:gap-3">
               {VIRADA.map((v, i) => (
                 <FlipCard key={v.pain} p={p} index={i} pain={v.pain} result={v.result} />
               ))}
             </ol>
-            <motion.p style={{ opacity: endOpacity, y: endY }} className="display mt-2 text-[clamp(28px,5vw,64px)] leading-[0.98] text-brand-paper sm:mt-4">
-              Não é motivação. É causa e efeito.
-            </motion.p>
+            {desktop && (
+              <motion.p style={{ opacity: endOpacity, y: endY }} className="display mt-4 text-[clamp(28px,min(5vw,6svh),64px)] leading-[0.98] text-brand-paper">
+                Não é motivação. É causa e efeito.
+              </motion.p>
+            )}
           </motion.div>
         </div>
       </div>

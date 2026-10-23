@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { JOURNEY } from "@/lib/constants.jsx"
-import { useScrollScenes } from "@/lib/motion"
+import { useSceneMode } from "@/lib/motion"
 
 /*
  * Cena 5, os 8 encontros. A rolagem vertical vira deslocamento lateral:
@@ -10,9 +10,9 @@ import { useScrollScenes } from "@/lib/motion"
  */
 function Encounter({ item }) {
   return (
-    <li className="flex w-[78vw] max-w-[340px] shrink-0 flex-col gap-4 rounded-[14px] border-2 border-brand-line-dark p-6 sm:w-[320px] lg:w-[340px] lg:p-7">
+    <li className="flex w-[78vw] max-w-[340px] shrink-0 snap-start flex-col gap-3 rounded-[14px] border-2 border-brand-line-dark p-5 sm:w-[320px] sm:gap-4 sm:p-6 lg:w-[340px] lg:p-7">
       <div className="flex items-baseline justify-between gap-4">
-        <span className="display text-[72px] leading-[0.8] text-brand-gold tabular-nums lg:text-[88px]">{item.num}</span>
+        <span className="display text-[56px] leading-[0.85] text-brand-gold tabular-nums sm:text-[72px] lg:text-[88px]">{item.num}</span>
         <span className="text-label text-right text-brand-mist">Semana {Number(item.num)}</span>
       </div>
       <h3 className="text-title text-brand-paper">{item.title}</h3>
@@ -28,6 +28,20 @@ function Track({ innerRef }) {
         <Encounter key={item.num} item={item} />
       ))}
     </ol>
+  )
+}
+
+function Ruler({ progress }) {
+  return (
+    <div className="mx-auto w-full max-w-[1280px] px-5 lg:px-10" aria-hidden="true">
+      <div className="h-[2px] w-full bg-brand-line-dark">
+        <motion.div style={{ scaleX: progress }} className="h-full origin-left bg-brand-gold" />
+      </div>
+      <div className="mt-3 flex justify-between text-label text-brand-mist">
+        <span>Semana 1</span>
+        <span>Semana 8</span>
+      </div>
+    </div>
   )
 }
 
@@ -47,7 +61,9 @@ function Intro() {
 export default function JornadaSection() {
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
-  const motionOn = useScrollScenes()
+  const railRef = useRef(null)
+  // No celular o trilho é nativo (arrasta com o dedo): nada de rolagem vertical extra
+  const motionOn = useSceneMode() === "full"
   const [distance, setDistance] = useState(0)
 
   useLayoutEffect(() => {
@@ -70,14 +86,19 @@ export default function JornadaSection() {
   // 6% de respiro no início e no fim, para o primeiro e o último encontro assentarem
   const x = useTransform(p, (v) => -Math.min(1, Math.max(0, (v - 0.06) / 0.88)) * distance)
   const ruler = useTransform(p, (v) => Math.min(1, Math.max(0, (v - 0.06) / 0.88)))
+  // Trilho nativo: a régua acompanha o arraste lateral
+  const { scrollXProgress: railProgress } = useScroll({ container: railRef })
 
   if (!motionOn) {
     return (
-      <section id="jornada" className="scene-dark py-20 lg:py-32" aria-labelledby="jornada-title">
+      <section id="jornada" className="scene-dark py-14 sm:py-20 lg:py-32" aria-labelledby="jornada-title">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
           <Intro />
-          <div className="no-scrollbar overflow-x-auto pb-4" tabIndex={0} aria-label="Os 8 encontros, role para o lado">
-            <Track />
+          <div className="flex flex-col gap-6">
+            <div ref={railRef} className="no-scrollbar snap-x snap-mandatory scroll-px-5 overflow-x-auto pb-2 lg:scroll-px-10" tabIndex={0} aria-label="Os 8 encontros, arraste para o lado">
+              <Track />
+            </div>
+            <Ruler progress={railProgress} />
           </div>
         </div>
       </section>
@@ -99,15 +120,7 @@ export default function JornadaSection() {
         <motion.div style={{ x }}>
           <Track innerRef={trackRef} />
         </motion.div>
-        <div className="mx-auto w-full max-w-[1280px] px-5 lg:px-10" aria-hidden="true">
-          <div className="h-[2px] w-full bg-brand-line-dark">
-            <motion.div style={{ scaleX: ruler }} className="h-full origin-left bg-brand-gold" />
-          </div>
-          <div className="mt-3 flex justify-between text-label text-brand-mist">
-            <span>Semana 1</span>
-            <span>Semana 8</span>
-          </div>
-        </div>
+        <Ruler progress={ruler} />
       </div>
     </section>
   )

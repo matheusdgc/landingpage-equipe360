@@ -84,7 +84,7 @@ export default function SobreSection() {
   const markScale = useRange(p, [0.22, 0.38], [0, 1])
 
   return (
-    <section id="sobre" ref={ref} className="scene-light overflow-hidden py-20 lg:py-32" aria-labelledby="sobre-title">
+    <section id="sobre" ref={ref} className="scene-light overflow-hidden py-14 sm:py-20 lg:py-32" aria-labelledby="sobre-title">
       <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[1.08fr_1fr] lg:gap-20 lg:px-10">
         <Portrait motionOn={motionOn} p={p} />
 

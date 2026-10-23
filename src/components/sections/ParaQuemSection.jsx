@@ -20,7 +20,7 @@ export default function ParaQuemSection() {
   const m = (i) => (motionOn ? enter(i) : {})
 
   return (
-    <section id="para-quem" className="scene-petrol py-20 lg:py-32" aria-labelledby="para-quem-title">
+    <section id="para-quem" className="scene-petrol py-14 sm:py-20 lg:py-32" aria-labelledby="para-quem-title">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-5 lg:gap-20 lg:px-10">
         <header className="flex flex-col gap-4">
           <p className="text-label text-brand-gold">Empreendedores querem...</p>

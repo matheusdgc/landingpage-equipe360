@@ -8,7 +8,7 @@ import { FAQ_ITEMS, WA_DUVIDAS } from "@/lib/constants.jsx"
  */
 export default function FAQSection() {
   return (
-    <section id="faq" className="scene-light border-t-2 border-brand-line-light bg-brand-bone-deep py-20 lg:py-32" aria-labelledby="faq-title">
+    <section id="faq" className="scene-light border-t-2 border-brand-line-light bg-brand-bone-deep py-14 sm:py-20 lg:py-32" aria-labelledby="faq-title">
       <div className="mx-auto grid max-w-[1280px] gap-12 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-10">
         <header className="flex flex-col gap-5 lg:sticky lg:top-[calc(var(--header-h)+48px)] lg:self-start">
           <h2 id="faq-title" className="display text-display-l">Perguntas frequentes</h2>
