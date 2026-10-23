@@ -27,7 +27,8 @@ function Line({ p, index, children }) {
 export default function DorRealSection() {
   const ref = useRef(null)
   const motionOn = useScrollScenes()
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  // O progresso começa quando a cena chega a 55% da tela: a primeira frase já entra subindo, antes de fixar
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start 55%", "end end"] })
 
   const butOpacity = useRange(p, [0.36, 0.44], [0, 1])
   const butY = useRange(p, [0.36, 0.46], [32, 0])

@@ -2,11 +2,11 @@ import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
 import { useRange, useScrollScenes } from "@/lib/motion"
-import joao from "@/public/images/joao-piramide.webp"
+import joao from "@/public/images/joao-bracos.webp"
 
 /*
  * Cena 1, a recusa. Quatro planos com ritmos diferentes:
- * fundo (EQUIPE COMUM gigante) < João recortado < névoa da base < manchete.
+ * fundo (EQUIPE 360 gigante) < João recortado < névoa da base < manchete.
  * A base do recorte é o ponto de contato: o João escala a partir dela.
  */
 export default function HeroSection() {
@@ -28,7 +28,7 @@ export default function HeroSection() {
     <section
       id="topo"
       ref={ref}
-      className={`scene-dark relative ${motionOn ? "h-[165svh]" : "min-h-svh"}`}
+      className={`scene-dark relative ${motionOn ? "h-[140svh]" : "min-h-svh"}`}
       aria-labelledby="hero-title"
     >
       <div className={`${motionOn ? "sticky top-0" : "relative"} h-svh min-h-[620px] overflow-hidden`}>
@@ -38,19 +38,19 @@ export default function HeroSection() {
           style={m({ x: backX, y: backY })}
           className="display pointer-events-none absolute bottom-[30svh] left-[-1vw] whitespace-nowrap text-[clamp(120px,27vw,440px)] leading-[0.8] text-[#0F4767] lg:bottom-[8svh]"
         >
-          Equipe comum
+          Equipe 360
         </motion.p>
 
         {/* Plano 2: o João, ancorado na base */}
         <motion.img
           src={joao}
-          alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
-          width="735"
-          height="971"
+          alt="João Paulino, de camisa branca e braços cruzados, sorrindo"
+          width="1000"
+          height="1000"
           fetchPriority="high"
           draggable={false}
           style={m({ y: joaoY, scale: joaoScale })}
-          className="absolute bottom-0 right-[-14vw] h-[60svh] w-auto max-w-none origin-bottom select-none sm:right-[-4vw] lg:right-[4vw] lg:h-[88svh] lg:max-h-[960px]"
+          className="absolute bottom-0 right-[-22vw] h-[54svh] w-auto max-w-none origin-bottom select-none sm:right-[-8vw] lg:right-[0vw] lg:h-[84svh] lg:max-h-[900px]"
         />
 
         {/* Plano 3: névoa da base, esconde o corte do recorte e afasta o fundo */}

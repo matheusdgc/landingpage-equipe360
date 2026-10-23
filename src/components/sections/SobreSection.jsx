@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { SPEAKER, INSTAGRAM_URL, EMAIL } from "@/lib/constants.jsx"
 import { useRange, useScrollScenes } from "@/lib/motion"
-import joao from "@/public/images/joao-bracos.webp"
+import joao from "@/public/images/joao-piramide.webp"
 
 /*
  * Cena 6, o João. A moldura do "360" vira o retrato: o recorte fica dentro dela
@@ -28,13 +28,13 @@ export default function SobreSection() {
           />
           <motion.img
             src={joao}
-            alt="João Paulino, de camisa branca e braços cruzados, sorrindo"
-            width="1000"
-            height="1000"
+            alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
+            width="735"
+            height="971"
             loading="lazy"
             draggable={false}
             style={motionOn ? { y: joaoY } : undefined}
-            className="absolute bottom-[-24px] left-1/2 w-[112%] max-w-none -translate-x-1/2 select-none"
+            className="absolute bottom-[-24px] left-1/2 w-full max-w-none -translate-x-1/2 select-none"
           />
         </div>
 
