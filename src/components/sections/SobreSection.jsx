@@ -5,8 +5,8 @@ import { useRange, useScrollScenes } from "@/lib/motion"
 import joao from "@/public/images/joao-piramide.webp"
 
 /*
- * Cena 6, o João. A moldura do "360" vira o retrato: o recorte fica dentro dela
- * e a cabeça rompe a borda de cima. Moldura e João sobem em ritmos diferentes.
+ * Cena 6, o João. Um bloco petróleo sem borda vira o retrato: o recorte fica dentro dele
+ * e a cabeça rompe o topo. Bloco e João sobem em ritmos diferentes.
  */
 export default function SobreSection() {
   const ref = useRef(null)
@@ -24,7 +24,7 @@ export default function SobreSection() {
           <motion.div
             aria-hidden="true"
             style={motionOn ? { y: frameY } : undefined}
-            className="absolute inset-x-0 bottom-[-40px] top-[16%] rounded-[14px] border-[3px] border-brand-gold bg-brand-petrol"
+            className="absolute inset-x-0 bottom-[-40px] top-[30%] rounded-[14px] bg-brand-petrol"
           />
           <motion.img
             src={joao}

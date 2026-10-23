@@ -82,7 +82,7 @@ export default function HeroSection() {
               Para empresários que se recusam a aceitar <span className="text-brand-gold">equipes comuns</span>
             </h1>
             <p className="measure max-w-[44ch] text-[17px] leading-relaxed text-brand-mist sm:text-body-l">
-              Desenvolvimento comportamental contínuo para empresas: 12 encontros presenciais com palestras vivenciais e dinâmicas práticas com João Paulino.
+              Desenvolvimento comportamental contínuo para empresas: 8 encontros presenciais com palestras vivenciais e dinâmicas práticas com João Paulino.
             </p>
             <div>
               <a href={TICKET_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">

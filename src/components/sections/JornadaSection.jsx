@@ -1,21 +1,21 @@
 import { useLayoutEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { JOURNEY_STRUCTURE } from "@/lib/constants.jsx"
+import { JOURNEY } from "@/lib/constants.jsx"
 import { useScrollScenes } from "@/lib/motion"
 
 /*
- * Cena 5, os 12 meses. A rolagem vertical vira deslocamento lateral:
- * o ano passa de lado, encontro a encontro, agrupado nos 4 pilares.
- * A régua da base mostra em que ponto do ano o visitante está.
+ * Cena 5, os 8 encontros. A rolagem vertical vira deslocamento lateral:
+ * o programa passa de lado, semana a semana.
+ * A régua da base mostra em que semana o visitante está.
  */
-function Encounter({ item, pillar }) {
+function Encounter({ item }) {
   return (
     <li className="flex w-[78vw] max-w-[340px] shrink-0 flex-col gap-4 rounded-[14px] border-2 border-brand-line-dark p-6 sm:w-[320px] lg:w-[340px] lg:p-7">
       <div className="flex items-baseline justify-between gap-4">
         <span className="display text-[72px] leading-[0.8] text-brand-gold tabular-nums lg:text-[88px]">{item.num}</span>
-        <span className="text-label text-right text-brand-mist">{pillar}</span>
+        <span className="text-label text-right text-brand-mist">Semana {Number(item.num)}</span>
       </div>
-      <h4 className="text-title text-brand-paper">{item.title}</h4>
+      <h3 className="text-title text-brand-paper">{item.title}</h3>
       <p className="text-body text-brand-mist">{item.desc}</p>
     </li>
   )
@@ -23,19 +23,9 @@ function Encounter({ item, pillar }) {
 
 function Track({ innerRef }) {
   return (
-    <ol ref={innerRef} className="flex w-max gap-10 pr-[max(20px,8vw)] pl-5 lg:gap-14 lg:pl-10" aria-label="Os 12 encontros">
-      {JOURNEY_STRUCTURE.map((group) => (
-        <li key={group.pillar} className="flex flex-col gap-5">
-          <div className="flex items-center gap-4">
-            <h3 className="display text-[clamp(28px,3vw,40px)] leading-none text-brand-paper">{group.pillar}</h3>
-            <span aria-hidden="true" className="h-[2px] min-w-12 flex-1 bg-brand-gold" />
-          </div>
-          <ol className="flex gap-4">
-            {group.items.map((item) => (
-              <Encounter key={item.num} item={item} pillar={group.pillar} />
-            ))}
-          </ol>
-        </li>
+    <ol ref={innerRef} className="flex w-max gap-4 pr-[max(20px,8vw)] pl-5 lg:pl-10" aria-label="Os 8 encontros">
+      {JOURNEY.map((item) => (
+        <Encounter key={item.num} item={item} />
       ))}
     </ol>
   )
@@ -48,7 +38,7 @@ function Intro() {
         O que os participantes do <span className="whitespace-nowrap text-brand-gold">EQUIPE 360</span> receberão?
       </h2>
       <p className="text-body measure text-brand-mist lg:max-w-[44ch]">
-        Trabalharemos 12 temas distribuídos nos quatro principais pilares do desenvolvimento comportamental, um por mês.
+        Trabalharemos 8 temas dos quatro principais pilares do desenvolvimento comportamental, um por semana, em encontros presenciais de 2 horas.
       </p>
     </header>
   )
@@ -86,7 +76,7 @@ export default function JornadaSection() {
       <section id="jornada" className="scene-dark py-20 lg:py-32" aria-labelledby="jornada-title">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
           <Intro />
-          <div className="no-scrollbar overflow-x-auto pb-4" tabIndex={0} aria-label="Os 12 encontros, role para o lado">
+          <div className="no-scrollbar overflow-x-auto pb-4" tabIndex={0} aria-label="Os 8 encontros, role para o lado">
             <Track />
           </div>
         </div>
@@ -114,8 +104,8 @@ export default function JornadaSection() {
             <motion.div style={{ scaleX: ruler }} className="h-full origin-left bg-brand-gold" />
           </div>
           <div className="mt-3 flex justify-between text-label text-brand-mist">
-            <span>Mês 1</span>
-            <span>Mês 12</span>
+            <span>Semana 1</span>
+            <span>Semana 8</span>
           </div>
         </div>
       </div>

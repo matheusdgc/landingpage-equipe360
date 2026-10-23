@@ -36,40 +36,16 @@ export const EQUIPE_ACRONYM = [
   { letter: "E", title: "Excelência", subtitle: "Padrão elevado", desc: "Buscar o melhor resultado possível. Não se contentar com o mínimo aceitável ou resultado mediano." },
 ]
 
-/* ─── Cena 5: os 12 encontros, em 4 pilares ─── */
-export const JOURNEY_STRUCTURE = [
-  {
-    pillar: "Base emocional",
-    items: [
-      { num: "01", title: "Gratidão", desc: "Reconhecer o valor do que se tem e construir a partir disso" },
-      { num: "02", title: "Gestão emocional", desc: "Manter equilíbrio em cenários de alta pressão e exigência" },
-      { num: "03", title: "Autocontrole", desc: "Dominar reações e responder com maturidade aos desafios" },
-    ],
-  },
-  {
-    pillar: "Postura profissional",
-    items: [
-      { num: "04", title: "Postura profissional", desc: "Atitude que gera respeito e credibilidade no ambiente de trabalho" },
-      { num: "05", title: "Responsabilidade", desc: "Assumir compromissos e entregar resultados com excelência" },
-      { num: "06", title: "Comunicação assertiva", desc: "Expressar ideias com clareza, ouvir com empatia e resolver conflitos" },
-    ],
-  },
-  {
-    pillar: "Performance e intraempreendedorismo",
-    items: [
-      { num: "07", title: "Mentalidade de dono", desc: "Cuidar do negócio como se fosse seu, com comprometimento total" },
-      { num: "08", title: "Trabalho em equipe", desc: "Fortalecer colaboração, confiança e senso de pertencimento" },
-      { num: "09", title: "Iniciativa e proatividade", desc: "Antecipar problemas, propor soluções e agir sem esperar ordens" },
-    ],
-  },
-  {
-    pillar: "Resultado e visão de futuro",
-    items: [
-      { num: "10", title: "Foco em resultado", desc: "Alinhar ações diárias com objetivos estratégicos mensuráveis" },
-      { num: "11", title: "Propósito e crescimento", desc: "Conectar trabalho, vida pessoal e evolução profissional contínua" },
-      { num: "12", title: "Visão de longo prazo", desc: "Pensar estrategicamente e construir carreira sustentável" },
-    ],
-  },
+/* ─── Cena 5: os 8 encontros semanais ─── */
+export const JOURNEY = [
+  { num: "01", title: "Gratidão", desc: "Reconhecer o valor do que se tem e construir a partir disso." },
+  { num: "02", title: "Trabalho em Equipe", desc: "Fortalecer a colaboração e o senso de pertencimento." },
+  { num: "03", title: "Postura Profissional", desc: "Atitude que gera respeito e credibilidade no ambiente corporativo." },
+  { num: "04", title: "Responsabilidade", desc: "Assumir compromissos e entregar com excelência." },
+  { num: "05", title: "Comunicação", desc: "Expressar ideias com clareza e escutar com empatia." },
+  { num: "06", title: "Atitude de Dono", desc: "Cuidar do negócio como se fosse seu." },
+  { num: "07", title: "Gestão Emocional", desc: "Manter o equilíbrio em cenários de alta exigência." },
+  { num: "08", title: "Propósito e Crescimento", desc: "Conectar trabalho, vida e evolução profissional." },
 ]
 
 /* ─── Cena 6: o João ─── */
@@ -79,7 +55,7 @@ export const SPEAKER = {
   description:
     "João Paulino trabalha com desenvolvimento comportamental aplicado à realidade de colaboradores, dentro da rotina real das empresas.",
   methodology:
-    "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro. Com encontros mensais que constroem maturidade de forma progressiva e consistente.",
+    "EQUIPE 360 é estruturado em 4 pilares: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro. Com encontros semanais que constroem maturidade de forma progressiva e consistente.",
   philosophy: "Porque crescimento não acontece em um evento. Acontece com repetição, consciência e prática.",
   badges: ["Linguagem simples", "Conexão real", "Foco em prática"],
 }
@@ -96,8 +72,8 @@ export const NOT_FOR = ["Quem só reclama", "Quem não assume responsabilidade",
 
 /* ─── Cena 8: investimento ─── */
 export const DELIVERABLES = [
-  { figure: "24h", title: "de palestras", desc: "12 encontros presenciais de 2h cada" },
-  { figure: "12", title: "dinâmicas vivenciais", desc: "Atividades práticas a cada encontro" },
+  { figure: "16h", title: "de palestras", desc: "8 encontros presenciais de 2h cada" },
+  { figure: "8", title: "dinâmicas vivenciais", desc: "Atividades práticas a cada encontro" },
   { figure: "12", title: "meses de acesso ao conteúdo", desc: "Material completo disponível online" },
   { figure: "1", title: "grupo exclusivo de desenvolvimento", desc: "Comunidade de crescimento contínuo" },
 ]
@@ -112,7 +88,7 @@ export const PRICE_COMPARISON = [
 export const PRICING = {
   people: "5 colaboradores",
   monthlyTotal: "R$ 3.250,00",
-  yearlyTotal: "R$ 39.000,00",
+  yearlyTotal: "R$ 10.000,00",
   installments: "12x R$ 387,84",
   upfront: "R$ 3.750",
   extraPerson: "+ R$ 62,50/mês",
@@ -124,7 +100,7 @@ export const FAQ_ITEMS = [
   {
     question: "Como funciona o programa EQUIPE 360?",
     answer:
-      "O EQUIPE 360 é um programa de desenvolvimento comportamental com 12 encontros, 1 por mês ao longo do ano, presenciais de 2 horas cada. Cada encontro combina palestra e dinâmica vivencial, trabalhando os 4 pilares do desenvolvimento: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro.",
+      "O EQUIPE 360 é um programa de desenvolvimento comportamental com 8 encontros semanais, presenciais, de 2 horas cada. Cada encontro combina palestra e dinâmica vivencial, trabalhando os 4 pilares do desenvolvimento: Base emocional, Postura profissional, Performance e intraempreendedorismo, Resultado e visão de futuro.",
   },
   {
     question: "Quantos colaboradores podem participar?",
@@ -133,12 +109,12 @@ export const FAQ_ITEMS = [
   {
     question: "Qual a duração do programa?",
     answer:
-      "O programa tem duração de 12 meses, com um encontro presencial mensal de 2 horas, totalizando 24 horas de conteúdo presencial ao longo do ano.",
+      "O programa tem duração de 8 semanas, com um encontro presencial semanal de 2 horas, totalizando 16 horas de conteúdo presencial.",
   },
   {
     question: "Os encontros são presenciais ou online?",
     answer:
-      "Todos os 12 encontros são presenciais na sua empresa. Acreditamos que o desenvolvimento comportamental acontece através da vivência prática e da interação real entre as pessoas.",
+      "Todos os 8 encontros são presenciais na sua empresa. Acreditamos que o desenvolvimento comportamental acontece através da vivência prática e da interação real entre as pessoas.",
   },
   {
     question: "Qual o investimento?",
@@ -148,12 +124,12 @@ export const FAQ_ITEMS = [
   {
     question: "O que está incluso no programa?",
     answer:
-      "Está incluso: 24 horas de palestras presenciais (12 encontros de 2h), 12 dinâmicas vivenciais práticas, acesso ao conteúdo digital por 12 meses e participação em grupo exclusivo de desenvolvimento comportamental.",
+      "Está incluso: 16 horas de palestras presenciais (8 encontros de 2h), 8 dinâmicas vivenciais práticas, acesso ao conteúdo digital por 12 meses e participação em grupo exclusivo de desenvolvimento comportamental.",
   },
   {
     question: "Qual a diferença entre EQUIPE 360 e palestras pontuais?",
     answer:
-      "Palestras pontuais geram inspiração momentânea. O EQUIPE 360 é um programa progressivo de 12 meses que constrói maturidade comportamental através da repetição, prática e acompanhamento contínuo. O resultado é transformação real, não apenas motivação passageira.",
+      "Palestras pontuais geram inspiração momentânea. O EQUIPE 360 é um programa progressivo de 8 encontros que constrói maturidade comportamental através da repetição, prática e acompanhamento contínuo. O resultado é transformação real, não apenas motivação passageira.",
   },
   {
     question: "Como é feito o pagamento?",

@@ -1,6 +1,6 @@
 # EQUIPE 360: landing page
 
-Página de venda do programa **EQUIPE 360** (12 encontros mensais de desenvolvimento comportamental com João Paulino).
+Página de venda do programa **EQUIPE 360** (8 encontros semanais de desenvolvimento comportamental com João Paulino).
 Site: https://joaopaulino.com.br/
 
 ## Stack
@@ -45,7 +45,7 @@ A pasta `dist/` é o site pronto. O arquivo `public/.htaccess` vai junto (força
 | 2. A dor | `DorRealSection.jsx` | `#dor` |
 | 3. A virada | `ViradaSection.jsx` | `#resultados` |
 | 4. E.Q.U.I.P.E. | `ProgramaSection.jsx` | `#programa` |
-| 5. 12 encontros | `JornadaSection.jsx` | `#jornada` |
+| 5. 8 encontros | `JornadaSection.jsx` | `#jornada` |
 | 6. João Paulino | `SobreSection.jsx` | `#sobre` |
 | 7. Para quem é | `ParaQuemSection.jsx` | `#para-quem` |
 | 8. Investimento | `CtaFinalSection.jsx` | `#contato` |
@@ -57,9 +57,9 @@ Textos, preços e links ficam em `src/lib/constants.jsx`.
 
 - Todas as cenas respeitam `prefers-reduced-motion`: sem tela fixa, layout estático completo.
 - O mapeamento rolagem → valor usa `useRange` (`src/lib/motion.js`), sempre por função.
-- Assinatura: a moldura do "360" no logo do header se desenha com a rolagem e fecha a volta no fim do investimento.
+- Assinatura: na virada, as dores giram 180° e mostram o resultado no verso.
 
 ### Imagens
 
 - `joao-piramide.webp` e `joao-bracos.webp`: recortes com fundo transparente gerados a partir de `profile2.jpeg` e `profile1.jpeg` (rembg, local).
-- `logo-light.png`: versão clara do logo, sem a moldura (a moldura é desenhada em SVG por `src/components/Logo.jsx`).
+- `logo-light-gold.png`: versão do `logo-2.png` para fundo escuro ("equipe" em branco, "360" no bloco amarelo).

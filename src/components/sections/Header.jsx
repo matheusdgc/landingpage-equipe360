@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Logo from "@/components/Logo"
 import { NAV_LINKS, TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
@@ -9,29 +9,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [solid, setSolid] = useState(false)
   const [showBar, setShowBar] = useState(false)
-  const endRef = useRef(1)
   const { scrollY } = useScroll()
-
-  // A volta do "360" fecha quando o fim do investimento chega à base da tela
-  useEffect(() => {
-    const measure = () => {
-      const contato = document.getElementById("contato")
-      const end = contato
-        ? contato.offsetTop + contato.offsetHeight - window.innerHeight
-        : document.documentElement.scrollHeight - window.innerHeight
-      endRef.current = Math.max(1, end)
-    }
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(document.body)
-    window.addEventListener("resize", measure)
-    return () => {
-      ro.disconnect()
-      window.removeEventListener("resize", measure)
-    }
-  }, [])
-
-  const progress = useTransform(scrollY, (v) => Math.min(1, Math.max(0, v / endRef.current)))
 
   useMotionValueEvent(scrollY, "change", (v) => {
     const isSolid = v > 24
@@ -74,7 +52,7 @@ export default function Header() {
           }}
         >
           <a href="#topo" onClick={closeMenu} className="block h-8 rounded-[4px] sm:h-9" aria-label="EQUIPE 360, voltar ao início">
-            <Logo progress={progress} className="h-full" />
+            <Logo className="h-full" />
           </a>
 
           <nav aria-label="Seções" className="hidden items-center gap-7 lg:flex">

@@ -7,7 +7,6 @@ import { useRange, useScrollScenes } from "@/lib/motion"
 /*
  * Cena 8, o investimento. O fecho firme no claro: entregáveis com números reais,
  * o comparativo, um painel escuro com o preço e um único botão.
- * Aqui a moldura do "360" no topo fecha a volta.
  */
 export default function CtaFinalSection() {
   const ref = useRef(null)

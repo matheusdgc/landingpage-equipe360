@@ -9,7 +9,7 @@ Modo: **parcial**. Logo e família petróleo + dourado preservados; nomes de tok
 
 **Movimento.** Seco e firme: interações de 160 a 240ms em `cubic-bezier(.2,.8,.2,1)`, sem quique, sem elástico. Hover do botão é um preenchimento que varre da esquerda. Cada cena tem um comportamento próprio guiado pela rolagem (fixar e montar, virar, deslizar na horizontal, revelar), nunca o mesmo duas vezes seguidas. Proibido: animação infinita, pulsar, brilho neon, glassmorphism, manchas desfocadas e contagem regressiva falsa.
 
-**Padrões permitidos:** a moldura arredondada do "360" como elemento recorrente (inclusive desenhando-se com a rolagem), contorno de 2px, rótulos em caixa alta com espaçamento, numerais grandes apenas para números reais (12 encontros, 24h, 12 meses, valores), recorte do João entre planos de texto no hero.
+**Padrões permitidos:** o bloco arredondado do "360" como elemento recorrente, contorno de 2px, rótulos em caixa alta com espaçamento, numerais grandes apenas para números reais (8 encontros, 16h, 12 meses de acesso, valores), recorte do João entre planos de texto no hero.
 
 **Ação única:** "Garantir as vagas da minha equipe" → checkout Ticto. WhatsApp só como "tirar dúvidas".
 
@@ -31,7 +31,6 @@ Modo: **parcial**. Logo e família petróleo + dourado preservados; nomes de tok
 | `brand-steel` | #7D8A92 | o lado "comum" | 4.96:1 (950), 4.76:1 (comum) |
 | `brand-comum` / `-comum-card` / `-comum-edge` | #0D1F29 / #13262F / #22343D | camada "Equipe comum" da virada | |
 | `brand-line-dark` / `-line-light` | 14% claro / 18% tinta | contornos | |
-| `brand-frame-dim` | 28% claro | moldura do logo antes de se desenhar | |
 
 Foco: dourado em cenas escuras, petróleo em cenas claras (`--focus` por cena). Dourado sobre osso não chega a 3:1.
 
@@ -56,7 +55,7 @@ Números alinhados usam `tabular-nums`.
 
 - Base 4px: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192.
 - Cenas de impacto: 128px vertical no desktop, 80px no celular. Cenas densas: 64 / 48.
-- Raios: 0 (blocos de cena), 10px `--radius-btn` (botões, cartas), 14px `--radius-frame` (moldura 360, retrato, painel de preço, popup).
+- Raios: 0 (blocos de cena), 10px `--radius-btn` (botões, cartas), 14px `--radius-frame` (moldura 360, bloco do retrato, painel de preço, popup).
 - Sombras: nenhuma. Separação por cor e contorno de 2px.
 
 ## Movimento
@@ -82,9 +81,11 @@ Números alinhados usam `tabular-nums`.
 | 2. A dor | `#dor` | Desconforto | Fixa e monta frase a frase; marcador dourado em "É emocional." |
 | 3. A virada (pico) | `#resultados` | Alívio | Dores giram 180°; a camada "comum" é varrida |
 | 4. O método | `#programa` | Clareza | E.Q.U.I.P.E. revelado em cortina |
-| 5. 12 meses | `#jornada` | Confiança | Trilho horizontal com régua do ano |
-| 6. O João | `#sobre` | Respeito | Recorte rompendo a moldura 360, paralaxe |
+| 5. 8 encontros | `#jornada` | Confiança | Trilho horizontal com régua da semana 1 à 8 |
+| 6. O João | `#sobre` | Respeito | Recorte rompendo o bloco petróleo (sem borda), paralaxe |
 | 7. Para quem é | `#para-quem` | "Sou desse lado" | Fluxo simples |
 | 8. Investimento | `#contato` | Decisão | Fecho no claro, painel escuro de preço |
 
-**Assinatura:** a moldura do "360" no logo do header se desenha com a rolagem e fecha a volta no fim do investimento.
+**Logo:** no fundo escuro usa `logo-light-gold.png` ("equipe" branco, "360" no bloco amarelo do logo oficial), sem animação.
+
+**Assinatura:** as dores da virada girando 180° e o lado "comum" sendo varrido.
