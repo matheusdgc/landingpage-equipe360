@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="scene-dark pb-[calc(104px+env(safe-area-inset-bottom,0px))] pt-16 lg:pb-[calc(24px+env(safe-area-inset-bottom,0px))] lg:pt-24">
       <div className="mx-auto grid max-w-[1280px] gap-12 px-5 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-10">
         <div className="flex flex-col gap-5">
-          <Logo className="h-10" />
+          <Logo className="h-11" />
           <p className="text-body measure text-brand-mist">
             João Paulino, palestrante e facilitador de desenvolvimento comportamental. Ajudando colaboradores comuns a se tornarem profissionais extraordinários.
           </p>

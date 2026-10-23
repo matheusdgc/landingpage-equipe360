@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { Check } from "lucide-react"
 import { DELIVERABLES, PRICE_COMPARISON, PRICING, TICKET_URL, CTA_LABEL } from "@/lib/constants.jsx"
+import Logo from "@/components/Logo"
 import { useRange, useScrollScenes } from "@/lib/motion"
 
 /*
@@ -88,7 +89,10 @@ export default function CtaFinalSection() {
           {/* Painel de preço: ilha escura no claro */}
           <div className="scene-dark flex flex-col gap-7 rounded-[14px] border-[3px] border-brand-gold p-6 sm:p-10">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="display text-[clamp(30px,3.2vw,42px)] leading-none">Programa EQUIPE 360</h3>
+              <h3 className="flex flex-col gap-3">
+                <span className="text-label text-brand-mist">Programa</span>
+                <Logo className="h-10 sm:h-11" />
+              </h3>
               <span className="text-label text-brand-gold">{PRICING.people}</span>
             </div>
 

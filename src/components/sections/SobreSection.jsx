@@ -1,34 +1,92 @@
 import { useRef } from "react"
-import { motion, useScroll } from "framer-motion"
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion"
 import { SPEAKER, INSTAGRAM_URL, EMAIL } from "@/lib/constants.jsx"
-import { useRange, useScrollScenes } from "@/lib/motion"
-import joao from "@/public/images/joao-profile2.webp"
+import { useMediaQuery, useRange, useScrollScenes } from "@/lib/motion"
+import joaoBg from "@/public/images/joao-profile2-bg.webp"
+import joaoFg from "@/public/images/joao-profile2-fg.webp"
 
 /*
- * Cena 6, o João. O retrato (joao-profile2) já rompe a própria moldura;
- * ele sobe num ritmo um pouco diferente do texto.
+ * Cena 6, o João. O retrato é separado em dois planos alinhados pixel a pixel:
+ * o fundo do estúdio (com o João removido e o buraco preenchido) e o João recortado.
+ * Na rolagem os planos sobem em ritmos diferentes; com mouse, o conjunto inclina em 3D
+ * e o João avança à frente do fundo. Movimento reduzido: os planos ficam parados.
  */
-export default function SobreSection() {
-  const ref = useRef(null)
-  const motionOn = useScrollScenes()
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start end", "end start"] })
-  const joaoY = useRange(p, [0, 1], [40, -40])
-  const markScale = useRange(p, [0.22, 0.38], [0, 1])
+const SPRING = { stiffness: 140, damping: 20, mass: 0.6 }
+
+function Portrait({ motionOn, p }) {
+  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)")
+  const tilt = motionOn && finePointer
+  const px = useMotionValue(0)
+  const py = useMotionValue(0)
+  const sx = useSpring(px, SPRING)
+  const sy = useSpring(py, SPRING)
+  const rotateY = useTransform(sx, (v) => v * 9)
+  const rotateX = useTransform(sy, (v) => v * -7)
+  const fgX = useTransform(sx, (v) => v * 16)
+  const bgX = useTransform(sx, (v) => v * -12)
+  const bgPointerY = useTransform(sy, (v) => v * -8)
+
+  // Rolagem: o fundo quase não anda, o João anda mais
+  const bgScrollY = useRange(p, [0, 1], [18, -18])
+  const fgScrollY = useRange(p, [0, 1], [60, -60])
+  const bgY = useTransform([bgScrollY, bgPointerY], ([a, b]) => a + b)
+
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    px.set(((e.clientX - r.left) / r.width - 0.5) * 2)
+    py.set(((e.clientY - r.top) / r.height - 0.5) * 2)
+  }
+  const onLeave = () => {
+    px.set(0)
+    py.set(0)
+  }
 
   return (
-    <section id="sobre" ref={ref} className="scene-light overflow-hidden py-20 lg:py-32" aria-labelledby="sobre-title">
-      <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[1.08fr_1fr] lg:gap-20 lg:px-10">
-        {/* Retrato: a foto já traz a quebra da moldura (os braços saem do quadro) */}
+    <div
+      onPointerMove={tilt ? onMove : undefined}
+      onPointerLeave={tilt ? onLeave : undefined}
+      className="relative mx-auto w-full max-w-[644px] select-none [perspective:1100px] lg:ml-[-2%] lg:w-[110%] lg:max-w-[708px]"
+    >
+      <motion.div
+        style={tilt ? { rotateX, rotateY, transformStyle: "preserve-3d" } : undefined}
+        className="relative aspect-[900/879] w-full"
+      >
         <motion.img
-          src={joao}
+          src={joaoBg}
+          alt=""
+          aria-hidden="true"
+          width="900"
+          height="879"
+          loading="lazy"
+          draggable={false}
+          style={motionOn ? { x: bgX, y: bgY, z: tilt ? -50 : 0, scale: 0.97 } : undefined}
+          className="absolute inset-0 h-full w-full"
+        />
+        <motion.img
+          src={joaoFg}
           alt="João Paulino, de mãos unidas em pirâmide, olhando para quem lê"
           width="900"
           height="879"
           loading="lazy"
           draggable={false}
-          style={motionOn ? { y: joaoY } : undefined}
-          className="mx-auto block h-auto w-full max-w-[644px] select-none lg:ml-[-2%] lg:w-[110%] lg:max-w-[708px]"
+          style={motionOn ? { x: fgX, y: fgScrollY, z: tilt ? 50 : 0 } : undefined}
+          className="absolute inset-0 h-full w-full"
         />
+      </motion.div>
+    </div>
+  )
+}
+
+export default function SobreSection() {
+  const ref = useRef(null)
+  const motionOn = useScrollScenes()
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start end", "end start"] })
+  const markScale = useRange(p, [0.22, 0.38], [0, 1])
+
+  return (
+    <section id="sobre" ref={ref} className="scene-light overflow-hidden py-20 lg:py-32" aria-labelledby="sobre-title">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-14 px-5 lg:grid-cols-[1.08fr_1fr] lg:gap-20 lg:px-10">
+        <Portrait motionOn={motionOn} p={p} />
 
         {/* Texto */}
         <div className="flex flex-col gap-8">

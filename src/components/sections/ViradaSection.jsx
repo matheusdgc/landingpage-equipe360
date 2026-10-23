@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { motion, useScroll } from "framer-motion"
 import { VIRADA } from "@/lib/constants.jsx"
+import Logo from "@/components/Logo"
 import { easeInOutQuad, easeOutCubic, useIsDesktop, useRange, useScrollScenes } from "@/lib/motion"
 
 /*
@@ -63,7 +64,7 @@ export default function ViradaSection() {
         <div className="mx-auto grid max-w-[1280px] gap-12 px-5 lg:grid-cols-2 lg:px-10">
           <Heading />
           <div className="flex flex-col gap-4">
-            <p className="text-label text-brand-gold">Equipe 360</p>
+            <Logo className="h-7" />
             <ul className="flex flex-col gap-3">
               {VIRADA.map((v) => (
                 <li key={v.pain} className="grid grid-cols-2 gap-2">
@@ -98,7 +99,7 @@ export default function ViradaSection() {
 
           {/* As cartas */}
           <motion.div style={desktop ? { x: stackX } : undefined} className="flex flex-col justify-end gap-4 self-end lg:self-center">
-            <p className="text-label text-brand-gold">Equipe 360</p>
+            <Logo className="h-7 lg:h-8" />
             <ol className="flip-stack flex flex-col gap-2 sm:gap-3">
               {VIRADA.map((v, i) => (
                 <FlipCard key={v.pain} p={p} index={i} pain={v.pain} result={v.result} />

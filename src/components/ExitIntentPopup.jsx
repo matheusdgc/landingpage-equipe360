@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import { WA_SABER_MAIS } from "@/lib/constants.jsx"
+import Logo from "@/components/Logo"
 import { DUR_UI, EASE_FIRM } from "@/lib/motion"
 
 const EASE_EXIT = [0.4, 0, 1, 1]
@@ -108,6 +109,7 @@ export default function ExitIntentPopup() {
                 <X className="h-5 w-5" />
               </button>
 
+              <Logo tone="light" className="mb-5 h-7" />
               <p className="text-label text-brand-ink-soft">Espera um segundo...</p>
               <h2 id="exit-title" className="display mt-3 text-[clamp(36px,6vw,48px)] leading-[0.92]">
                 Sua equipe pode chegar mais longe do que você imagina.

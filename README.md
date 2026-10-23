@@ -62,5 +62,5 @@ Textos, preços e links ficam em `src/lib/constants.jsx`.
 ### Imagens
 
 - `joao-bracos.webp` (hero): recorte com fundo transparente de `profile1.jpeg` (rembg, local).
-- `joao-profile2.webp` (seção do João): `profile2.jpeg` com o fundo branco transparente, mantendo a quebra da moldura da foto original.
-- `logo-light-gold.png`: versão do `logo-2.png` para fundo escuro ("equipe" em branco, "360" no bloco amarelo).
+- `joao-profile2-bg.webp` e `joao-profile2-fg.webp` (seção do João): `profile2.jpeg` separada em dois planos alinhados, o fundo do estúdio (João removido, buraco preenchido) e o João recortado, para o parallax 3D.
+- `logo-light-gold.png` (fundo escuro) e `logo-ink-gold.png` (fundo claro): logo oficial com o "360" no bloco amarelo, recortado rente ao desenho. Componente `src/components/Logo.jsx` (`tone="dark" | "light"`).

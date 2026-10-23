@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { Check, X } from "lucide-react"
 import { IS_FOR, NOT_FOR } from "@/lib/constants.jsx"
+import Logo from "@/components/Logo"
 import { DUR_UI, EASE_FIRM, useScrollScenes } from "@/lib/motion"
 
 /*
@@ -30,7 +31,10 @@ export default function ParaQuemSection() {
 
         <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
           <div className="flex flex-col gap-6">
-            <h3 className="text-label text-brand-paper">O EQUIPE 360 é para</h3>
+            <h3 className="flex items-center gap-3">
+              <Logo className="h-7" alt="O EQUIPE 360" />
+              <span className="text-label text-brand-paper">é para</span>
+            </h3>
             <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {IS_FOR.map((item, i) => (
                 <motion.li key={item.title} {...m(i)} className="flex flex-col gap-3">

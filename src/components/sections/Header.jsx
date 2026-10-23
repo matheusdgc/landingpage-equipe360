@@ -51,8 +51,8 @@ export default function Header() {
             paddingRight: "max(20px, env(safe-area-inset-right, 0px))",
           }}
         >
-          <a href="#topo" onClick={closeMenu} className="block h-8 rounded-[4px] sm:h-9" aria-label="EQUIPE 360, voltar ao início">
-            <Logo className="h-full" />
+          <a href="#topo" onClick={closeMenu} className="block rounded-[4px]" aria-label="EQUIPE 360, voltar ao início">
+            <Logo alt="" className="h-7 sm:h-8" />
           </a>
 
           <nav aria-label="Seções" className="hidden items-center gap-7 lg:flex">

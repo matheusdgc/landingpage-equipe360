@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { EQUIPE_ACRONYM } from "@/lib/constants.jsx"
+import Logo from "@/components/Logo"
 import { clamp01, easeOutCubic, useRange, useScrollScenes } from "@/lib/motion"
 
 /*
@@ -41,9 +42,12 @@ export default function ProgramaSection() {
     <section id="programa" className="scene-light py-20 lg:py-32" aria-labelledby="programa-title">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-14 px-5 lg:gap-20 lg:px-10">
         <header className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end">
-          <h2 id="programa-title" className="display text-display-l">
-            O significado de <span className="whitespace-nowrap">E.Q.U.I.P.E.</span>
-          </h2>
+          <div className="flex flex-col gap-6">
+            <Logo tone="light" className="h-8 lg:h-10" />
+            <h2 id="programa-title" className="display text-display-l">
+              O significado de <span className="whitespace-nowrap">E.Q.U.I.P.E.</span>
+            </h2>
+          </div>
           <p className="text-body-l measure text-brand-ink-soft">
             Cada letra representa um pilar essencial para formar colaboradores que assumem responsabilidade, pensam como donos e executam com padrão elevado.
           </p>
